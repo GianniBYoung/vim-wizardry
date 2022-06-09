@@ -14,6 +14,12 @@ require('packer').startup(function(use)
     as = 'dracula'
   }
 
+  use({
+      "iamcco/markdown-preview.nvim",
+      run = function() vim.fn["mkdp#util#install"]() end,
+  })
+
+
   use {
   'kdheepak/tabline.nvim',
   config = function()
@@ -107,14 +113,12 @@ require('packer').startup(function(use)
   use 'wellle/targets.vim'
   use 'folke/which-key.nvim'
   use 'hrsh7th/cmp-nvim-lsp'
-  -- use 'onsails/lspkind.nvim'
   use 'vimwiki/vimwiki'
   use 'norcalli/nvim-colorizer.lua'
   use 'frazrepo/vim-rainbow'
   use 'jiangmiao/auto-pairs'
   use 'machakann/vim-highlightedyank'
   use 'justinmk/vim-sneak'
-  -- use 'iamcco/markdown-preview.nvim'--
   use 'fatih/vim-go'
   use 'kevinhwang91/rnvimr'
 
@@ -208,7 +212,7 @@ map('n','<Leader>R',':Rg<space>')
 map('n','<Leader>gb',':GBranches<CR>')
 
 -- Markdown Preview
--- map('n','<M-m>',':MarkdownPreview<CR>')
+map('n','<M-m>',':MarkdownPreview<CR>')
 
 -- Colorizer
 map('n','<Leader>kk',':ColorizerToggle<CR>')
