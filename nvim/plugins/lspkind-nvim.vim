@@ -1,0 +1,1 @@
+Plug 'onsails/lspkind.nvim'
