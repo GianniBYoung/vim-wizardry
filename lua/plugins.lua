@@ -6,31 +6,14 @@
 require('packer').startup(function(use)
   -- packer can update itself
   use 'wbthomason/packer.nvim'
+  -- use 'Mofiqul/dracula.nvim'
+  -- vim.cmd[[colorscheme dracula]]
 
-  -- colorscheme
-  use 'joshdick/onedark.vim'
-
-  use{
+  use {
     'dracula/vim',
-    as = 'dracula',
-    config = function()
-      require('user.plugins.dracula')
-    end
-    }
-
-    use{
-      'sickill/vim-pasta',
-      config = function()
-        require('user.plugins.pasta')
-      end
-      }
-
-    use {
-      'jessarcher/vim-sayonara',
-       config = function()
-        require('user.plugins.sayonara')
-      end
+    as = 'dracula'
   }
+
 
     use {
     'nvim-treesitter/nvim-treesitter',
@@ -41,12 +24,12 @@ require('packer').startup(function(use)
       'lewis6991/spellsitter.nvim',
       'JoosepAlviste/nvim-ts-context-commentstring',
     },
-    config = function()
-      require('user.plugins.treesitter')
-      require('spellsitter').setup()
-    end
+    -- config = function()
+    --   require('user.plugins.treesitter')
+    --   require('spellsitter').setup()
+    -- end
   }
-   use {
+  use {
     'hrsh7th/nvim-cmp',
     requires = {
       'hrsh7th/cmp-nvim-lsp',
@@ -57,27 +40,28 @@ require('packer').startup(function(use)
       'hrsh7th/cmp-nvim-lua',
       'onsails/lspkind-nvim', --
       'hrsh7th/cmp-nvim-lsp-signature-help',
-    },
-    config = function()
-      require('user.plugins.cmp')
-    end
+    }
   }
 
 -- gitsigns
   use {
-  'lewis6991/gitsigns.nvim',
-  config = function()
-    require('gitsigns').setup()
-  end
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
 }
 
--- luealine
-use {
-  'nvim-lualine/lualine.nvim',
-  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-}
+  -- lualine
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
+
+  use { 'alvarosevilla95/luatab.nvim', requires='kyazdani42/nvim-web-devicons' }
+  require('luatab').setup{}
 
   -- Plugins
+  use 'sickill/vim-pasta'
   use 'folke/lsp-colors.nvim'
   use 'neovim/nvim-lspconfig'
   use 'tpope/vim-commentary'
@@ -88,6 +72,7 @@ use {
   use 'junegunn/vim-peekaboo'
   use 'voldikss/vim-floaterm'
   use 'junegunn/fzf'
+  use 'jessarcher/vim-sayonara'
   use 'junegunn/fzf.vim'
   use 'stsewd/fzf-checkout.vim'
   use 'jessarcher/vim-heritage'
@@ -134,10 +119,6 @@ use {
 
 end)
 
--- Setup colorscheme
-vim.opt.termguicolors = true
-pcall(vim.cmd, 'colorscheme onedark')
-
 -- LSP setup
 
 local lsp = require('lsp-zero')
@@ -167,20 +148,20 @@ function map(mode, shortcut, command)
 end
 
 
--- Dracula
-vim.cmd([[
-    augroup DraculaOverrides
-        autocmd!
-        autocmd ColorScheme dracula highlight! link Pmenu DraculaBg
-        autocmd ColorScheme dracula highlight link NormalFloat DraculaBgLight
-        autocmd ColorScheme dracula highlight FloatBorder guifg=#343746 guibg=#343746
-        autocmd ColorScheme dracula highlight DraculaBoundary guibg=none
-        autocmd ColorScheme dracula highlight DraculaDiffDelete ctermbg=none guibg=none
-        autocmd ColorScheme dracula highlight DraculaComment cterm=italic gui=italic
-    augroup end
-    colorscheme dracula
-]])
--- Floaterm
+-- -- Dracula
+-- vim.cmd([[
+--     augroup DraculaOverrides
+--         autocmd!
+--         autocmd ColorScheme dracula highlight! link Pmenu DraculaBg
+--         autocmd ColorScheme dracula highlight link NormalFloat DraculaBgLight
+--         autocmd ColorScheme dracula highlight FloatBorder guifg=#343746 guibg=#343746
+--         autocmd ColorScheme dracula highlight DraculaBoundary guibg=none
+--         autocmd ColorScheme dracula highlight DraculaDiffDelete ctermbg=none guibg=none
+--         autocmd ColorScheme dracula highlight DraculaComment cterm=italic gui=italic
+--     augroup end
+--     colorscheme dracula
+-- ]])
+-- -- Floaterm
 
 map('n','<F4>',':FloatermNew<CR>')
 map('t','<F4>','<C-\\><C-n>::FloatermNew<CR>')
@@ -208,7 +189,6 @@ map('n','<Leader>gb',':GBranches<CR>')
 
 -- Colorizer
 map('n','<Leader>kk',':ColorizerToggle<CR>')
-
 
 -- Tree Sitter
 require'nvim-treesitter.configs'.setup {
@@ -351,3 +331,17 @@ require('lualine').setup {
   tabline = {},
   extensions = {}
 }
+
+vim.cmd([[
+    augroup DraculaOverrides
+        autocmd!
+        autocmd ColorScheme dracula highlight! link Pmenu DraculaBg
+        autocmd ColorScheme dracula highlight link NormalFloat DraculaBgLight
+        autocmd ColorScheme dracula highlight FloatBorder guifg=#343746 guibg=#343746
+        autocmd ColorScheme dracula highlight DraculaBoundary guibg=none
+        autocmd ColorScheme dracula highlight DraculaDiffDelete ctermbg=none guibg=none
+        autocmd ColorScheme dracula highlight DraculaComment cterm=italic gui=italic
+    augroup end
+    colorscheme dracula
+]])
+
