@@ -34,9 +34,8 @@ source ~/.config/nvim/plugins/textobj-xmlattr.vim
 source ~/.config/nvim/plugins/which-key.vim
 source ~/.config/nvim/plugins/vimwiki.vim
 source ~/.config/nvim/plugins/smooth-scroll.vim
-source ~/.config/nvim/plugins/nerdtree.vim
 source ~/.config/nvim/plugins/fzf.vim
-source ~/.config/nvim/plugins/airline.vim
+" source ~/.config/nvim/plugins/airline.vim
 
 " " source ~/.config/nvim/plugins/firenvim.vim
 " Plug 'neovim/nvim-lspconfig'

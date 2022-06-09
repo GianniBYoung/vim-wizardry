@@ -27,6 +27,8 @@ map ('n','gk',':bn<CR>')
 map ('n','gj',':bp<CR>')
 map ('n','<leader>k',':bn<CR>')
 map ('n','<leader>j',':bp<CR>')
+map ('n','<leader>K',':tabn<CR>')
+map ('n','<leader>J',':tabp<CR>')
 
 -- file hopping
 map ('n','<leader>ve',':edit ~/.config/nvim/init.vim<cr>')
@@ -39,7 +41,7 @@ map ('n','<leader>s',':w<CR>')
 map ('n','<leader>S',':wa<CR>')
 
 -- misc
-map ('n','<leader>K',':nohlsearch<CR>')
+map ('n','<leader>H',':nohlsearch<CR>')
 map ('n','<leader>c',':set cuc!<CR>')
 map ('n','gf',':edit <cfile><cr>')
 
@@ -71,3 +73,9 @@ map ('i',',,','<Esc>A,<Esc>')
 map ('c','w!!','%!sudo tee > /dev/null %')
 
 map('n','<leader>q',':Sayonara<CR>')
+
+-- Ranger
+map('n','<leader>n',':RnvimrToggle<CR>')
+map('t','<leader>n','<C-\\><C-n>:RnvimrToggle<CR>')
+
+

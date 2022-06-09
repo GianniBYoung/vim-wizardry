@@ -63,10 +63,22 @@ require('packer').startup(function(use)
     end
   }
 
+-- gitsigns
+  use {
+  'lewis6991/gitsigns.nvim',
+  config = function()
+    require('gitsigns').setup()
+  end
+}
+
+-- luealine
+use {
+  'nvim-lualine/lualine.nvim',
+  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+}
+
   -- Plugins
   use 'folke/lsp-colors.nvim'
-  use 'vim-airline/vim-airline'
-  use 'vim-airline/vim-airline-themes'
   use 'neovim/nvim-lspconfig'
   use 'tpope/vim-commentary'
   use 'tpope/vim-eunuch'
@@ -79,7 +91,8 @@ require('packer').startup(function(use)
   use 'junegunn/fzf.vim'
   use 'stsewd/fzf-checkout.vim'
   use 'jessarcher/vim-heritage'
-  use 'ryanoasis/vim-devicons'
+  -- use 'ryanoasis/vim-devicons'
+  use 'kyazdani42/nvim-web-devicons'
   use 'sheerun/vim-polyglot'
   use 'unblevable/quick-scope'
   use 'terryma/vim-smooth-scroll'
@@ -95,6 +108,7 @@ require('packer').startup(function(use)
   use 'justinmk/vim-sneak'
   -- use 'iamcco/markdown-preview.nvim'--
   use 'fatih/vim-go'
+  use 'kevinhwang91/rnvimr'
 
   -- LSP
   use {
@@ -152,17 +166,6 @@ function map(mode, shortcut, command)
   vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
 
--- Airline
-
-vim.g.airline_theme = 'luna'
-vim.g.airline_powerline_fonts = 1
-vim.g.airline_skip_empty_sections = 1
-vim.g.airline_left_sep = ''
-vim.g.airline_right_sep = ''
--- vim.g.['airline#extensions#tabline#enabled']=1
--- vim.g.['airline#extensions#tabline#left_sep'] = ' '
--- vim.g.['airline#extensions#tabline#left_alt_sep'] = ' '
-
 
 -- Dracula
 vim.cmd([[
@@ -189,8 +192,6 @@ map('t','<F1>','<C-\\><C-n>::FloatermToggle<CR>')
 
 
 map('t','<F9>','<C-\\><C-n>::FloatermKill<CR>')
-
-map('n','<F3>',':FloatermNew ranger<CR>')
 
 -- FZF
 
@@ -225,6 +226,11 @@ require'nvim-treesitter.configs'.setup {
 
   },
 }
+
+-- Ranger
+
+vim.g.rnvimr_enable_ex=1
+vim.g.rnvimr_enable_bw=1
 
 -- Polyglot
 
@@ -296,4 +302,52 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
+}
+
+-- devicons
+require'nvim-web-devicons'.setup {
+ -- your personnal icons can go here (to override)
+ -- you can specify color or cterm_color instead of specifying both of them
+ -- DevIcon will be appended to `name`
+ override = {
+  zsh = {
+    icon = "",
+    color = "#428850",
+    cterm_color = "65",
+    name = "Zsh"
+  }
+ };
+ -- globally enable default icons (default to false)
+ -- will get overriden by `get_icons` option
+ default = true;
+}
+
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'nightfly',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+    globalstatus = false,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
 }
