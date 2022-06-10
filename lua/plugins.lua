@@ -1,10 +1,7 @@
 ---
 -- Plugins
 ---
-
-
 require('packer').startup(function(use)
-  -- packer can update itself
   use 'wbthomason/packer.nvim'
   -- use 'Mofiqul/dracula.nvim'
   -- vim.cmd[[colorscheme dracula]]
@@ -53,10 +50,6 @@ require('packer').startup(function(use)
       'lewis6991/spellsitter.nvim',
       'JoosepAlviste/nvim-ts-context-commentstring',
     },
-    -- config = function()
-    --   require('user.plugins.treesitter')
-    --   require('spellsitter').setup()
-    -- end
   }
   use {
     'hrsh7th/nvim-cmp',
@@ -105,7 +98,6 @@ require('packer').startup(function(use)
   use 'junegunn/fzf.vim'
   use 'stsewd/fzf-checkout.vim'
   use 'jessarcher/vim-heritage'
-  -- use 'ryanoasis/vim-devicons'
   use 'kyazdani42/nvim-web-devicons'
   use 'sheerun/vim-polyglot'
   use 'unblevable/quick-scope'
@@ -165,30 +157,11 @@ lsp.nvim_workspace()
 lsp.setup()
 
 
-
-
-
 -- Plugin Configuration
 --
 function map(mode, shortcut, command)
   vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
-
-
--- -- Dracula
--- vim.cmd([[
---     augroup DraculaOverrides
---         autocmd!
---         autocmd ColorScheme dracula highlight! link Pmenu DraculaBg
---         autocmd ColorScheme dracula highlight link NormalFloat DraculaBgLight
---         autocmd ColorScheme dracula highlight FloatBorder guifg=#343746 guibg=#343746
---         autocmd ColorScheme dracula highlight DraculaBoundary guibg=none
---         autocmd ColorScheme dracula highlight DraculaDiffDelete ctermbg=none guibg=none
---         autocmd ColorScheme dracula highlight DraculaComment cterm=italic gui=italic
---     augroup end
---     colorscheme dracula
--- ]])
--- -- Floaterm
 
 map('n','<F4>',':FloatermNew<CR>')
 map('t','<F4>','<C-\\><C-n>::FloatermNew<CR>')
@@ -259,7 +232,7 @@ vim.g['sneak#use_ic_scs'] = 1
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local lspconfig = require('lspconfig')
-local servers = { 'sumneko_lua', 'solargraph', 'pyright', 'yamlls' }
+local servers = { 'sumneko_lua', 'golangci_lint_ls', 'solargraph', 'pyright', 'yamlls', 'ansiblels', 'bashls','jsonls','vimls','yamlls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -308,6 +281,10 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = "treesitter" },
+    { name = "buffer" },
+    { name = "nvim_lua" },
+    { name = "path" },
   },
 }
 
