@@ -1,3 +1,4 @@
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 ---
 -- Plugins
 ---
@@ -12,36 +13,36 @@ require('packer').startup(function(use)
   }
 
   use({
-      "iamcco/markdown-preview.nvim",
-      run = function() vim.fn["mkdp#util#install"]() end,
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
   })
 
 
   use {
-  'kdheepak/tabline.nvim',
-  config = function()
-    require'tabline'.setup {
-      enable = true,
-      options = {
-        max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
-        show_tabs_always = true, -- this shows tabs only when there are more than one tab or if the first tab is named
-        show_devicons = true, -- this shows devicons in buffer section
-        show_bufnr = false, -- this appends [bufnr] to buffer section,
-        show_filename_only = true, -- shows base filename only instead of relative path in filename
-        modified_icon = "+ ", -- change the default modified icon
-        modified_italic = true, -- set to true by default; this determines whether the filename turns italic if modified
-        show_tabs_only = false, -- this shows only tabs instead of tabs + buffers
+    'kdheepak/tabline.nvim',
+    config = function()
+      require 'tabline'.setup {
+        enable = true,
+        options = {
+          max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
+          show_tabs_always = true, -- this shows tabs only when there are more than one tab or if the first tab is named
+          show_devicons = true, -- this shows devicons in buffer section
+          show_bufnr = false, -- this appends [bufnr] to buffer section,
+          show_filename_only = true, -- shows base filename only instead of relative path in filename
+          modified_icon = "+ ", -- change the default modified icon
+          modified_italic = true, -- set to true by default; this determines whether the filename turns italic if modified
+          show_tabs_only = false, -- this shows only tabs instead of tabs + buffers
+        }
       }
-    }
-    vim.cmd[[
+      vim.cmd [[
       set guioptions-=e " Use showtabline in gui vim
       set sessionoptions+=tabpages,globals " store tabpages and globals in session
     ]]
-  end,
-  requires = { { 'hoob3rt/lualine.nvim', opt=true }, {'kyazdani42/nvim-web-devicons', opt = true} }
-}
+    end,
+    requires = { { 'hoob3rt/lualine.nvim', opt = true }, { 'kyazdani42/nvim-web-devicons', opt = true } }
+  }
 
-    use {
+  use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     requires = {
@@ -65,13 +66,13 @@ require('packer').startup(function(use)
     }
   }
 
--- gitsigns
+  -- gitsigns
   use {
     'lewis6991/gitsigns.nvim',
     config = function()
       require('gitsigns').setup()
     end
-}
+  }
 
   -- lualine
   use {
@@ -79,8 +80,8 @@ require('packer').startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
-  use { 'alvarosevilla95/luatab.nvim', requires='kyazdani42/nvim-web-devicons' }
-  require('luatab').setup{}
+  use { 'alvarosevilla95/luatab.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+  require('luatab').setup {}
 
   -- Plugins
   use 'sickill/vim-pasta'
@@ -119,20 +120,20 @@ require('packer').startup(function(use)
     'VonHeikemen/lsp-zero.nvim',
     requires = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},
-      {'williamboman/nvim-lsp-installer'},
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/nvim-lsp-installer' },
 
       -- Autocompletion
-      {'hrsh7th/nvim-cmp'},
-      {'hrsh7th/cmp-buffer'},
-      {'hrsh7th/cmp-path'},
-      {'saadparwaiz1/cmp_luasnip'},
-      {'hrsh7th/cmp-nvim-lsp'},
-      {'hrsh7th/cmp-nvim-lua'},
+      { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'saadparwaiz1/cmp_luasnip' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-nvim-lua' },
 
       -- Snippets
-      {'L3MON4D3/LuaSnip'},
-      {'rafamadriz/friendly-snippets'},
+      { 'L3MON4D3/LuaSnip' },
+      { 'rafamadriz/friendly-snippets' },
     }
   }
 
@@ -163,37 +164,37 @@ function map(mode, shortcut, command)
   vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
 
-map('n','<F4>',':FloatermNew<CR>')
-map('t','<F4>','<C-\\><C-n>::FloatermNew<CR>')
+map('n', '<F4>', ':FloatermNew<CR>')
+map('t', '<F4>', '<C-\\><C-n>::FloatermNew<CR>')
 
-map('t','<F2>','<C-\\><C-n>::FloatermNext<CR>')
+map('t', '<F2>', '<C-\\><C-n>::FloatermNext<CR>')
 
-map('n','<F1>',':FloatermToggle<CR>')
-map('t','<F1>','<C-\\><C-n>::FloatermToggle<CR>')
+map('n', '<F1>', ':FloatermToggle<CR>')
+map('t', '<F1>', '<C-\\><C-n>::FloatermToggle<CR>')
 
 
-map('t','<F9>','<C-\\><C-n>::FloatermKill<CR>')
+map('t', '<F9>', '<C-\\><C-n>::FloatermKill<CR>')
 
 -- FZF
 
-map('n','<Leader>f',':Files<CR>')
-map('n','<Leader>F',':AllFiles<CR>')
-map('n','<Leader>b',':Buffers<CR>')
-map('n','<Leader>h',':History<CR>')
-map('n','<Leader>r',':Rg<CR>')
-map('n','<Leader>R',':Rg<space>')
-map('n','<Leader>gb',':GBranches<CR>')
+map('n', '<Leader>f', ':Files<CR>')
+map('n', '<Leader>F', ':AllFiles<CR>')
+map('n', '<Leader>b', ':Buffers<CR>')
+map('n', '<Leader>h', ':History<CR>')
+map('n', '<Leader>r', ':Rg<CR>')
+map('n', '<Leader>R', ':Rg<space>')
+map('n', '<Leader>gb', ':GBranches<CR>')
 
 -- Markdown Preview
-map('n','<M-m>',':MarkdownPreview<CR>')
+map('n', '<M-m>', ':MarkdownPreview<CR>')
 
 -- Colorizer
-map('n','<Leader>kk',':ColorizerToggle<CR>')
+map('n', '<Leader>kk', ':ColorizerToggle<CR>')
 
 -- Tree Sitter
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "python", "ruby", "yaml", "go"},
+  ensure_installed = { "python", "ruby", "yaml", "go" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -209,8 +210,8 @@ require'nvim-treesitter.configs'.setup {
 
 -- Ranger
 
-vim.g.rnvimr_enable_ex=1
-vim.g.rnvimr_enable_bw=1
+vim.g.rnvimr_enable_ex = 1
+vim.g.rnvimr_enable_bw = 1
 
 -- Polyglot
 
@@ -218,11 +219,11 @@ vim.g.vim_markdown_new_list_item_indent = 0
 
 -- quickscope
 
-vim.g.qs_highlight_on_keys= {'f','F','t','T'}
-vim.g.qs_max_chars=150
+vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
+vim.g.qs_max_chars = 150
 
 -- vim-rainbow
-vim.g.rainbow_active=1
+vim.g.rainbow_active = 1
 
 -- sneak
 vim.g['sneak#label'] = 1
@@ -232,7 +233,7 @@ vim.g['sneak#use_ic_scs'] = 1
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local lspconfig = require('lspconfig')
-local servers = { 'sumneko_lua', 'golangci_lint_ls', 'solargraph', 'pyright', 'yamlls', 'ansiblels', 'bashls','jsonls','vimls','yamlls' }
+local servers = { 'sumneko_lua', 'golangci_lint_ls', 'solargraph', 'pyright', 'yamlls', 'ansiblels', 'bashls', 'jsonls', 'vimls', 'yamlls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -289,46 +290,46 @@ cmp.setup {
 }
 
 -- devicons
-require'nvim-web-devicons'.setup {
- -- your personnal icons can go here (to override)
- -- you can specify color or cterm_color instead of specifying both of them
- -- DevIcon will be appended to `name`
- override = {
-  zsh = {
-    icon = "",
-    color = "#428850",
-    cterm_color = "65",
-    name = "Zsh"
-  }
- };
- -- globally enable default icons (default to false)
- -- will get overriden by `get_icons` option
- default = true;
+require 'nvim-web-devicons'.setup {
+  -- your personnal icons can go here (to override)
+  -- you can specify color or cterm_color instead of specifying both of them
+  -- DevIcon will be appended to `name`
+  override = {
+    zsh = {
+      icon = "",
+      color = "#428850",
+      cterm_color = "65",
+      name = "Zsh"
+    }
+  };
+  -- globally enable default icons (default to false)
+  -- will get overriden by `get_icons` option
+  default = true;
 }
 
 require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = 'nightfly',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
     disabled_filetypes = {},
     always_divide_middle = true,
     globalstatus = false,
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch', 'diff', 'diagnostics' },
+    lualine_c = { 'filename' },
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
     lualine_y = {},
     lualine_z = {}
   },
@@ -348,4 +349,3 @@ vim.cmd([[
     augroup end
     colorscheme dracula
 ]])
-
