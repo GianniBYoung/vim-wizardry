@@ -1,4 +1,3 @@
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 ---
 -- Plugins
 ---
@@ -11,12 +10,6 @@ require('packer').startup(function(use)
   vim.g.tokyonight_italic_functions = true
   vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
   vim.cmd [[colorscheme tokyonight]]
-
-
-  -- use {
-  --   'dracula/vim',
-  --   as = 'dracula'
-  -- }
 
   use({
     "iamcco/markdown-preview.nvim",
@@ -246,14 +239,6 @@ vim.g['sneak#use_ic_scs'] = 1
 -- LSP
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-local lspconfig = require('lspconfig')
-local servers = { 'sumneko_lua', 'golangci_lint_ls', 'solargraph', 'pyright', 'yamlls', 'ansiblels', 'bashls', 'jsonls', 'vimls', 'yamlls' }
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    -- on_attach = my_custom_on_attach,
-    capabilities = capabilities,
-  }
-end
 
 -- luasnip setup
 local luasnip = require 'luasnip'
@@ -364,19 +349,6 @@ require('lualine').setup {
   tabline = {},
   extensions = {}
 }
-
--- vim.cmd([[
---     augroup DraculaOverrides
---         autocmd!
---         autocmd ColorScheme dracula highlight! link Pmenu DraculaBg
---         autocmd ColorScheme dracula highlight link NormalFloat DraculaBgLight
---         autocmd ColorScheme dracula highlight FloatBorder guifg=#343746 guibg=#343746
---         autocmd ColorScheme dracula highlight DraculaBoundary guibg=none
---         autocmd ColorScheme dracula highlight DraculaDiffDelete ctermbg=none guibg=none
---         autocmd ColorScheme dracula highlight DraculaComment cterm=italic gui=italic
---     augroup end
---     colorscheme dracula
--- ]])
 
 -- lsp binds
 vim.api.nvim_create_autocmd('User', {
