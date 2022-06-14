@@ -77,3 +77,6 @@ map('n', '<leader>q', ':Sayonara<CR>')
 -- Ranger
 map('n', '<leader>n', ':RnvimrToggle<CR>')
 map('t', '<leader>n', '<C-\\><C-n>:RnvimrToggle<CR>')
+
+-- vim-go
+map('n', '<Leader>gr', ':w<CR>:GoRun<CR>')

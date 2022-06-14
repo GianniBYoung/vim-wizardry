@@ -5,10 +5,18 @@ vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  use {
-    'dracula/vim',
-    as = 'dracula'
-  }
+  use 'folke/tokyonight.nvim'
+  -- Lua
+  -- vim.g.tokyonight_style = "night"
+  vim.g.tokyonight_italic_functions = true
+  vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
+  vim.cmd [[colorscheme tokyonight]]
+
+
+  -- use {
+  --   'dracula/vim',
+  --   as = 'dracula'
+  -- }
 
   use({
     "iamcco/markdown-preview.nvim",
@@ -190,6 +198,7 @@ map('n', '<Leader>r', ':Rg<CR>')
 map('n', '<Leader>R', ':Rg<space>')
 map('n', '<Leader>gb', ':GBranches<CR>')
 
+
 -- Markdown Preview
 map('n', '<M-m>', ':MarkdownPreview<CR>')
 
@@ -329,7 +338,7 @@ require 'nvim-web-devicons'.setup {
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'nightfly',
+    theme = 'tokyonight',
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
     disabled_filetypes = {},
@@ -356,18 +365,18 @@ require('lualine').setup {
   extensions = {}
 }
 
-vim.cmd([[
-    augroup DraculaOverrides
-        autocmd!
-        autocmd ColorScheme dracula highlight! link Pmenu DraculaBg
-        autocmd ColorScheme dracula highlight link NormalFloat DraculaBgLight
-        autocmd ColorScheme dracula highlight FloatBorder guifg=#343746 guibg=#343746
-        autocmd ColorScheme dracula highlight DraculaBoundary guibg=none
-        autocmd ColorScheme dracula highlight DraculaDiffDelete ctermbg=none guibg=none
-        autocmd ColorScheme dracula highlight DraculaComment cterm=italic gui=italic
-    augroup end
-    colorscheme dracula
-]])
+-- vim.cmd([[
+--     augroup DraculaOverrides
+--         autocmd!
+--         autocmd ColorScheme dracula highlight! link Pmenu DraculaBg
+--         autocmd ColorScheme dracula highlight link NormalFloat DraculaBgLight
+--         autocmd ColorScheme dracula highlight FloatBorder guifg=#343746 guibg=#343746
+--         autocmd ColorScheme dracula highlight DraculaBoundary guibg=none
+--         autocmd ColorScheme dracula highlight DraculaDiffDelete ctermbg=none guibg=none
+--         autocmd ColorScheme dracula highlight DraculaComment cterm=italic gui=italic
+--     augroup end
+--     colorscheme dracula
+-- ]])
 
 -- lsp binds
 vim.api.nvim_create_autocmd('User', {
@@ -395,7 +404,7 @@ vim.api.nvim_create_autocmd('User', {
     bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
 
     -- Lists all the references
-    bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
+    bufmap('n', 'gR', '<cmd>lua vim.lsp.buf.references()<cr>')
 
     -- Displays a function's signature information
     bufmap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
