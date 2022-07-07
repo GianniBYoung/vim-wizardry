@@ -236,10 +236,6 @@ vim.g.rainbow_active = 1
 vim.g['sneak#label'] = 1
 vim.g['sneak#use_ic_scs'] = 1
 
--- LSP
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
 -- luasnip setup
 local luasnip = require 'luasnip'
 
@@ -290,8 +286,8 @@ cmp.setup {
     fields = { 'menu', 'abbr', 'kind' },
     format = function(entry, item)
       local menu_icon = {
-        nvim_lsp = 'λ',
         luasnip = '⋗',
+        nvim_lsp = 'λ',
         buffer = 'Ω',
         path = '🖫',
       }
