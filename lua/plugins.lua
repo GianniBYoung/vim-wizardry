@@ -14,6 +14,7 @@ require('packer').startup(function(use)
   use({
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,
+    ft = {"md", "MD"},
   })
 
   use {
@@ -118,7 +119,9 @@ require('packer').startup(function(use)
   use 'jiangmiao/auto-pairs'
   use 'machakann/vim-highlightedyank'
   use 'justinmk/vim-sneak'
-  use 'fatih/vim-go'
+  use {'fatih/vim-go',
+    ft = {"go"},
+  }
   use 'kevinhwang91/rnvimr'
 
   -- LSP

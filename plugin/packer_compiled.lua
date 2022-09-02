@@ -167,8 +167,10 @@ _G.packer_plugins = {
     url = "https://github.com/alvarosevilla95/luatab.nvim"
   },
   ["markdown-preview.nvim"] = {
-    loaded = true,
-    path = "/home/gyoung/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/gyoung/.local/share/nvim/site/pack/packer/opt/markdown-preview.nvim",
     url = "https://github.com/iamcco/markdown-preview.nvim"
   },
   ["nvim-cmp"] = {
@@ -278,8 +280,10 @@ _G.packer_plugins = {
     url = "https://github.com/voldikss/vim-floaterm"
   },
   ["vim-go"] = {
-    loaded = true,
-    path = "/home/gyoung/.local/share/nvim/site/pack/packer/start/vim-go",
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/gyoung/.local/share/nvim/site/pack/packer/opt/vim-go",
     url = "https://github.com/fatih/vim-go"
   },
   ["vim-heritage"] = {
@@ -357,6 +361,20 @@ time([[Config for gitsigns.nvim]], false)
 time([[Config for alpha-nvim]], true)
 try_loadstring("\27LJ\2\2`\0\0\3\0\5\0\n6\0\0\0'\1\1\0B\0\2\0029\0\2\0006\1\0\0'\2\3\0B\1\2\0029\1\4\1B\0\2\1K\0\1\0\vconfig\26alpha.themes.startify\nsetup\nalpha\frequire\0", "config", "alpha-nvim")
 time([[Config for alpha-nvim]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType go ++once lua require("packer.load")({'vim-go'}, { ft = "go" }, _G.packer_plugins)]]
+vim.cmd [[au FileType md ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "md" }, _G.packer_plugins)]]
+vim.cmd [[au FileType MD ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "MD" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
+vim.cmd [[augroup filetypedetect]]
+time([[Sourcing ftdetect script at: /home/gyoung/.local/share/nvim/site/pack/packer/opt/vim-go/ftdetect/gofiletype.vim]], true)
+vim.cmd [[source /home/gyoung/.local/share/nvim/site/pack/packer/opt/vim-go/ftdetect/gofiletype.vim]]
+time([[Sourcing ftdetect script at: /home/gyoung/.local/share/nvim/site/pack/packer/opt/vim-go/ftdetect/gofiletype.vim]], false)
+vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)

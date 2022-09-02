@@ -10,10 +10,10 @@ end
 vim.g.mapleader = ' '
 
 -- resize splits
-map('n', '<M-j>', ':resize -2<CR>')
-map('n', '<M-k>', ':resize +2<CR>')
-map('n', '<M-h>', ':vertical resize -2<CR>')
-map('n', '<M-l>', ':vertical resize +2<CR>')
+map('n', '<M-J>', ':resize -2<CR>')
+map('n', '<M-K>', ':resize +2<CR>')
+map('n', '<M-H>', ':vertical resize -2<CR>')
+map('n', '<M-L>', ':vertical resize +2<CR>')
 
 -- navigate splits
 map('n', '<C-h>', '<C-w>h')
@@ -35,6 +35,7 @@ map('n', '<leader>ve', ':edit ~/.config/nvim/init.vim<cr>')
 map('n', '<leader>vk', ':edit ~/.config/nvim/lua/keymaps.lua<cr>')
 map('n', '<leader>vp', ':edit ~/.config/nvim/lua/plugins.lua<cr>')
 map('n', '<leader>vr', ':source $MYVIMRC<cr>')
+map('n', '<leader>cd', ':cd %:h<cr>')
 
 -- saving
 map('n', '<leader>s', ':w<CR>')
@@ -42,8 +43,13 @@ map('n', '<leader>S', ':wa<CR>')
 
 -- misc
 map('n', '<leader>H', ':nohlsearch<CR>')
-map('n', '<leader>c', ':set cuc!<CR>')
+map('n', '<leader>C', ':set cuc!<CR>')
 map('n', 'gf', ':edit <cfile><cr>')
+
+-- smooth scrolling
+
+map('n', '<M-k>', ':call smooth_scroll#up(10, 5, 2)<CR>')
+map('n', '<M-j>', ':call smooth_scroll#down(10, 5, 2)<CR>')
 
 -- Make Y behave like the other capitals
 map('n', 'Y', 'y$')
@@ -75,7 +81,7 @@ map('c', 'w!!', '%!sudo tee > /dev/null %')
 map('n', '<leader>q', ':Sayonara<CR>')
 
 -- Ranger
-map('n', '<leader>n', ':RnvimrToggle<CR>')
+map('n', '<leader>n', ':cd %:h<bar>RnvimrToggle<CR>')
 map('t', '<leader>n', '<C-\\><C-n>:RnvimrToggle<CR>')
 
 -- vim-go

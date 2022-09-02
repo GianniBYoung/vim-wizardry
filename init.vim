@@ -4,6 +4,7 @@ lua require('plugins')
 " ~/.config/nvim/lua/keymaps.lua
 lua require('genset')
 lua require('keymaps')
+lua require('autocmd')
 
 "--------------------------------------------------------------------------
 " Plugins
@@ -17,10 +18,10 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin(data_dir . '/plugins')
-source ~/.config/nvim/plugins/textobj-xmlattr.vim
+" can definitly port which-key to lua
+" same with viki
 source ~/.config/nvim/plugins/which-key.vim
 source ~/.config/nvim/plugins/vimwiki.vim
-source ~/.config/nvim/plugins/smooth-scroll.vim
 source ~/.config/nvim/plugins/fzf.vim
 
 doautocmd User PlugLoaded
