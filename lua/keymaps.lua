@@ -36,6 +36,7 @@ map('n', '<leader>vk', ':edit ~/.config/nvim/lua/keymaps.lua<cr>')
 map('n', '<leader>vp', ':edit ~/.config/nvim/lua/plugins.lua<cr>')
 map('n', '<leader>vr', ':source $MYVIMRC<cr>')
 map('n', '<leader>cd', ':cd %:h<cr>')
+map('n', '<leader>a', ':Alpha<cr>')
 
 -- saving
 map('n', '<leader>s', ':w<CR>')

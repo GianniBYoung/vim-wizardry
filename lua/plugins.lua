@@ -92,6 +92,7 @@ require('packer').startup(function(use)
 
   -- Plugins
   use 'sickill/vim-pasta'
+  use 'Konfekt/vim-wsl-copy-paste'
   use 'folke/lsp-colors.nvim'
   use 'neovim/nvim-lspconfig'
   use 'tpope/vim-commentary'

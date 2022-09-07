@@ -336,6 +336,11 @@ _G.packer_plugins = {
     path = "/home/gyoung/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
   },
+  ["vim-wsl-copy-paste"] = {
+    loaded = true,
+    path = "/home/gyoung/.local/share/nvim/site/pack/packer/start/vim-wsl-copy-paste",
+    url = "https://github.com/Konfekt/vim-wsl-copy-paste"
+  },
   vimwiki = {
     loaded = true,
     path = "/home/gyoung/.local/share/nvim/site/pack/packer/start/vimwiki",
