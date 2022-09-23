@@ -7,3 +7,14 @@ json
 Hashicorp
 provisioners
 pb
+sed/!
+tsl
+knife
+url
+secretserver
+inspec
+syspatch
+filesystem
+ssl
+tls
+syslog

@@ -91,7 +91,9 @@ require('packer').startup(function(use)
   require('luatab').setup {}
 
   -- Plugins
+  use "lukas-reineke/indent-blankline.nvim"
   use 'sickill/vim-pasta'
+  use 'p00f/nvim-ts-rainbow'
   use 'Konfekt/vim-wsl-copy-paste'
   use 'folke/lsp-colors.nvim'
   use 'neovim/nvim-lspconfig'
@@ -217,12 +219,19 @@ require 'nvim-treesitter.configs'.setup {
     enable = true,
 
   },
+    rainbow = {
+    enable = true,
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+  }
+
 }
 
 -- Ranger
 
 vim.g.rnvimr_enable_ex = 1
 vim.g.rnvimr_enable_bw = 1
+vim.g.rnvimr_enable_picker = 1
 
 -- Polyglot
 
@@ -398,3 +407,31 @@ vim.api.nvim_create_autocmd('User', {
     bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
   end
 })
+
+-- indent lines
+vim.opt.termguicolors = true
+vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+
+vim.opt.list = true
+vim.opt.listchars:append "space:⋅"
+-- vim.opt.listchars:append "eol:↴"
+
+require("indent_blankline").setup {
+    indent_blankline_char = "/",
+    space_char_blankline = " ",
+    show_current_context = true,
+    show_current_context_start = true,
+    char_highlight_list = {
+        "IndentBlanklineIndent1",
+        "IndentBlanklineIndent2",
+        "IndentBlanklineIndent3",
+        "IndentBlanklineIndent4",
+        "IndentBlanklineIndent5",
+        "IndentBlanklineIndent6",
+    },
+}

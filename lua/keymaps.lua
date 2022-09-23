@@ -25,8 +25,6 @@ map('n', '<leader>Q', ':bufdo bdelete<CR>')
 -- navigate buffers
 map('n', 'gk', ':bn<CR>')
 map('n', 'gj', ':bp<CR>')
-map('n', '<leader>k', ':bn<CR>')
-map('n', '<leader>j', ':bp<CR>')
 map('n', '<leader>K', ':tabn<CR>')
 map('n', '<leader>J', ':tabp<CR>')
 
@@ -45,6 +43,7 @@ map('n', '<leader>S', ':wa<CR>')
 -- misc
 map('n', '<leader>H', ':nohlsearch<CR>')
 map('n', '<leader>C', ':set cuc!<CR>')
+map('n', '<leader>i', ':IndentBlanklineToggle<CR>')
 map('n', 'gf', ':edit <cfile><cr>')
 
 -- smooth scrolling
