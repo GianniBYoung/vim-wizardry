@@ -89,10 +89,7 @@ map('t', '<leader>n', '<C-\\><C-n>:RnvimrToggle<CR>')
 -- vim-go
 map('n', '<Leader>gr', ':w<CR>:GoRun<CR>')
 
-local vim = vim
-local opt = vim.opt
-
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldlevel = 40
+opt.foldlevelstart= 40
 
