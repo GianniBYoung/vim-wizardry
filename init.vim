@@ -1,7 +1,4 @@
 lua require('plugins')
-" ~/.config/nvim/lua/plugins.lua
-" ~/.config/nvim/lua/genset.lua
-" ~/.config/nvim/lua/keymaps.lua
 lua require('genset')
 lua require('keymaps')
 lua require('autocmd')
@@ -29,4 +26,3 @@ doautocmd User PlugLoaded
 autocmd BufWritePost *default.yml !espanso restart
 autocmd FileWritePost *zshrc !source ~/.zshrc
 au BufWritePost *.go !gofmt -w %
-

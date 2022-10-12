@@ -2,6 +2,8 @@
 -- Plugins
 ---
 require('packer').startup(function(use)
+  use 'lewis6991/impatient.nvim'
+  require('impatient')
   use 'wbthomason/packer.nvim'
 
   use 'folke/tokyonight.nvim'
