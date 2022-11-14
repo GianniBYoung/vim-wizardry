@@ -7,6 +7,7 @@ vim.opt.wildmode = { longest = 'full', 'full' }
 vim.opt.expandtab = true
 vim.opt.relativenumber = true
 vim.opt.shiftwidth = 4
+vim.opt.shiftround = true
 vim.opt.tabstop = 2
 vim.opt.hidden = true
 vim.o.signcolumn = 'yes:2'

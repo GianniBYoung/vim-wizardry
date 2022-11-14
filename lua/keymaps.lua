@@ -47,6 +47,7 @@ map('n', '<leader>H', ':nohlsearch<CR>')
 map('n', '<leader>C', ':set cuc!<CR>')
 map('n', '<leader>i', ':IndentBlanklineToggle<CR>')
 map('n', 'gf', ':edit <cfile><cr>')
+map('n', '<Enter>', ' o<ESC>')
 
 -- smooth scrolling
 
