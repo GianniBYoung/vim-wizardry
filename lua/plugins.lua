@@ -134,6 +134,7 @@ require('packer').startup(function(use)
   use 'justinmk/vim-sneak'
   use 'kdheepak/lazygit.nvim'
   use 'kevinhwang91/rnvimr'
+  use 'ellisonleao/glow.nvim'
   use {'fatih/vim-go',
     ft = {"go"},
   }
