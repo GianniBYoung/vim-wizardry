@@ -124,6 +124,7 @@ require('packer').startup(function(use)
   use 'jiangmiao/auto-pairs'
   use 'machakann/vim-highlightedyank'
   use 'justinmk/vim-sneak'
+  use 'kdheepak/lazygit.nvim'
   use {'fatih/vim-go',
     ft = {"go"},
   }
