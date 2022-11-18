@@ -30,6 +30,11 @@ map('n', 'gj', ':bp<CR>')
 map('n', '<leader>K', ':tabn<CR>')
 map('n', '<leader>J', ':tabp<CR>')
 
+-- git
+map('n', '<leader>lg', ':cd %:h<cr>:LazyGitCurrentFile<cr>')
+map('n', '<leader>lr', ':source $MYVIMRC<cr>')
+map('n', '<leader>lr', ':source $MYVIMRC<cr>')
+
 -- file hopping
 map('n', '<leader>ve', ':edit ~/.config/nvim/init.vim<cr>')
 map('n', '<leader>vk', ':edit ~/.config/nvim/lua/keymaps.lua<cr>')
