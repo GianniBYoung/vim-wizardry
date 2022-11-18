@@ -101,8 +101,8 @@ require('packer').startup(function(use)
   require('luatab').setup {}
 
   -- Plugins
-  use "lukas-reineke/indent-blankline.nvim"
-  use 'sickill/vim-pasta'
+  -- use "lukas-reineke/indent-blankline.nvim"
+  -- use 'sickill/vim-pasta'
   use 'p00f/nvim-ts-rainbow'
   use 'Konfekt/vim-wsl-copy-paste'
   use 'folke/lsp-colors.nvim'
@@ -112,15 +112,14 @@ require('packer').startup(function(use)
   -- use 'tpope/vim-surround'
   use 'tpope/vim-endwise'
   use 'jessarcher/vim-context-commentstring'
-  use 'junegunn/vim-peekaboo'
+  -- use 'junegunn/vim-peekaboo'
   use 'voldikss/vim-floaterm'
   use 'junegunn/fzf'
   use 'jessarcher/vim-sayonara'
-  use 'junegunn/fzf.vim'
-  use 'stsewd/fzf-checkout.vim'
+  -- use 'stsewd/fzf-checkout.vim'
   use 'jessarcher/vim-heritage'
   use 'kyazdani42/nvim-web-devicons'
-  use 'sheerun/vim-polyglot'
+  -- use 'sheerun/vim-polyglot'
   use 'unblevable/quick-scope'
   use 'terryma/vim-smooth-scroll'
   use 'wellle/targets.vim'
@@ -128,7 +127,7 @@ require('packer').startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp'
   use 'vimwiki/vimwiki'
   use 'norcalli/nvim-colorizer.lua'
-  use 'frazrepo/vim-rainbow'
+  -- use 'frazrepo/vim-rainbow'
   use 'jiangmiao/auto-pairs'
   use 'machakann/vim-highlightedyank'
   use 'justinmk/vim-sneak'
