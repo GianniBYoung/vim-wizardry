@@ -101,7 +101,7 @@ require('packer').startup(function(use)
   require('luatab').setup {}
 
   -- Plugins
-  -- use "lukas-reineke/indent-blankline.nvim"
+  use "lukas-reineke/indent-blankline.nvim"
   -- use 'sickill/vim-pasta'
   use 'p00f/nvim-ts-rainbow'
   use 'Konfekt/vim-wsl-copy-paste'
@@ -264,7 +264,7 @@ vim.g.rnvimr_enable_picker = 1
 
 -- Polyglot
 
-vim.g.vim_markdown_new_list_item_indent = 0
+-- vim.g.vim_markdown_new_list_item_indent = 0
 
 -- quickscope
 
@@ -272,7 +272,7 @@ vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
 vim.g.qs_max_chars = 150
 
 -- vim-rainbow
-vim.g.rainbow_active = 1
+-- vim.g.rainbow_active = 1
 
 -- sneak
 vim.g['sneak#label'] = 1
