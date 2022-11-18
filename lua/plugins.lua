@@ -109,7 +109,7 @@ require('packer').startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'tpope/vim-commentary'
   use 'tpope/vim-eunuch'
-  use 'tpope/vim-surround'
+  -- use 'tpope/vim-surround'
   use 'tpope/vim-endwise'
   use 'jessarcher/vim-context-commentstring'
   use 'junegunn/vim-peekaboo'
@@ -133,10 +133,11 @@ require('packer').startup(function(use)
   use 'machakann/vim-highlightedyank'
   use 'justinmk/vim-sneak'
   use 'kdheepak/lazygit.nvim'
+  use 'kevinhwang91/rnvimr'
   use {'fatih/vim-go',
     ft = {"go"},
   }
-  use 'kevinhwang91/rnvimr'
+  use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
 
   -- LSP
   use {
@@ -208,6 +209,26 @@ map('n', '<Leader>R', ':Rg<space>')
 
 -- Markdown Preview
 map('n', '<M-m>', ':MarkdownPreview<CR>')
+
+require('peek').setup({
+  auto_load = true,         -- whether to automatically load preview when
+                            -- entering another markdown buffer
+  close_on_bdelete = true,  -- close preview window on buffer delete
+
+  syntax = true,            -- enable syntax highlighting, affects performance
+
+  theme = 'dark',           -- 'dark' or 'light'
+
+  update_on_change = true,
+
+  -- relevant if update_on_change is true
+  throttle_at = 200000,     -- start throttling when file exceeds this
+                            -- amount of bytes in size
+  throttle_time = 'auto',   -- minimum amount of time in milliseconds
+                            -- that has to pass before starting new render
+})
+vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
+vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
 
 -- Colorizer
 map('n', '<Leader>kk', ':ColorizerToggle<CR>')
@@ -350,7 +371,7 @@ require('lualine').setup {
   sections = {
     lualine_a = { 'mode' },
     lualine_b = { 'branch', 'diff', 'diagnostics' },
-    lualine_c = { 'filename' },
+    lualine_c = { {'filename', path=1} },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
     lualine_z = { 'location' }
