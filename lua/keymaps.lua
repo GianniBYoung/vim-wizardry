@@ -53,6 +53,8 @@ map('n', '<leader>C', ':set cuc!<CR>')
 map('n', '<leader>i', ':IndentBlanklineToggle<CR>')
 map('n', 'gf', ':edit <cfile><cr>')
 map('n', '<Enter>', ' o<ESC>')
+map('n', '<leader>m', ':set ft=markdown<CR>:PeekOpen <CR>')
+
 
 -- smooth scrolling
 

@@ -13,12 +13,6 @@ require('packer').startup(function(use)
   vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
   vim.cmd [[colorscheme tokyonight]]
 
-  use({
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
-    ft = {"md", "MD"},
-  })
-
   use {
     'goolord/alpha-nvim',
     requires = { 'kyazdani42/nvim-web-devicons' },
@@ -208,8 +202,6 @@ map('n', '<Leader>R', ':Rg<space>')
 
 
 -- Markdown Preview
-map('n', '<M-m>', ':MarkdownPreview<CR>')
-
 require('peek').setup({
   auto_load = true,         -- whether to automatically load preview when
                             -- entering another markdown buffer
@@ -261,6 +253,7 @@ require 'nvim-treesitter.configs'.setup {
 vim.g.rnvimr_enable_ex = 1
 vim.g.rnvimr_enable_bw = 1
 vim.g.rnvimr_enable_picker = 1
+vim.g.rnvimr_edit_cmd = 'drop'
 
 -- Polyglot
 
