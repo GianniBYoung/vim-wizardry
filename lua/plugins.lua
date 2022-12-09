@@ -2,9 +2,48 @@
 -- Plugins
 ---
 require('packer').startup(function(use)
+  use 'wbthomason/packer.nvim'
   use 'lewis6991/impatient.nvim'
   require('impatient')
-  use 'wbthomason/packer.nvim'
+  -- Plugins
+  use "lukas-reineke/indent-blankline.nvim"
+  -- use 'sickill/vim-pasta'
+  use 'p00f/nvim-ts-rainbow'
+  use 'Konfekt/vim-wsl-copy-paste'
+  use 'folke/lsp-colors.nvim'
+  use 'neovim/nvim-lspconfig'
+  use 'tpope/vim-commentary'
+  use 'tpope/vim-eunuch'
+  -- use 'tpope/vim-surround'
+  use 'tpope/vim-endwise'
+  use 'jessarcher/vim-context-commentstring'
+  -- use 'junegunn/vim-peekaboo'
+  use 'voldikss/vim-floaterm'
+  use 'junegunn/fzf'
+  use 'jessarcher/vim-sayonara'
+  -- use 'stsewd/fzf-checkout.vim'
+  use 'jessarcher/vim-heritage'
+  use 'kyazdani42/nvim-web-devicons'
+  -- use 'sheerun/vim-polyglot'
+  use 'unblevable/quick-scope'
+  use 'terryma/vim-smooth-scroll'
+  use 'wellle/targets.vim'
+  use 'folke/which-key.nvim'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'vimwiki/vimwiki'
+  use 'norcalli/nvim-colorizer.lua'
+  -- use 'frazrepo/vim-rainbow'
+  use 'jiangmiao/auto-pairs'
+  use 'machakann/vim-highlightedyank'
+  use 'justinmk/vim-sneak'
+  use 'kdheepak/lazygit.nvim'
+  use 'kevinhwang91/rnvimr'
+  use 'ellisonleao/glow.nvim'
+  use {'fatih/vim-go',
+    ft = {"go"},
+  }
+  use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
+
 
   use 'folke/tokyonight.nvim'
   -- Lua
@@ -21,30 +60,44 @@ require('packer').startup(function(use)
     end
   }
 
-  -- use {
-  --   'kdheepak/tabline.nvim',
-  --   config = function()
-  --     require 'tabline'.setup {
-  --       enable = true,
-  --       options = {
-  --         max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
-  --         show_tabs_always = true, -- this shows tabs only when there are more than one tab or if the first tab is named
-  --         show_devicons = true, -- this shows devicons in buffer section
-  --         show_bufnr = false, -- this appends [bufnr] to buffer section,
-  --         show_filename_only = true, -- shows base filename only instead of relative path in filename
-  --         modified_icon = "+ ", -- change the default modified icon
-  --         modified_italic = true, -- set to true by default; this determines whether the filename turns italic if modified
-  --         show_tabs_only = false, -- this shows only tabs instead of tabs + buffers
-  --       }
-  --     }
-  --     vim.cmd [[
-  --     set guioptions-=e " Use showtabline in gui vim
-  --     set sessionoptions+=tabpages,globals " store tabpages and globals in session
-  --   ]]
-  --   end,
-  --   requires = { { 'hoob3rt/lualine.nvim', opt = true }, { 'kyazdani42/nvim-web-devicons', opt = true } }
-  -- }
-  -- Replaced the block above with the block below for simplicity
+  use { 'bennypowers/nvim-regexplainer',
+      config = function() require'regexplainer'.setup() end,
+      requires = {
+          'nvim-treesitter/nvim-treesitter',
+          'MunifTanjim/nui.nvim',
+      } }
+  -- defaults
+  require'regexplainer'.setup {
+  -- 'narrative'
+  mode = 'narrative',
+
+  -- automatically show the explainer when the cursor enters a regexp
+  auto = true,
+  filetypes = {
+    'rb',
+    'go',
+    'py',
+  },
+
+  display = 'popup',
+
+  mappings = {
+    toggle = 'gR',
+  },
+  narrative = {
+  separator = function(component)
+    local sep = '\n';
+    if component.depth > 0 then
+      for _ = 1, component.depth do
+        sep = sep .. '> '
+      end
+    end
+    return sep
+  end
+  },
+
+  }
+
   use {
     'kdheepak/tabline.nvim',
     config = function()
@@ -94,44 +147,6 @@ require('packer').startup(function(use)
   use { 'alvarosevilla95/luatab.nvim', requires = 'kyazdani42/nvim-web-devicons' }
   require('luatab').setup {}
 
-  -- Plugins
-  use "lukas-reineke/indent-blankline.nvim"
-  -- use 'sickill/vim-pasta'
-  use 'p00f/nvim-ts-rainbow'
-  use 'Konfekt/vim-wsl-copy-paste'
-  use 'folke/lsp-colors.nvim'
-  use 'neovim/nvim-lspconfig'
-  use 'tpope/vim-commentary'
-  use 'tpope/vim-eunuch'
-  -- use 'tpope/vim-surround'
-  use 'tpope/vim-endwise'
-  use 'jessarcher/vim-context-commentstring'
-  -- use 'junegunn/vim-peekaboo'
-  use 'voldikss/vim-floaterm'
-  use 'junegunn/fzf'
-  use 'jessarcher/vim-sayonara'
-  -- use 'stsewd/fzf-checkout.vim'
-  use 'jessarcher/vim-heritage'
-  use 'kyazdani42/nvim-web-devicons'
-  -- use 'sheerun/vim-polyglot'
-  use 'unblevable/quick-scope'
-  use 'terryma/vim-smooth-scroll'
-  use 'wellle/targets.vim'
-  use 'folke/which-key.nvim'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'vimwiki/vimwiki'
-  use 'norcalli/nvim-colorizer.lua'
-  -- use 'frazrepo/vim-rainbow'
-  use 'jiangmiao/auto-pairs'
-  use 'machakann/vim-highlightedyank'
-  use 'justinmk/vim-sneak'
-  use 'kdheepak/lazygit.nvim'
-  use 'kevinhwang91/rnvimr'
-  use 'ellisonleao/glow.nvim'
-  use {'fatih/vim-go',
-    ft = {"go"},
-  }
-  use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
 
   -- LSP
   use {
