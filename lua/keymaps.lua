@@ -50,10 +50,10 @@ map('n', '<leader>S', ':wa<CR>')
 -- misc
 map('n', '<leader>H', ':nohlsearch<CR>')
 map('n', '<leader>C', ':set cuc!<CR>')
-map('n', '<leader>i', ':IndentBlanklineToggle<CR>')
 map('n', 'gf', ':edit <cfile><cr>')
 map('n', '<Enter>', ' o<ESC>')
 map('n', '<leader>m', ':set ft=markdown<CR>:PeekOpen <CR>')
+map('n', '<Leader>kk', ':ColorizerToggle<CR>')
 
 
 -- smooth scrolling
@@ -100,4 +100,13 @@ map('n', '<Leader>gr', ':w<CR>:GoRun<CR>')
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldlevelstart= 40
+
+-- FloatTerm
+
+map('n', '<F4>', ':FloatermNew<CR>')
+map('t', '<F4>', '<C-\\><C-n>::FloatermNew<CR>')
+map('t', '<F2>', '<C-\\><C-n>::FloatermNext<CR>')
+map('n', '<F1>', ':FloatermToggle<CR>')
+map('t', '<F1>', '<C-\\><C-n>::FloatermToggle<CR>')
+map('t', '<F9>', '<C-\\><C-n>::FloatermKill<CR>')
 

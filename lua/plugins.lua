@@ -7,24 +7,20 @@ require('packer').startup(function(use)
   require('impatient')
   -- Plugins
   use "lukas-reineke/indent-blankline.nvim"
-  -- use 'sickill/vim-pasta'
   use 'p00f/nvim-ts-rainbow'
   use 'Konfekt/vim-wsl-copy-paste'
   use 'folke/lsp-colors.nvim'
   use 'neovim/nvim-lspconfig'
   use 'tpope/vim-commentary'
   use 'tpope/vim-eunuch'
-  -- use 'tpope/vim-surround'
   use 'tpope/vim-endwise'
   use 'jessarcher/vim-context-commentstring'
   -- use 'junegunn/vim-peekaboo'
   use 'voldikss/vim-floaterm'
   use 'junegunn/fzf'
   use 'jessarcher/vim-sayonara'
-  -- use 'stsewd/fzf-checkout.vim'
   use 'jessarcher/vim-heritage'
   use 'kyazdani42/nvim-web-devicons'
-  -- use 'sheerun/vim-polyglot'
   use 'unblevable/quick-scope'
   use 'terryma/vim-smooth-scroll'
   use 'wellle/targets.vim'
@@ -32,7 +28,6 @@ require('packer').startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp'
   use 'vimwiki/vimwiki'
   use 'norcalli/nvim-colorizer.lua'
-  -- use 'frazrepo/vim-rainbow'
   use 'jiangmiao/auto-pairs'
   use 'machakann/vim-highlightedyank'
   use 'justinmk/vim-sneak'
@@ -66,11 +61,8 @@ require('packer').startup(function(use)
           'nvim-treesitter/nvim-treesitter',
           'MunifTanjim/nui.nvim',
       } }
-  -- defaults
   require'regexplainer'.setup {
-  -- 'narrative'
   mode = 'narrative',
-
   -- automatically show the explainer when the cursor enters a regexp
   auto = true,
   filetypes = {
@@ -95,7 +87,6 @@ require('packer').startup(function(use)
     return sep
   end
   },
-
   }
 
   use {
@@ -147,7 +138,6 @@ require('packer').startup(function(use)
   use { 'alvarosevilla95/luatab.nvim', requires = 'kyazdani42/nvim-web-devicons' }
   require('luatab').setup {}
 
-
   -- LSP
   use {
     'VonHeikemen/lsp-zero.nvim',
@@ -197,25 +187,6 @@ function map(mode, shortcut, command)
   vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
 
-map('n', '<F4>', ':FloatermNew<CR>')
-map('t', '<F4>', '<C-\\><C-n>::FloatermNew<CR>')
-
-map('t', '<F2>', '<C-\\><C-n>::FloatermNext<CR>')
-
-map('n', '<F1>', ':FloatermToggle<CR>')
-map('t', '<F1>', '<C-\\><C-n>::FloatermToggle<CR>')
-
-
-map('t', '<F9>', '<C-\\><C-n>::FloatermKill<CR>')
-
--- FZF
-
-map('n', '<Leader>f', ':Files<CR>')
--- map('n', '<Leader>F', ':AllFiles<CR>')
-map('n', '<Leader>r', ':Rg<CR>')
-map('n', '<Leader>R', ':Rg<space>')
-
-
 -- Markdown Preview
 require('peek').setup({
   auto_load = true,         -- whether to automatically load preview when
@@ -237,8 +208,6 @@ require('peek').setup({
 vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
 vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
 
--- Colorizer
-map('n', '<Leader>kk', ':ColorizerToggle<CR>')
 
 -- Tree Sitter
 require 'nvim-treesitter.configs'.setup {
@@ -258,23 +227,14 @@ require 'nvim-treesitter.configs'.setup {
 }
 
 -- Ranger
-
 vim.g.rnvimr_enable_ex = 1
 vim.g.rnvimr_enable_bw = 1
 vim.g.rnvimr_enable_picker = 1
 vim.g.rnvimr_edit_cmd = 'drop'
 
--- Polyglot
-
--- vim.g.vim_markdown_new_list_item_indent = 0
-
 -- quickscope
-
 vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
 vim.g.qs_max_chars = 150
-
--- vim-rainbow
--- vim.g.rainbow_active = 1
 
 -- sneak
 vim.g['sneak#label'] = 1
@@ -344,9 +304,6 @@ cmp.setup {
 
 -- devicons
 require 'nvim-web-devicons'.setup {
-  -- your personnal icons can go here (to override)
-  -- you can specify color or cterm_color instead of specifying both of them
-  -- DevIcon will be appended to `name`
   override = {
     zsh = {
       icon = "",
@@ -355,8 +312,6 @@ require 'nvim-web-devicons'.setup {
       name = "Zsh"
     }
   };
-  -- globally enable default icons (default to false)
-  -- will get overriden by `get_icons` option
   default = true;
 }
 
@@ -458,7 +413,6 @@ vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
 vim.opt.list = true
 vim.opt.listchars:append "space:⋅"
--- vim.opt.listchars:append "eol:↴"
 
 require("indent_blankline").setup {
     indent_blankline_char = "/",
