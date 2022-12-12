@@ -17,7 +17,12 @@ vim.api.nvim_create_autocmd(
     { pattern = "tf$", command = "terraform fmt" }
 )
 
--- Translate this
--- autocmd BufWritePost *default.yml !espanso restart
--- autocmd FileWritePost *zshrc !source ~/.zshrc
--- au BufWritePost *.go !gofmt -w %
+vim.api.nvim_create_autocmd(
+    "BufWritePost",
+    { pattern = ".*default.yml", command = "!espanso restart" }
+)
+
+vim.api.nvim_create_autocmd(
+    "BufWritePost",
+    { pattern = "*.go", command = "!gofmt -w %" }
+)

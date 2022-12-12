@@ -19,7 +19,3 @@ source ~/.config/nvim/plugins/vimwiki.vim
 source ~/.config/nvim/plugins/fzf.vim
 
 doautocmd User PlugLoaded
-" Misc
-autocmd BufWritePost *default.yml !espanso restart
-autocmd FileWritePost *zshrc !source ~/.zshrc
-au BufWritePost *.go !gofmt -w %
