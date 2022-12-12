@@ -5,6 +5,8 @@ require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'lewis6991/impatient.nvim'
   require('impatient')
+  -- devicons are important for lots of plugins
+  use 'kyazdani42/nvim-web-devicons'
   -- Plugins
   use "lukas-reineke/indent-blankline.nvim"
   use 'p00f/nvim-ts-rainbow'
@@ -20,7 +22,6 @@ require('packer').startup(function(use)
   use 'junegunn/fzf'
   use 'jessarcher/vim-sayonara'
   use 'jessarcher/vim-heritage'
-  use 'kyazdani42/nvim-web-devicons'
   use 'unblevable/quick-scope'
   use 'terryma/vim-smooth-scroll'
   use 'wellle/targets.vim'
@@ -49,7 +50,6 @@ require('packer').startup(function(use)
 
   use {
     'goolord/alpha-nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' },
     config = function()
       require 'alpha'.setup(require 'alpha.themes.startify'.config)
     end
@@ -94,7 +94,7 @@ require('packer').startup(function(use)
     config = function()
       require'tabline'.setup {enable = false}
     end,
-    requires = {'hoob3rt/lualine.nvim', 'kyazdani42/nvim-web-devicons'}
+    requires = {'hoob3rt/lualine.nvim'}
   }
 
   use {
@@ -130,12 +130,9 @@ require('packer').startup(function(use)
   }
 
   -- lualine
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
+  use { 'nvim-lualine/lualine.nvim', }
+  use { 'alvarosevilla95/luatab.nvim'}
 
-  use { 'alvarosevilla95/luatab.nvim', requires = 'kyazdani42/nvim-web-devicons' }
   require('luatab').setup {}
 
   -- LSP
@@ -164,9 +161,8 @@ require('packer').startup(function(use)
 end)
 
 -- LSP setup
-
 local lsp = require('lsp-zero')
-
+lsp.preset('lsp-compe')
 lsp.set_preferences({
   suggest_lsp_servers = true,
   setup_servers_on_start = true,
@@ -185,66 +181,6 @@ lsp.set_preferences({
 
 lsp.nvim_workspace()
 lsp.setup()
-
-
--- Plugin Configuration
---
-function map(mode, shortcut, command)
-  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
-end
-
--- Markdown Preview
-require('peek').setup({
-  auto_load = true,         -- whether to automatically load preview when
-                            -- entering another markdown buffer
-  close_on_bdelete = true,  -- close preview window on buffer delete
-
-  syntax = true,            -- enable syntax highlighting, affects performance
-
-  theme = 'dark',           -- 'dark' or 'light'
-
-  update_on_change = true,
-
-  -- relevant if update_on_change is true
-  throttle_at = 200000,     -- start throttling when file exceeds this
-                            -- amount of bytes in size
-  throttle_time = 'auto',   -- minimum amount of time in milliseconds
-                            -- that has to pass before starting new render
-})
-vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
-vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
-
-
--- Tree Sitter
-require 'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all"
-  ensure_installed = { "python", "ruby", "yaml", "go", "bash", "dockerfile", "hcl", "json"  },
-
-  highlight = {
-    enable = true,
-
-  },
-    rainbow = {
-    enable = true,
-    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-    max_file_lines = nil, -- Do not enable for files with more than n lines, int
-  }
-
-}
-
--- Ranger
-vim.g.rnvimr_enable_ex = 1
-vim.g.rnvimr_enable_bw = 1
-vim.g.rnvimr_enable_picker = 1
-vim.g.rnvimr_edit_cmd = 'drop'
-
--- quickscope
-vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
-vim.g.qs_max_chars = 150
-
--- sneak
-vim.g['sneak#label'] = 1
-vim.g['sneak#use_ic_scs'] = 1
 
 -- luasnip setup
 local luasnip = require 'luasnip'
@@ -309,6 +245,66 @@ cmp.setup {
   },
 }
 
+
+
+-- Plugin Configuration
+--
+function map(mode, shortcut, command)
+  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+end
+
+-- Markdown Preview
+require('peek').setup({
+  auto_load = true,         -- whether to automatically load preview when
+                            -- entering another markdown buffer
+  close_on_bdelete = true,  -- close preview window on buffer delete
+
+  syntax = true,            -- enable syntax highlighting, affects performance
+
+  theme = 'dark',           -- 'dark' or 'light'
+
+  update_on_change = true,
+
+  -- relevant if update_on_change is true
+  throttle_at = 200000,     -- start throttling when file exceeds this
+                            -- amount of bytes in size
+  throttle_time = 'auto',   -- minimum amount of time in milliseconds
+                            -- that has to pass before starting new render
+})
+vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
+vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
+
+
+-- Tree Sitter
+require 'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "python", "ruby", "yaml", "go", "bash", "dockerfile", "hcl", "json"  },
+
+  highlight = {
+    enable = true,
+
+  },
+    rainbow = {
+    enable = true,
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+  }
+
+}
+
+-- Ranger
+vim.g.rnvimr_enable_ex = 1
+vim.g.rnvimr_enable_bw = 1
+vim.g.rnvimr_enable_picker = 1
+vim.g.rnvimr_edit_cmd = 'drop'
+
+-- quickscope
+vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
+vim.g.qs_max_chars = 150
+
+-- sneak
+vim.g['sneak#label'] = 1
+vim.g['sneak#use_ic_scs'] = 1
 -- devicons
 require 'nvim-web-devicons'.setup {
   override = {
