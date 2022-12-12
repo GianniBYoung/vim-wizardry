@@ -175,10 +175,10 @@ lsp.set_preferences({
   manage_nvim_cmp = true,
   call_servers = 'local',
   sign_icons = {
-    error = '✘',
-    warn = '▲',
-    hint = '⚑',
-    info = ''
+    error = '😡',
+    warn = '⚡',
+    hint = '💡',
+    info = '🧠'
   }
 })
 
