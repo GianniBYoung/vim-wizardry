@@ -5,7 +5,7 @@ local opt = vim.opt
 ---
 
 function map(mode, shortcut, command)
-  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+    vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
 
 -- leader
@@ -33,13 +33,11 @@ map('n', '<leader>J', ':tabp<CR>')
 -- git
 map('n', '<leader>lg', ':cd %:h<cr>:LazyGitCurrentFile<cr>')
 map('n', '<leader>lr', ':source $MYVIMRC<cr>')
-map('n', '<leader>lr', ':source $MYVIMRC<cr>')
 
 -- file hopping
 map('n', '<leader>ve', ':edit ~/.config/nvim/init.vim<cr>')
 map('n', '<leader>vk', ':edit ~/.config/nvim/lua/keymaps.lua<cr>')
 map('n', '<leader>vp', ':edit ~/.config/nvim/lua/plugins.lua<cr>')
-map('n', '<leader>vr', ':source $MYVIMRC<cr>')
 map('n', '<leader>cd', ':cd %:h<cr>')
 map('n', '<leader>a', ':Alpha<cr>')
 
@@ -51,7 +49,7 @@ map('n', '<leader>S', ':wa<CR>')
 map('n', '<leader>H', ':nohlsearch<CR>')
 map('n', '<leader>C', ':set cuc!<CR>')
 map('n', 'gf', ':edit <cfile><cr>')
-map('n', '<Enter>', ' o<ESC>')
+-- map('n', ' <Enter>', ' o<ESC>')
 map('n', '<leader>m', ':set ft=markdown<CR>:PeekOpen <CR>')
 map('n', '<Leader>kk', ':ColorizerToggle<CR>')
 
@@ -83,9 +81,6 @@ map('n', '<leader>x', ':!xdg-open %<cr><cr>')
 
 -- Quicky escape to normal mode
 map('i', 'ii', '<esc>')
-map('i', ';;', '<Esc>A;<Esc>')
-map('i', ',,', '<Esc>A,<Esc>')
-
 map('c', 'w!!', '%!sudo tee > /dev/null %')
 
 map('n', '<leader>q', ':Sayonara<CR>')
@@ -99,7 +94,7 @@ map('n', '<Leader>gr', ':w<CR>:GoRun<CR>')
 
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldlevelstart= 40
+opt.foldlevelstart = 40
 
 -- FloatTerm
 
@@ -110,3 +105,5 @@ map('n', '<F1>', ':FloatermToggle<CR>')
 map('t', '<F1>', '<C-\\><C-n>::FloatermToggle<CR>')
 map('t', '<F9>', '<C-\\><C-n>::FloatermKill<CR>')
 
+-- lsp binds
+map('n', '<Leader>w', ':LspZeroFormat<CR>')

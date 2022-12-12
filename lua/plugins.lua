@@ -144,7 +144,8 @@ require('packer').startup(function(use)
     requires = {
       -- LSP Support
       { 'neovim/nvim-lspconfig' },
-      { 'williamboman/nvim-lsp-installer' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
 
       -- Autocompletion
       { 'hrsh7th/nvim-cmp' },
@@ -167,7 +168,7 @@ end)
 local lsp = require('lsp-zero')
 
 lsp.set_preferences({
-  suggest_lsp_servers = false,
+  suggest_lsp_servers = true,
   setup_servers_on_start = true,
   set_lsp_keymaps = true,
   configure_diagnostics = true,
@@ -249,6 +250,7 @@ vim.g['sneak#use_ic_scs'] = 1
 local luasnip = require 'luasnip'
 
 -- nvim-cmp setup
+-- might not be necessary -> managed by lsp-zero?
 local cmp = require 'cmp'
 cmp.setup {
   snippet = {
@@ -295,10 +297,10 @@ cmp.setup {
     fields = { 'menu', 'abbr', 'kind' },
     format = function(entry, item)
       local menu_icon = {
-        luasnip = '⋗',
-        nvim_lsp = 'λ',
-        buffer = 'Ω',
-        path = '🖫',
+        luasnip = '🔪',
+        nvim_lsp = '🤓',
+        buffer = '🧾',
+        path = '💾',
       }
 
       item.menu = menu_icon[entry.source.name]
