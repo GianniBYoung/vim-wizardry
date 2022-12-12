@@ -2,12 +2,15 @@
 -- Plugins
 ---
 require('packer').startup(function(use)
+  -- Ultra Important plugins
   use 'wbthomason/packer.nvim'
   use 'lewis6991/impatient.nvim'
   require('impatient')
-  -- devicons are important for lots of plugins
   use 'kyazdani42/nvim-web-devicons'
-  -- Plugins
+  use 'L3MON4D3/LuaSnip'
+  use 'rafamadriz/friendly-snippets'
+
+  -- Regular Plugins
   use "lukas-reineke/indent-blankline.nvim"
   use 'p00f/nvim-ts-rainbow'
   use 'Konfekt/vim-wsl-copy-paste'
@@ -35,9 +38,7 @@ require('packer').startup(function(use)
   use 'kdheepak/lazygit.nvim'
   use 'kevinhwang91/rnvimr'
   use 'ellisonleao/glow.nvim'
-  use {'fatih/vim-go',
-    ft = {"go"},
-  }
+  use {'fatih/vim-go', ft = {"go"}, }
   use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
 
 
@@ -48,8 +49,7 @@ require('packer').startup(function(use)
   vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
   vim.cmd [[colorscheme tokyonight]]
 
-  use {
-    'goolord/alpha-nvim',
+  use { 'goolord/alpha-nvim',
     config = function()
       require 'alpha'.setup(require 'alpha.themes.startify'.config)
     end
@@ -89,16 +89,14 @@ require('packer').startup(function(use)
   },
   }
 
-  use {
-    'kdheepak/tabline.nvim',
+  use { 'kdheepak/tabline.nvim',
     config = function()
       require'tabline'.setup {enable = false}
     end,
     requires = {'hoob3rt/lualine.nvim'}
   }
 
-  use {
-    'nvim-treesitter/nvim-treesitter',
+  use { 'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     requires = {
       'nvim-treesitter/playground',
@@ -107,8 +105,7 @@ require('packer').startup(function(use)
       'JoosepAlviste/nvim-ts-context-commentstring',
     },
   }
-  use {
-    'hrsh7th/nvim-cmp',
+  use { 'hrsh7th/nvim-cmp',
     requires = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
@@ -122,8 +119,7 @@ require('packer').startup(function(use)
   }
 
   -- gitsigns
-  use {
-    'lewis6991/gitsigns.nvim',
+  use { 'lewis6991/gitsigns.nvim',
     config = function()
       require('gitsigns').setup()
     end
@@ -136,25 +132,12 @@ require('packer').startup(function(use)
   require('luatab').setup {}
 
   -- LSP
-  use {
-    'VonHeikemen/lsp-zero.nvim',
+  use { 'VonHeikemen/lsp-zero.nvim',
     requires = {
       -- LSP Support
       { 'neovim/nvim-lspconfig' },
       { 'williamboman/mason.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
-
-      -- Autocompletion
-      { 'hrsh7th/nvim-cmp' },
-      { 'hrsh7th/cmp-buffer' },
-      { 'hrsh7th/cmp-path' },
-      { 'saadparwaiz1/cmp_luasnip' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-nvim-lua' },
-
-      -- Snippets
-      { 'L3MON4D3/LuaSnip' },
-      { 'rafamadriz/friendly-snippets' },
     }
   }
 
@@ -186,7 +169,6 @@ lsp.setup()
 local luasnip = require 'luasnip'
 
 -- nvim-cmp setup
--- might not be necessary -> managed by lsp-zero?
 local cmp = require 'cmp'
 cmp.setup {
   snippet = {
@@ -249,22 +231,14 @@ cmp.setup {
 
 -- Plugin Configuration
 --
-function map(mode, shortcut, command)
-  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
-end
 
 -- Markdown Preview
 require('peek').setup({
-  auto_load = true,         -- whether to automatically load preview when
-                            -- entering another markdown buffer
-  close_on_bdelete = true,  -- close preview window on buffer delete
-
-  syntax = true,            -- enable syntax highlighting, affects performance
-
-  theme = 'dark',           -- 'dark' or 'light'
-
+  auto_load = true,
+  close_on_bdelete = true,
+  syntax = true,
+  theme = 'dark',
   update_on_change = true,
-
   -- relevant if update_on_change is true
   throttle_at = 200000,     -- start throttling when file exceeds this
                             -- amount of bytes in size
@@ -282,14 +256,12 @@ require 'nvim-treesitter.configs'.setup {
 
   highlight = {
     enable = true,
-
   },
     rainbow = {
     enable = true,
     extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
     max_file_lines = nil, -- Do not enable for files with more than n lines, int
   }
-
 }
 
 -- Ranger
@@ -309,12 +281,11 @@ vim.g['sneak#use_ic_scs'] = 1
 require 'nvim-web-devicons'.setup {
   override = {
     zsh = {
-      icon = "",
+      icon = "📺",
       color = "#428850",
       cterm_color = "65",
       name = "Zsh"
-    }
-  };
+    }};
   default = true;
 }
 
