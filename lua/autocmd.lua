@@ -16,3 +16,8 @@ vim.api.nvim_create_autocmd(
     "BufWritePre",
     { pattern = "tf$", command = "terraform fmt" }
 )
+
+-- Translate this
+-- autocmd BufWritePost *default.yml !espanso restart
+-- autocmd FileWritePost *zshrc !source ~/.zshrc
+-- au BufWritePost *.go !gofmt -w %

@@ -15,9 +15,6 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin(data_dir . '/plugins')
-" can definitly port which-key to lua
-" same with viki
-source ~/.config/nvim/plugins/which-key.vim
 source ~/.config/nvim/plugins/vimwiki.vim
 source ~/.config/nvim/plugins/fzf.vim
 
