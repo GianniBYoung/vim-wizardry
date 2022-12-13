@@ -133,6 +133,22 @@ require('packer').startup(function(use)
             { path = '/home/gianni/vimwiki', syntax = 'markdown', ext = '.md', }
         }
     end}
+
+
+
+  -- this config isn't doing anything
+  use {'ray-x/starry.nvim', setup = function()
+      vim.g.starry_style="mariana"
+      vim.g.starry_italic_comments=true
+      vim.g.starry_italic_string=false
+      vim.g.starry_italic_keywords=false
+      vim.g.starry_italic_functions=false
+      vim.g.starry_italic_variables=false
+      vim.g.starry_contrast=true
+      vim.g.starry_borders=false
+  end}
+  require('starry.functions').change_style("mariana")
+
 end)
 
 -- Plugin Configuration
