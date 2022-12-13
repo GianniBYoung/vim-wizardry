@@ -38,6 +38,7 @@ map('n', '<leader>lr', ':source $MYVIMRC<cr>')
 map('n', '<leader>ve', ':edit ~/.config/nvim/init.vim<cr>')
 map('n', '<leader>vk', ':edit ~/.config/nvim/lua/keymaps.lua<cr>')
 map('n', '<leader>vp', ':edit ~/.config/nvim/lua/plugins.lua<cr>')
+map('n', '<leader>vl', ':edit ~/.config/nvim/lua/lsp.lua<cr>')
 map('n', '<leader>cd', ':cd %:h<cr>')
 map('n', '<leader>a', ':Alpha<cr>')
 
@@ -52,6 +53,7 @@ map('n', 'gf', ':edit <cfile><cr>')
 -- map('n', ' <Enter>', ' o<ESC>')
 map('n', '<leader>m', ':set ft=markdown<CR>:PeekOpen <CR>')
 map('n', '<Leader>kk', ':ColorizerToggle<CR>')
+map('n', '<Leader>f', ':set ft=bash<CR>')
 
 
 -- smooth scrolling
@@ -107,3 +109,12 @@ map('t', '<F9>', '<C-\\><C-n>::FloatermKill<CR>')
 
 -- lsp binds
 map('n', '<Leader>w', ':LspZeroFormat<CR>')
+
+-- telescope
+map('n', '<Leader>tf', ':Telescope fd<CR>')
+map('n', '<Leader>tz', ':Telescope spell_suggest<CR>')
+map('n', '<Leader>tg', ':Telescope live_grepCR>')
+map('n', '<Leader>tq', ':Telescope colorscheme<CR>')
+map('n', '<Leader>td', ':Telescope diagnostics<CR>')
+map('n', '<Leader>tt', ':Telescope filetypes<CR>')
+

@@ -37,6 +37,8 @@ require('packer').startup(function(use)
   use 'ellisonleao/glow.nvim'
   use {'fatih/vim-go', ft = {"go"}, }
   use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
+  use "nvim-telescope/telescope.nvim"
+  use "nvim-lua/plenary.nvim"
 
   --theme
   use 'folke/tokyonight.nvim'
