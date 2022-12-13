@@ -41,7 +41,7 @@ require('packer').startup(function(use)
   use "nvim-lua/plenary.nvim"
 
   --theme
-  use 'folke/tokyonight.nvim'
+  -- use 'folke/tokyonight.nvim'
 
   use { 'goolord/alpha-nvim',
     config = function()
@@ -204,7 +204,7 @@ require 'nvim-web-devicons'.setup {
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'tokyonight',
+    theme = 'auto',
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
     disabled_filetypes = {},
