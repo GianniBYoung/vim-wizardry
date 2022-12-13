@@ -1,6 +1,3 @@
----
--- Plugins
----
 require('packer').startup(function(use)
   -- Ultra Important plugins
   use 'wbthomason/packer.nvim'
@@ -9,13 +6,14 @@ require('packer').startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
   use 'L3MON4D3/LuaSnip'
   use 'rafamadriz/friendly-snippets'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'neovim/nvim-lspconfig'
 
   -- Regular Plugins
   use "lukas-reineke/indent-blankline.nvim"
   use 'p00f/nvim-ts-rainbow'
   use 'Konfekt/vim-wsl-copy-paste'
   use 'folke/lsp-colors.nvim'
-  use 'neovim/nvim-lspconfig'
   use 'tpope/vim-commentary'
   use 'tpope/vim-eunuch'
   use 'tpope/vim-endwise'
@@ -29,7 +27,6 @@ require('packer').startup(function(use)
   use 'terryma/vim-smooth-scroll'
   use 'wellle/targets.vim'
   use 'folke/which-key.nvim'
-  use 'hrsh7th/cmp-nvim-lsp'
   -- use 'vimwiki/vimwiki'
   use 'norcalli/nvim-colorizer.lua'
   use 'jiangmiao/auto-pairs'
@@ -41,13 +38,8 @@ require('packer').startup(function(use)
   use {'fatih/vim-go', ft = {"go"}, }
   use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
 
-
+  --theme
   use 'folke/tokyonight.nvim'
-  -- Lua
-  -- vim.g.tokyonight_style = "night"
-  vim.g.tokyonight_italic_functions = true
-  vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
-  vim.cmd [[colorscheme tokyonight]]
 
   use { 'goolord/alpha-nvim',
     config = function()
@@ -65,17 +57,9 @@ require('packer').startup(function(use)
   mode = 'narrative',
   -- automatically show the explainer when the cursor enters a regexp
   auto = true,
-  filetypes = {
-    'rb',
-    'go',
-    'py',
-  },
-
+  filetypes = { 'rb', 'go', 'py', },
   display = 'popup',
-
-  mappings = {
-    toggle = 'gR',
-  },
+  mappings = { toggle = 'gR',},
   narrative = {
   separator = function(component)
     local sep = '\n';
@@ -105,6 +89,7 @@ require('packer').startup(function(use)
       'JoosepAlviste/nvim-ts-context-commentstring',
     },
   }
+
   use { 'hrsh7th/nvim-cmp',
     requires = {
       'hrsh7th/cmp-nvim-lsp',
@@ -134,111 +119,19 @@ require('packer').startup(function(use)
   -- LSP
   use { 'VonHeikemen/lsp-zero.nvim',
     requires = {
-      -- LSP Support
       { 'neovim/nvim-lspconfig' },
       { 'williamboman/mason.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
     }
   }
 
-use{'vimwiki/vimwiki',
+  use{'vimwiki/vimwiki',
     config = function()
         vim.g.vimwiki_list = {
-            {
-                path = '/home/gianni/vimwiki',
-                syntax = 'markdown',
-                ext = '.md',
-            }
+            { path = '/home/gianni/vimwiki', syntax = 'markdown', ext = '.md', }
         }
-    end
-}
+    end}
 end)
-
--- LSP setup
-local lsp = require('lsp-zero')
-lsp.preset('lsp-compe')
-lsp.set_preferences({
-  suggest_lsp_servers = true,
-  setup_servers_on_start = true,
-  set_lsp_keymaps = true,
-  configure_diagnostics = true,
-  cmp_capabilities = true,
-  manage_nvim_cmp = true,
-  call_servers = 'local',
-  sign_icons = {
-    error = '😡',
-    warn = '⚡',
-    hint = '💡',
-    info = '🧠'
-  }
-})
-
-lsp.nvim_workspace()
-lsp.setup()
-
--- luasnip setup
-local luasnip = require 'luasnip'
-
--- nvim-cmp setup
-local cmp = require 'cmp'
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  }),
-  sources = {
-    { name = 'luasnip', keyword_length = 2 },
-    { name = 'nvim_lsp', keyword_length = 2 },
-    { name = "treesitter", keyword_length = 2 },
-    { name = "nvim_lua", keyword_length = 2 },
-    { name = "path" },
-    { name = "buffer", keyword_length = 3 },
-  },
-  formatting = {
-    fields = { 'menu', 'abbr', 'kind' },
-    format = function(entry, item)
-      local menu_icon = {
-        luasnip = '🔪',
-        nvim_lsp = '🤓',
-        buffer = '🧾',
-        path = '💾',
-      }
-
-      item.menu = menu_icon[entry.source.name]
-      return item
-    end,
-  },
-}
-
-
 
 -- Plugin Configuration
 --
@@ -259,20 +152,14 @@ require('peek').setup({
 vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
 vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
 
-
 -- Tree Sitter
 require 'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = { "python", "ruby", "yaml", "go", "bash", "dockerfile", "hcl", "json"  },
 
-  highlight = {
-    enable = true,
-  },
+  highlight = { enable = true, },
     rainbow = {
-    enable = true,
-    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-    max_file_lines = nil, -- Do not enable for files with more than n lines, int
-  }
+    enable = true, extended_mode = true, max_file_lines = nil, }
 }
 
 -- Ranger
@@ -291,12 +178,8 @@ vim.g['sneak#use_ic_scs'] = 1
 -- devicons
 require 'nvim-web-devicons'.setup {
   override = {
-    zsh = {
-      icon = "📺",
-      color = "#428850",
-      cterm_color = "65",
-      name = "Zsh"
-    }};
+    zsh = { icon = "📺", color = "#428850", cterm_color = "65", name = "Zsh" }
+  };
   default = true;
 }
 
