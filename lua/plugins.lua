@@ -30,7 +30,7 @@ require('packer').startup(function(use)
   use 'wellle/targets.vim'
   use 'folke/which-key.nvim'
   use 'hrsh7th/cmp-nvim-lsp'
-  use 'vimwiki/vimwiki'
+  -- use 'vimwiki/vimwiki'
   use 'norcalli/nvim-colorizer.lua'
   use 'jiangmiao/auto-pairs'
   use 'machakann/vim-highlightedyank'
@@ -141,6 +141,17 @@ require('packer').startup(function(use)
     }
   }
 
+use{'vimwiki/vimwiki',
+    config = function()
+        vim.g.vimwiki_list = {
+            {
+                path = '/home/gianni/vimwiki',
+                syntax = 'markdown',
+                ext = '.md',
+            }
+        }
+    end
+}
 end)
 
 -- LSP setup
