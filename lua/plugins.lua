@@ -27,7 +27,6 @@ require('packer').startup(function(use)
   use 'terryma/vim-smooth-scroll'
   use 'wellle/targets.vim'
   use 'folke/which-key.nvim'
-  -- use 'vimwiki/vimwiki'
   use 'norcalli/nvim-colorizer.lua'
   use 'jiangmiao/auto-pairs'
   use 'machakann/vim-highlightedyank'
@@ -47,32 +46,6 @@ require('packer').startup(function(use)
     config = function()
       require 'alpha'.setup(require 'alpha.themes.startify'.config)
     end
-  }
-
-  use { 'bennypowers/nvim-regexplainer',
-      config = function() require'regexplainer'.setup() end,
-      requires = {
-          'nvim-treesitter/nvim-treesitter',
-          'MunifTanjim/nui.nvim',
-      } }
-  require'regexplainer'.setup {
-  mode = 'narrative',
-  -- automatically show the explainer when the cursor enters a regexp
-  auto = true,
-  filetypes = { 'rb', 'go', 'py', },
-  display = 'popup',
-  mappings = { toggle = 'gR',},
-  narrative = {
-  separator = function(component)
-    local sep = '\n';
-    if component.depth > 0 then
-      for _ = 1, component.depth do
-        sep = sep .. '> '
-      end
-    end
-    return sep
-  end
-  },
   }
 
   use { 'kdheepak/tabline.nvim',

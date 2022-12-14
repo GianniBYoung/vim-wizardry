@@ -19,6 +19,11 @@ lsp.set_preferences({
 lsp.nvim_workspace()
 lsp.setup()
 
+-- Add additional capabilities supported by nvim-cmp
+-- not sure if this works with 'zero'
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local lspconfig = require('lspconfig')
+
 -- luasnip setup
 local luasnip = require 'luasnip'
 
