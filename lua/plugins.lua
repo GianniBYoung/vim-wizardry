@@ -103,10 +103,11 @@ require('packer').startup(function(use)
   use{'vimwiki/vimwiki',
     config = function()
         vim.g.vimwiki_list = {
-            { path = '/home/gianni/vimwiki', syntax = 'markdown', ext = '.md', }
+            { path = '~/vimwiki', syntax = 'markdown', ext = '.md', }
         }
     end}
 
+  use 'ray-x/starry.nvim'
   require('starry.functions').change_style("mariana")
 
 end)
