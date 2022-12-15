@@ -109,17 +109,7 @@ require('packer').startup(function(use)
 
 
 
-  -- this config isn't doing anything
-  use {'ray-x/starry.nvim', setup = function()
-      vim.g.starry_style="mariana"
-      vim.g.starry_italic_comments=true
-      vim.g.starry_italic_string=false
-      vim.g.starry_italic_keywords=false
-      vim.g.starry_italic_functions=false
-      vim.g.starry_italic_variables=false
-      vim.g.starry_contrast=true
-      vim.g.starry_borders=false
-  end}
+  use 'ray-x/starry.nvim'
   require('starry.functions').change_style("mariana")
 
 end)
@@ -158,6 +148,7 @@ vim.g.rnvimr_enable_ex = 1
 vim.g.rnvimr_enable_bw = 1
 vim.g.rnvimr_enable_picker = 1
 vim.g.rnvimr_edit_cmd = 'drop'
+vim.g.rnvimr_vanilla = 1
 
 -- quickscope
 vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
