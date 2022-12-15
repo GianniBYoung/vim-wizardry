@@ -39,9 +39,7 @@ require('packer').startup(function(use)
   use "nvim-telescope/telescope.nvim"
   use "nvim-lua/plenary.nvim"
 
-  --theme
-  -- use 'folke/tokyonight.nvim'
-
+  -- Change MRU options in packer/site folder to fix autocd
   use { 'goolord/alpha-nvim',
     config = function()
       require 'alpha'.setup(require 'alpha.themes.startify'.config)
