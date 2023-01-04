@@ -5,11 +5,11 @@ HOME = os.getenv("HOME")
 vim.opt.clipboard = vim.opt.clipboard + 'unnamedplus'
 vim.opt.wildmode = { longest = 'full', 'full' }
 vim.opt.expandtab = true
-vim.opt.relativenumber = true
+vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.shiftround = true
-vim.opt.tabstop = 2
 vim.opt.hidden = true
+vim.opt.relativenumber = true
 vim.o.signcolumn = 'yes:2'
 vim.o.listchars = 'tab:▸ ,trail:·'
 vim.opt.splitbelow = true
@@ -31,6 +31,7 @@ vim.opt.updatetime = 300 -- Reduce time for highlighting other references
 vim.opt.redrawtime = 13000 -- Allow more time for loading syntax on large files
 vim.opt.showmatch = true
 vim.opt.showmode = false
+-- vim.opt.formatoptions = { 'j' }
 
 -- " set backup
 -- " set backupdir=~/.local/share/nvim/backup//
