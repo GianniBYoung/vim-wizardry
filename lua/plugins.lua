@@ -26,7 +26,6 @@ require('packer').startup(function(use)
   use 'unblevable/quick-scope'
   use 'terryma/vim-smooth-scroll'
   use 'wellle/targets.vim'
-  use 'folke/which-key.nvim'
   use 'norcalli/nvim-colorizer.lua'
   use 'jiangmiao/auto-pairs'
   use 'machakann/vim-highlightedyank'
@@ -38,6 +37,15 @@ require('packer').startup(function(use)
   use { 'toppair/peek.nvim', run = 'deno task --quiet build:fast' }
   use "nvim-telescope/telescope.nvim"
   use "nvim-lua/plenary.nvim"
+
+  use {
+      "folke/which-key.nvim",
+      config = function()
+          vim.o.timeout = true
+          vim.o.timeoutlen = 200
+          require("which-key").setup { }
+      end
+  }
 
   -- Change MRU options in packer/site folder to fix autocd
   use { 'goolord/alpha-nvim',
@@ -142,7 +150,7 @@ require 'nvim-treesitter.configs'.setup {
 vim.g.rnvimr_enable_ex = 1
 vim.g.rnvimr_enable_bw = 1
 vim.g.rnvimr_enable_picker = 1
-vim.g.rnvimr_edit_cmd = 'drop'
+-- vim.g.rnvimr_edit_cmd = 'drop'
 vim.g.rnvimr_vanilla = 1
 
 -- quickscope
