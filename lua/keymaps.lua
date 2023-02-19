@@ -116,9 +116,12 @@ map('n', '<Leader>w', ':LspZeroFormat<CR>')
 
 -- telescope
 map('n', '<Leader>tf', ':Telescope fd<CR>')
-map('n', '<Leader>tz', ':Telescope spell_suggest<CR>')
+map('n', '<Leader>z', ':Telescope spell_suggest<CR>')
 map('n', '<Leader>tg', ':Telescope live_grep<CR>')
 map('n', '<Leader>tq', ':Telescope colorscheme<CR>')
 map('n', '<Leader>td', ':Telescope diagnostics<CR>')
-map('n', '<Leader>tt', ':Telescope filetypes<CR>')
+-- map('n', '<Leader>tt', ':Telescope filetypes<CR>')
+map('n', '<Leader>tr', ':Telescope lsp_references<CR>')
+map('n', '<Leader>tr', ':Telescope lsp_document_symbols<CR>')
+map('n', '<Leader>tt', ':Telescope lsp_type_definitions<CR>')
 
