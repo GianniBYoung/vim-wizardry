@@ -10,6 +10,28 @@ end
 
 -- leader
 vim.g.mapleader = ' '
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', 'gl', vim.diagnostic.open_float, opts)
+
+-- trouble
+map('n', '<leader>xr', ':TroubleToggle lsp_references<CR>')
+map('n', '<leader>xx', ':TroubleToggle<CR>')
+map('n', '<leader>xd', ':TroubleToggle document_diagnostics<CR>')
+map('n', '<leader>xk', ':TroubleToggle quickfix<CR>')
+
+local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
+
+local telescope = require("telescope")
+
+telescope.setup {
+  defaults = {
+    mappings = {
+      i = { ["<c-t>"] = trouble.open_with_trouble },
+      n = { ["<c-t>"] = trouble.open_with_trouble },
+    },
+  },
+}
 
 -- resize splits
 map('n', '<M-J>', ':resize -2<CR>')

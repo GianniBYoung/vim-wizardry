@@ -10,6 +10,7 @@ require('packer').startup(function(use)
   use 'neovim/nvim-lspconfig'
 
   -- Regular Plugins
+  use 'sainnhe/everforest'
   use "lukas-reineke/indent-blankline.nvim"
   use 'p00f/nvim-ts-rainbow'
   use 'Konfekt/vim-wsl-copy-paste'
@@ -38,6 +39,21 @@ require('packer').startup(function(use)
   use "nvim-telescope/telescope.nvim"
   use "nvim-lua/plenary.nvim"
 
+
+  use { "folke/trouble.nvim",
+  config = function()
+      require("trouble").setup {
+          auto_close = true,
+          sign_icons = {
+              error = '😡',
+              warning = '⚡',
+              hint = '💡',
+              information = '🧠'
+          },
+      }
+  end
+  }
+
   use {
       "folke/which-key.nvim",
       config = function()
@@ -50,7 +66,10 @@ require('packer').startup(function(use)
   -- Change MRU options in packer/site folder to fix autocd
   use { 'goolord/alpha-nvim',
     config = function()
-      require 'alpha'.setup(require 'alpha.themes.startify'.config)
+      local alpha = require('alpha')
+      local theme = require'alpha.themes.startify'
+      theme.mru_opts.autocd = true
+      alpha.setup(theme.config)
     end
   }
 
@@ -113,8 +132,16 @@ require('packer').startup(function(use)
         }
     end}
 
-  use 'ray-x/starry.nvim'
-  require('starry.functions').change_style("mariana")
+  vim.cmd("set background=light")
+  vim.cmd("let g:everforest_background = 'soft'")
+  vim.cmd("let g:everforest_colors_override = {'bg1': ['#B0C145', '5'],'bg5': ['#d699b6', '223']}")
+  vim.cmd("colorscheme everforest")
+
+
+  -- use 'ray-x/starry.nvim'
+  -- vim.opt.background = 'light'
+  -- vim.g.everforest_background = 'soft'
+  -- require('starry.functions').change_style("everforest")
 
 end)
 
