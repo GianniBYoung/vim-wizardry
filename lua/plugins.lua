@@ -177,8 +177,8 @@ require 'nvim-treesitter.configs'.setup {
 vim.g.rnvimr_enable_ex = 1
 vim.g.rnvimr_enable_bw = 1
 vim.g.rnvimr_enable_picker = 1
--- vim.g.rnvimr_edit_cmd = 'drop'
-vim.g.rnvimr_vanilla = 1
+vim.g.rnvimr_edit_cmd = 'drop'
+vim.g.rnvimr_vanilla = 0
 
 -- quickscope
 vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }

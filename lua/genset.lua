@@ -31,6 +31,7 @@ vim.opt.updatetime = 300 -- Reduce time for highlighting other references
 vim.opt.redrawtime = 13000 -- Allow more time for loading syntax on large files
 vim.opt.showmatch = true
 vim.opt.showmode = false
+vim.opt.swapfile = false
 -- vim.opt.formatoptions = { 'j' }
 
 -- " set backup
