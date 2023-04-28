@@ -8,6 +8,8 @@ require('packer').startup(function(use)
   use 'rafamadriz/friendly-snippets'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'neovim/nvim-lspconfig'
+  use 'junegunn/fzf'
+  use 'jiangmiao/auto-pairs'
 
   -- Regular Plugins
   use 'sainnhe/everforest'
@@ -21,24 +23,31 @@ require('packer').startup(function(use)
   use 'jessarcher/vim-context-commentstring'
   -- use 'junegunn/vim-peekaboo'
   use 'voldikss/vim-floaterm'
-  use 'junegunn/fzf'
   use 'jessarcher/vim-sayonara'
   use 'jessarcher/vim-heritage'
   use 'unblevable/quick-scope'
   use 'terryma/vim-smooth-scroll'
   use 'wellle/targets.vim'
   use 'norcalli/nvim-colorizer.lua'
-  use 'jiangmiao/auto-pairs'
   use 'machakann/vim-highlightedyank'
   use 'justinmk/vim-sneak'
   use 'kdheepak/lazygit.nvim'
   use 'kevinhwang91/rnvimr'
-  use 'ellisonleao/glow.nvim'
+  -- use 'ellisonleao/glow.nvim'
   use {'fatih/vim-go', ft = {"go"}, }
   use { 'toppair/peek.nvim', run = 'deno task --quiet build:fast' }
   use "nvim-telescope/telescope.nvim"
   use "nvim-lua/plenary.nvim"
 
+use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+})
 
   use { "folke/trouble.nvim",
   config = function()
@@ -73,13 +82,6 @@ require('packer').startup(function(use)
     end
   }
 
-  use { 'kdheepak/tabline.nvim',
-    config = function()
-      require'tabline'.setup {enable = false}
-    end,
-    requires = {'hoob3rt/lualine.nvim'}
-  }
-
   use { 'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     requires = {
@@ -112,9 +114,6 @@ require('packer').startup(function(use)
 
   -- lualine
   use { 'nvim-lualine/lualine.nvim', }
-  use { 'alvarosevilla95/luatab.nvim'}
-
-  require('luatab').setup {}
 
   -- LSP
   use { 'VonHeikemen/lsp-zero.nvim',
@@ -203,13 +202,13 @@ require('lualine').setup {
     section_separators = { left = '', right = '' },
     component_separators = { left = '', right = '' },
     disabled_filetypes = {},
-    always_divide_middle = true,
+    always_divide_middle = false,
     globalstatus = false,
   },
   sections = {
     lualine_a = { 'mode' },
     lualine_b = { 'branch', 'diff', 'diagnostics' },
-    lualine_c = { {'filename', path=0} },
+    lualine_c = { {'filename', path=3, shortening_target=20} },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
     lualine_z = { 'location' }
@@ -217,21 +216,35 @@ require('lualine').setup {
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { 'filename' },
+    lualine_c = {{'filename', path=0} },
     lualine_x = { 'location' },
     lualine_y = {},
     lualine_z = {}
   },
   tabline = {
-    lualine_a = {},
+    lualine_a = {{'buffers',
+        symbols = {
+        modified = ' ●',      -- Text to show when the file is modified.
+        directory = '🗂️',     -- Text to show for newly created file before first write
+        }
+    }},
     lualine_b = {},
-    lualine_c = { require'tabline'.tabline_buffers },
-    lualine_x = { require'tabline'.tabline_tabs },
+    lualine_c = {},
+    lualine_x = {},
     lualine_y = {},
-    lualine_z = {},
+    lualine_z = {
+        {'filename', path=4,
+        symbols = {
+        modified = '➕',      -- Text to show when the file is modified.
+        readonly = '➖',      -- Text to show when the file is non-modifiable or readonly.
+        unnamed = '[No Name]', -- Text to show for unnamed buffers.
+        newfile = '🐤',     -- Text to show for newly created file before first write
+        }
+        }
+
+    },
   },
-  -- tabline = {},
-  extensions = {}
+  extensions = {'quickfix'}
 }
 
 -- indent lines
