@@ -1,12 +1,15 @@
 require("lazy").setup({
-    { 'sainnhe/everforest', lazy = false,
+    {
+        'sainnhe/everforest',
+        lazy = false,
         priority = 1000,
         config = function()
             vim.cmd('set background=light')
             vim.cmd("let g:everforest_background = 'soft'")
             vim.cmd("let g:everforest_colors_override = {'bg1': ['#B0C145', '5'],'bg5': ['#d699b6', '223']}")
             vim.cmd('colorscheme everforest')
-        end },
+        end
+    },
 
     'junegunn/fzf',
     'jiangmiao/auto-pairs',
@@ -28,7 +31,8 @@ require("lazy").setup({
     'lewis6991/gitsigns.nvim',
     { 'fatih/vim-go', ft = "go" },
 
-    { 'unblevable/quick-scope',
+    {
+        'unblevable/quick-scope',
         lazy = false,
         init = function()
             vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
@@ -37,11 +41,14 @@ require("lazy").setup({
         end
     },
 
-{ "kylechui/nvim-surround",
-    version = "*", event = "VeryLazy",
-    config = true
-},
-    { 'kevinhwang91/rnvimr',
+    {
+        "kylechui/nvim-surround",
+        version = "*",
+        event = "VeryLazy",
+        config = true
+    },
+    {
+        'kevinhwang91/rnvimr',
         init = function()
             vim.g.rnvimr_enable_ex = 1
             vim.g.rnvimr_enable_bw = 1
@@ -51,15 +58,19 @@ require("lazy").setup({
         end
     },
 
-    { 'kyazdani42/nvim-web-devicons',
+    {
+        'kyazdani42/nvim-web-devicons',
         opts = {
-            override = { zsh = { icon = '📺', color = '#428850', cterm_color = '65', name = 'Zsh' } };
+            override = { zsh = { icon = '📺', color = '#428850', cterm_color = '65', name = 'Zsh' } },
             default = true
         }
     },
 
-    { 'toppair/peek.nvim', lazy = true,
-        event = { 'BufRead', 'BufNewFile' }, build = 'deno task --quiet build:fast',
+    {
+        'toppair/peek.nvim',
+        lazy = true,
+        event = { 'BufRead', 'BufNewFile' },
+        build = 'deno task --quiet build:fast',
         config = function()
             vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
             vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
@@ -70,20 +81,22 @@ require("lazy").setup({
             syntax = true,
             theme = 'light',
             update_on_change = true,
-            throttle_at = 200000, throttle_time = 'auto',
+            throttle_at = 200000,
+            throttle_time = 'auto',
             filetype = { 'markdown', 'md' },
         },
     },
 
-  {
-    "folke/which-key.nvim",
-    config = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-      require("which-key").setup()
-    end,
-  },
-    { 'lukas-reineke/indent-blankline.nvim',
+    {
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup()
+        end,
+    },
+    {
+        'lukas-reineke/indent-blankline.nvim',
         config = function()
             vim.opt.termguicolors = true
             vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
@@ -105,12 +118,16 @@ require("lazy").setup({
         },
     },
 
-    { 'justinmk/vim-sneak', init = function()
-        vim.g['sneak#label'] = 1
-        vim.g['sneak#use_ic_scs'] = 1
-    end },
+    {
+        'justinmk/vim-sneak',
+        init = function()
+            vim.g['sneak#label'] = 1
+            vim.g['sneak#use_ic_scs'] = 1
+        end
+    },
 
-    { 'folke/trouble.nvim',
+    {
+        'folke/trouble.nvim',
         opts = {
             auto_close = true,
             signs = { error = '😡', warning = '⚡', hint = '💡', information = '🧠' },
@@ -118,7 +135,8 @@ require("lazy").setup({
         }
     },
 
-    { 'nvim-treesitter/nvim-treesitter',
+    {
+        'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         dependencies = {
             'nvim-treesitter/playground',
@@ -132,13 +150,15 @@ require("lazy").setup({
         }
     },
 
-    { 'vimwiki/vimwiki',
+    {
+        'vimwiki/vimwiki',
         lazy = false,
         keys = { { '<leader>ww', '<cmd>VimwikiIndex<cr>', desc = 'Vim Wiki Index' } },
         init = function() vim.g.vimwiki_list = { { path = '~/vimwiki', syntax = 'markdown', ext = '.md' } } end
     },
 
-    { 'nvim-lualine/lualine.nvim',
+    {
+        'nvim-lualine/lualine.nvim',
         opts = {
             options = {
                 icons_enabled = true,
@@ -151,7 +171,8 @@ require("lazy").setup({
             },
             sections = {
                 lualine_a = { 'mode' },
-                lualine_b = { 'branch', 'diff', { 'diagnostics',
+                lualine_b = { 'branch', 'diff', {
+                    'diagnostics',
                     sources = { 'nvim_diagnostic', 'nvim_lsp' },
                     symbols = { error = '😡', warning = '⚡', info = '🧠', hint = '💡' },
                 } },
@@ -169,18 +190,24 @@ require("lazy").setup({
                 lualine_z = {}
             },
             tabline = {
-                lualine_a = { { 'buffers',
+                lualine_a = { {
+                    'buffers',
                     symbols = {
                         modified = ' ●',
                         directory = '🗂️',
                     }
                 } },
-                lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {},
+                lualine_b = {},
+                lualine_c = {},
+                lualine_x = {},
+                lualine_y = {},
                 lualine_z = {
-                    { 'filename', path = 4,
+                    {
+                        'filename',
+                        path = 4,
                         symbols = {
                             modified = '➕',
-                            readonly = '➖', -- Text to show when the file is non-modifiable or readonly.
+                            readonly = '➖',      -- Text to show when the file is non-modifiable or readonly.
                             unnamed = '[No Name]', -- Text to show for unnamed buffers.
                             newfile = '🐤',
                         }
@@ -191,37 +218,42 @@ require("lazy").setup({
         }
     },
 
-'neovim/nvim-lspconfig',
+    'neovim/nvim-lspconfig',
 
-{'williamboman/mason-lspconfig.nvim',
-  dependencies = {{'williamboman/mason.nvim', build = ":MasonUpdate", config = true} },
-  opts = {
-    ensure_installed = {
-        'bashls', 'dockerls', 'gopls',
-        'marksman', 'lua_ls', 'pyright',
-        'jsonls', 'yamlls', 'vimls'
-    }
-  }
-},
+    {
+        'williamboman/mason-lspconfig.nvim',
+        dependencies = { { 'williamboman/mason.nvim', build = ":MasonUpdate", config = true } },
+        opts = {
+            ensure_installed = {
+                'bashls', 'dockerls', 'gopls',
+                'marksman', 'lua_ls', 'pyright',
+                'jsonls', 'yamlls', 'vimls'
+            }
+        }
+    },
+    {
+        'L3MON4D3/LuaSnip',
+        version = "v1.*",
+        run = "make install_jsregexp",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        lazy = true,
+        config = function()
+            require("luasnip")
+            require("luasnip.loaders.from_vscode").lazy_load()
+        end
+    },
 
-{ 'L3MON4D3/LuaSnip', version = "v1.*", run = "make install_jsregexp", dependencies = {"rafamadriz/friendly-snippets"},
-lazy = true,
-config = function()
-require("luasnip")
-require("luasnip.loaders.from_vscode").lazy_load()
-end
-},
+    {
+        'hrsh7th/nvim-cmp',
+        dependencies = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip' },
+    },
 
-{ 'hrsh7th/nvim-cmp',
-dependencies = { 'hrsh7th/cmp-nvim-lsp','hrsh7th/cmp-path','hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip' },
-},
-
---                float_boarder = 'rounded',
---            lsp.set_sign_icons({
---                error = '😡',
---                warn = '⚡',
---                hint = '💡',
---                info = '🧠'
+    --                float_boarder = 'rounded',
+    --            lsp.set_sign_icons({
+    --                error = '😡',
+    --                warn = '⚡',
+    --                hint = '💡',
+    --                info = '🧠'
 })
 ---- end of lazy
 
@@ -238,7 +270,7 @@ dependencies = { 'hrsh7th/cmp-nvim-lsp','hrsh7th/cmp-path','hrsh7th/cmp-buffer',
 -- lsp stuff
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lsp_attach = function(client, bufnr)
-    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -252,67 +284,67 @@ end
 
 local lspconfig = require('lspconfig')
 require('mason-lspconfig').setup_handlers({
-  function(server_name)
-    lspconfig[server_name].setup({
-      on_attach = lsp_attach,
-      capabilities = lsp_capabilities,
-    })
-  end,
+    function(server_name)
+        lspconfig[server_name].setup({
+            on_attach = lsp_attach,
+            capabilities = lsp_capabilities,
+        })
+    end,
 })
 
 
- local luasnip = require 'luasnip'
- local cmp = require 'cmp'
+local luasnip = require 'luasnip'
+local cmp = require 'cmp'
 
- cmp.setup {
-     snippet = {
-         expand = function(args)
+cmp.setup {
+    snippet = {
+        expand = function(args)
             luasnip.lsp_expand(args.body)
-         end,
-     },
-     mapping = cmp.mapping.preset.insert({
-         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-         ['<C-Space>'] = cmp.mapping.complete(),
-         ['<CR>'] = cmp.mapping.confirm {
-             behavior = cmp.ConfirmBehavior.Replace,
-             select = true,
-         },
-         ['<Tab>'] = cmp.mapping(function(fallback)
-             if cmp.visible() then
-                 cmp.select_next_item()
-             elseif luasnip.expand_or_jumpable() then
-                 luasnip.expand_or_jump()
-             else
-                 fallback()
-             end
-         end, { 'i', 's' }),
-         ['<S-Tab>'] = cmp.mapping(function(fallback)
-             if cmp.visible() then
-                 cmp.select_prev_item()
-             elseif luasnip.jumpable(-1) then
-                 luasnip.jump(-1)
-             else
-                 fallback()
-             end
-         end, { 'i', 's' }),
-     }),
-     sources = cmp.config.sources({
-         { name = 'luasnip', keyword_length = 2 },
-         { name = 'nvim_lsp', keyword_length = 2 },
-         { name = "treesitter", keyword_length = 2 },
-         { name = "nvim_lua", keyword_length = 2 },
-         { name = "path" },
-         { name = "buffer", keyword_length = 3 },
-     }),
-     formatting = {
-         fields = { 'menu', 'abbr', 'kind' },
-         format = function(entry, item)
-             local menu_icon = {
-                 luasnip = '🔪', nvim_lsp = '🤓', buffer = '🧾', path = '🥾',
-             }
-             item.menu = menu_icon[entry.source.name]
-             return item
-         end,
-     },
- }
+        end,
+    },
+    mapping = cmp.mapping.preset.insert({
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        },
+        ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
+    }),
+    sources = cmp.config.sources({
+        { name = 'luasnip',    keyword_length = 2 },
+        { name = 'nvim_lsp',   keyword_length = 2 },
+        { name = "treesitter", keyword_length = 2 },
+        { name = "nvim_lua",   keyword_length = 2 },
+        { name = "path" },
+        { name = "buffer",     keyword_length = 3 },
+    }),
+    formatting = {
+        fields = { 'menu', 'abbr', 'kind' },
+        format = function(entry, item)
+            local menu_icon = {
+                luasnip = '🔪', nvim_lsp = '🤓', buffer = '🧾', path = '🥾',
+            }
+            item.menu = menu_icon[entry.source.name]
+            return item
+        end,
+    },
+}
