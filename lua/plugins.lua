@@ -18,18 +18,18 @@ require("lazy").setup({
     'tpope/vim-eunuch',
     'tpope/vim-endwise',
     'jessarcher/vim-context-commentstring',
-    'voldikss/vim-floaterm',
+    { 'voldikss/vim-floaterm', lazy = true, cmd = 'FloatermToggle' },
     'jessarcher/vim-sayonara',
     'jessarcher/vim-heritage',
     'terryma/vim-smooth-scroll',
     'wellle/targets.vim',
-    'norcalli/nvim-colorizer.lua',
+    { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
     'machakann/vim-highlightedyank',
-    'kdheepak/lazygit.nvim',
+    { 'kdheepak/lazygit.nvim', lazy = true, cmd = 'LazyGitCurrentFile'},
     'nvim-telescope/telescope.nvim',
     'nvim-lua/plenary.nvim',
     'lewis6991/gitsigns.nvim',
-    { 'fatih/vim-go', ft = "go" },
+    { 'fatih/vim-go', lazy = true, ft = "go" },
 
     {
         'unblevable/quick-scope',
@@ -49,6 +49,8 @@ require("lazy").setup({
     },
     {
         'kevinhwang91/rnvimr',
+        lazy = true,
+        cmd = "RnvimrToggle",
         init = function()
             vim.g.rnvimr_enable_ex = 1
             vim.g.rnvimr_enable_bw = 1
@@ -69,6 +71,7 @@ require("lazy").setup({
     {
         'toppair/peek.nvim',
         lazy = true,
+        ft = {'md', "markdown"},
         event = { 'BufRead', 'BufNewFile' },
         build = 'deno task --quiet build:fast',
         config = function()
@@ -256,16 +259,6 @@ require("lazy").setup({
     --                info = '🧠'
 })
 ---- end of lazy
-
--- -- lsp stuff
--- require('mason').setup()
--- require('mason-lspconfig').setup({
---   ensure_installed = {
---     'bashls', 'dockerls', 'gopls',
---     'marksman', 'lua_ls', 'pyright',
---     'jsonls', 'yamlls', 'vimls'
---   }
--- })
 
 -- lsp stuff
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()

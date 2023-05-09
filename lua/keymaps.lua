@@ -131,9 +131,6 @@ map('n', '<F1>', ':FloatermToggle<CR>')
 map('t', '<F1>', '<C-\\><C-n>::FloatermToggle<CR>')
 map('t', '<F9>', '<C-\\><C-n>::FloatermKill<CR>')
 
--- lsp binds
-map('n', '<Leader>w', ':LspZeroFormat<CR>')
-
 -- telescope
 map('n', '<Leader>tf', ':Telescope fd<CR>')
 map('n', '<C-e>', ':Telescope fd<CR>')
