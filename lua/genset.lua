@@ -32,6 +32,7 @@ vim.opt.redrawtime = 13000 -- Allow more time for loading syntax on large files
 vim.opt.showmatch = true
 vim.opt.showmode = false
 vim.opt.swapfile = false
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 -- vim.opt.formatoptions = { 'j' }
 
 -- " set backup

@@ -1,8 +1,5 @@
 local vim = vim
 local opt = vim.opt
----
--- Keymaps
----
 
 function map(mode, shortcut, command)
     vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
@@ -10,7 +7,7 @@ end
 
 -- leader
 vim.g.mapleader = ' '
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float, opts)
 
 -- trouble
@@ -18,6 +15,7 @@ map('n', '<leader>xr', ':TroubleToggle lsp_references<CR>')
 map('n', '<leader>xx', ':TroubleToggle<CR>')
 map('n', '<leader>xd', ':TroubleToggle document_diagnostics<CR>')
 map('n', '<leader>xk', ':TroubleToggle quickfix<CR>')
+map('n', '<leader>ww', ':VimwikiIndex<CR>')
 
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
@@ -25,12 +23,12 @@ local trouble = require("trouble.providers.telescope")
 local telescope = require("telescope")
 
 telescope.setup {
-  defaults = {
-    mappings = {
-      i = { ["<c-t>"] = trouble.open_with_trouble },
-      n = { ["<c-t>"] = trouble.open_with_trouble },
+    defaults = {
+        mappings = {
+            i = { ["<c-t>"] = trouble.open_with_trouble },
+            n = { ["<c-t>"] = trouble.open_with_trouble },
+        },
     },
-  },
 }
 
 -- resize splits
@@ -150,4 +148,3 @@ map('n', '<C-d>', ':Telescope diagnostics<CR>')
 map('n', '<Leader>tr', ':Telescope lsp_references<CR>')
 map('n', '<Leader>tr', ':Telescope lsp_document_symbols<CR>')
 map('n', '<Leader>tt', ':Telescope lsp_type_definitions<CR>')
-
