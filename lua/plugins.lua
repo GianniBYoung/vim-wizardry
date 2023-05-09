@@ -18,19 +18,19 @@ require("lazy").setup({
     'tpope/vim-eunuch',
     'tpope/vim-endwise',
     'jessarcher/vim-context-commentstring',
-    { 'voldikss/vim-floaterm', lazy = true, cmd = 'FloatermToggle' },
     'jessarcher/vim-sayonara',
     'jessarcher/vim-heritage',
     'terryma/vim-smooth-scroll',
     'wellle/targets.vim',
-    { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
     'machakann/vim-highlightedyank',
-    { 'kdheepak/lazygit.nvim', lazy = true, cmd = 'LazyGitCurrentFile'},
     'nvim-telescope/telescope.nvim',
     'nvim-lua/plenary.nvim',
     'lewis6991/gitsigns.nvim',
-    { 'fatih/vim-go', lazy = true, ft = "go" },
 
+    { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
+    { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
+    { 'kdheepak/lazygit.nvim',       lazy = true, cmd = 'LazyGitCurrentFile' },
+    { 'fatih/vim-go',                lazy = true, ft = "go" },
     {
         'unblevable/quick-scope',
         lazy = false,
@@ -71,7 +71,7 @@ require("lazy").setup({
     {
         'toppair/peek.nvim',
         lazy = true,
-        ft = {'md', "markdown"},
+        ft = { 'md', "markdown" },
         event = { 'BufRead', 'BufNewFile' },
         build = 'deno task --quiet build:fast',
         config = function()

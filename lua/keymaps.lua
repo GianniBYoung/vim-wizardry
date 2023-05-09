@@ -75,7 +75,6 @@ map('n', 'gf', ':edit <cfile><cr>')
 -- map('n', ' <Enter>', ' o<ESC>')
 map('n', '<leader>m', ':set ft=markdown<CR>:PeekOpen <CR>')
 map('n', '<Leader>kk', ':ColorizerToggle<CR>')
-map('n', '<Leader>f', ':set ft=bash<CR>')
 -- reload current file
 map('n', '<Leader>vr', ':luafile %<CR>')
 
