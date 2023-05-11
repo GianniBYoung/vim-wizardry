@@ -273,15 +273,22 @@ local lsp_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>F', function() vim.lsp.buf.format { async = true } end, bufopts)
+
+    -- if client.server_capabilities.document_highlight then
+    --     vim.cmd [[ hi! LspReferenceRead cterm=bold ctermbg=235 guibg=LightPink
+    --   hi! LspReferenceText cterm=bold ctermbg=235 guibg=LightPink
+    --   hi! LspReferenceWrite cterm=bold ctermbg=235 guibg=LightPink ]]
+
+    --     vim.api.nvim_create_augroup('lsp_document_highlight', {})
+    --     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, { group = 'lsp_document_highlight', buffer = 0, callback = vim.lsp.buf.document_highlight, })
+    --     vim.api.nvim_create_autocmd('CursorMoved', { group = 'lsp_document_highlight', buffer = 0, callback = vim.lsp.buf.clear_references, })
+    -- end
 end
 
 local lspconfig = require('lspconfig')
 require('mason-lspconfig').setup_handlers({
     function(server_name)
-        lspconfig[server_name].setup({
-            on_attach = lsp_attach,
-            capabilities = lsp_capabilities,
-        })
+        lspconfig[server_name].setup({ on_attach = lsp_attach, capabilities = lsp_capabilities })
     end,
 })
 
@@ -333,11 +340,40 @@ cmp.setup {
     formatting = {
         fields = { 'menu', 'abbr', 'kind' },
         format = function(entry, item)
-            local menu_icon = {
-                luasnip = '🔪', nvim_lsp = '🤓', buffer = '🧾', path = '🥾',
-            }
+            local menu_icon = { luasnip = '🔪', nvim_lsp = '🤓', buffer = '🧾', path = '🥾' }
             item.menu = menu_icon[entry.source.name]
             return item
         end,
     },
 }
+
+-- Diagnostic config
+local signs = { Error = "😡", Warn = "⚡", Hint = "💡", Info = "🧠" }
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+-- show diagnostics in message window at the bottom of the screen
+function PrintDiagnostics(opts, bufnr, line_nr, client_id)
+    bufnr = bufnr or 0
+    line_nr = line_nr or (vim.api.nvim_win_get_cursor(0)[1] - 1)
+    opts = opts or { ['lnum'] = line_nr }
+
+    local line_diagnostics = vim.diagnostic.get(bufnr, opts)
+    if vim.tbl_isempty(line_diagnostics) then return end
+
+    local diagnostic_message = ""
+    for i, diagnostic in ipairs(line_diagnostics) do
+        diagnostic_message = diagnostic_message .. string.format("%d: %s", i, diagnostic.message or "")
+        print(diagnostic_message)
+        if i ~= #line_diagnostics then
+            diagnostic_message = diagnostic_message .. "\n"
+        end
+    end
+    vim.api.nvim_echo({ { diagnostic_message, "Normal" } }, false, {})
+end
+
+vim.cmd [[ autocmd! CursorHold * lua PrintDiagnostics() ]]
+
+vim.diagnostic.config({ virtual_text = false, severity_sort = true, float = { source = "if_many", } })
