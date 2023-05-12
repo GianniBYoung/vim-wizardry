@@ -112,6 +112,7 @@ map('n', '<leader>q', ':Sayonara<CR>')
 
 -- Ranger
 map('n', '<leader>n', ':cd %:h<bar>RnvimrToggle<CR>')
+map('n', '<leader>N', ':NnnPicker<CR>')
 map('t', '<leader>n', '<C-\\><C-n>:RnvimrToggle<CR>')
 
 -- vim-go

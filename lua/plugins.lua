@@ -32,6 +32,10 @@ require("lazy").setup({
     { 'kdheepak/lazygit.nvim',       lazy = true, cmd = 'LazyGitCurrentFile' },
     { 'fatih/vim-go',                lazy = true, ft = "go" },
     {
+        "luukvbaal/nnn.nvim",
+        opts = { picker = { style = { border = "rounded" }, }, auto_close = true, }
+    },
+    {
         'unblevable/quick-scope',
         lazy = false,
         init = function()
