@@ -74,10 +74,6 @@ require("lazy").setup({
         ft = { 'md', "markdown" },
         event = { 'BufRead', 'BufNewFile' },
         build = 'deno task --quiet build:fast',
-        config = function()
-            vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
-            vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
-        end,
         opts = {
             auto_load = true,
             close_on_bdelete = true,
@@ -88,6 +84,10 @@ require("lazy").setup({
             throttle_time = 'auto',
             filetype = { 'markdown', 'md' },
         },
+        config = function()
+            vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
+            vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
+        end,
     },
 
     {
