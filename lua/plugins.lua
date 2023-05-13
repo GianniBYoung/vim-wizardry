@@ -359,7 +359,7 @@ for type, icon in pairs(signs) do
 end
 
 -- show diagnostics in message window at the bottom of the screen
-function PrintDiagnostics(opts, bufnr, line_nr, client_id)
+function PrintDiagnostics(opts, bufnr, line_nr, _)
     bufnr = bufnr or 0
     line_nr = line_nr or (vim.api.nvim_win_get_cursor(0)[1] - 1)
     opts = opts or { ['lnum'] = line_nr }
