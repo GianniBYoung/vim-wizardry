@@ -32,16 +32,16 @@ telescope.setup {
 }
 
 -- resize splits
-map('n', '<M-J>', ':resize -2<CR>')
-map('n', '<M-K>', ':resize +2<CR>')
-map('n', '<M-H>', ':vertical resize -2<CR>')
-map('n', '<M-L>', ':vertical resize +2<CR>')
+map('n', '<CM-J>', ':resize -2<CR>')
+map('n', '<CM-K>', ':resize +2<CR>')
+map('n', '<CM-H>', ':vertical resize -2<CR>')
+map('n', '<CM-L>', ':vertical resize +2<CR>')
 
 -- navigate splits
-map('n', '<C-h>', '<C-w>h')
-map('n', '<C-j>', '<C-w>j')
-map('n', '<C-k>', '<C-w>k')
-map('n', '<C-l>', '<C-w>l')
+map('n', '<CM-h>', '<C-w>h')
+map('n', '<CM-j>', '<C-w>j')
+map('n', '<CM-k>', '<C-w>k')
+map('n', '<CM-l>', '<C-w>l')
 map('n', '<leader>Q', ':bufdo bdelete<CR>')
 
 -- navigate buffers
@@ -71,6 +71,7 @@ map('n', '<leader>S', ':wa<CR>')
 -- misc
 map('n', '<leader>H', ':nohlsearch<CR>')
 map('n', '<leader>C', ':set cuc!<CR>')
+map('n', '<leader>R', ':set relativenumber!<CR>')
 map('n', 'gf', ':edit <cfile><cr>')
 -- map('n', ' <Enter>', ' o<ESC>')
 map('n', '<leader>m', ':set ft=markdown<CR>:PeekOpen <CR>')
@@ -145,3 +146,11 @@ map('n', '<C-d>', ':Telescope diagnostics<CR>')
 map('n', '<Leader>tr', ':Telescope lsp_references<CR>')
 map('n', '<Leader>tr', ':Telescope lsp_document_symbols<CR>')
 map('n', '<Leader>tt', ':Telescope lsp_type_definitions<CR>')
+
+-- |g:AutoPairsMapBS|                                                          int
+
+-- Default: 1
+
+-- Map <BS> to delete brackets and quotes in pair, executes:
+
+--     inoremap <buffer> <silent> <BS> <C-R>=AutoPairsDelete()<CR>

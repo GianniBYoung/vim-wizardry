@@ -10,7 +10,17 @@ require("lazy").setup({
             vim.cmd('colorscheme everforest')
         end
     },
+    {
+        'glacambre/firenvim',
 
+        -- Lazy load firenvim
+        -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
+        -- cond = not not vim.g.started_by_firenvim,
+        build = function()
+            require("lazy").load({ plugins = "firenvim", wait = true })
+            vim.fn["firenvim#install"](0)
+        end
+    },
     'junegunn/fzf',
     'jiangmiao/auto-pairs',
     'folke/lsp-colors.nvim',
@@ -29,8 +39,19 @@ require("lazy").setup({
 
     { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
     { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
-    { 'kdheepak/lazygit.nvim',       lazy = true, cmd = 'LazyGitCurrentFile' },
-    { 'fatih/vim-go',                lazy = true, ft = "go" },
+    {
+        'kdheepak/lazygit.nvim',
+        lazy = true,
+        cmd = 'LazyGitCurrentFile',
+        dependencies = { "nvim-lua/plenary.nvim" },
+    },
+    {
+        'jose-elias-alvarez/null-ls.nvim',
+        dependencies = { "nvim-lua/plenary.nvim",
+
+        },
+    },
+    { 'fatih/vim-go',           lazy = true,   ft = "go" },
     {
         "luukvbaal/nnn.nvim",
         opts = { picker = { style = { border = "rounded" }, }, auto_close = true, }
@@ -45,12 +66,7 @@ require("lazy").setup({
         end
     },
 
-    {
-        "kylechui/nvim-surround",
-        version = "*",
-        event = "VeryLazy",
-        config = true
-    },
+    { "kylechui/nvim-surround", version = "*", event = "VeryLazy", config = true },
     {
         'kevinhwang91/rnvimr',
         lazy = true,
@@ -230,19 +246,13 @@ require("lazy").setup({
     {
         'williamboman/mason-lspconfig.nvim',
         dependencies = { { 'williamboman/mason.nvim', build = ":MasonUpdate", config = true } },
-        opts = {
-            ensure_installed = {
-                'bashls', 'dockerls', 'gopls',
-                'marksman', 'lua_ls', 'pyright',
-                'jsonls', 'yamlls', 'vimls'
-            }
-        }
     },
     {
         'L3MON4D3/LuaSnip',
         version = "v1.*",
         run = "make install_jsregexp",
-        dependencies = { "rafamadriz/friendly-snippets" },
+        dependencies = { 'kmf/vim-chef-snippets', "rafamadriz/friendly-snippets" },
+
         lazy = true,
         config = function()
             require("luasnip")
@@ -381,3 +391,15 @@ end
 vim.cmd [[ autocmd! CursorHold * lua PrintDiagnostics() ]]
 
 vim.diagnostic.config({ virtual_text = false, severity_sort = true, float = { source = "if_many", } })
+
+--null-ls
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.beautysh,
+        null_ls.builtins.formatting.terraform_fmt,
+        null_ls.builtins.formatting.yamlfmt,
+        null_ls.builtins.formatting.jq,
+    }
+})
