@@ -4,6 +4,13 @@ vim.api.nvim_create_autocmd(
     { pattern = { "*.txt", "*.md", "*.tex" }, command = "setlocal spell" }
 )
 
+-- Set spellcheck on markdown and text
+vim.api.nvim_create_autocmd(
+    { "BufRead"},
+    { pattern = "*tfvars", command = "set ft=tf" }
+)
+
+
 -- Strip trailing whitespaces on save → figure our how to exclude markdown
 vim.api.nvim_create_autocmd(
     "BufWritePre",
