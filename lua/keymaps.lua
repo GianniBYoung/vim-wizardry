@@ -11,11 +11,12 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float, opts)
 
 -- trouble
-map('n', '<leader>xr', ':TroubleToggle lsp_references<CR>')
-map('n', '<leader>xx', ':TroubleToggle<CR>')
-map('n', '<leader>xd', ':TroubleToggle document_diagnostics<CR>')
-map('n', '<leader>xk', ':TroubleToggle quickfix<CR>')
+map('n', '<leader>dr', ':TroubleToggle lsp_references<CR>')
+map('n', '<leader>d', ':TroubleToggle<CR>')
+map('n', '<leader>dd', ':TroubleToggle document_diagnostics<CR>')
+map('n', '<leader>df', ':TroubleToggle quickfix<CR>')
 map('n', '<leader>ww', ':VimwikiIndex<CR>')
+map('n', '<leader>lc', ':set cursorbind<CR>')
 
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
@@ -100,6 +101,7 @@ map('v', 'Y', 'myY`y')
 
 -- Paste replace visual selection without copying it
 map('v', '<leader>p', '"_dP')
+map('v', '<leader>r', ':Hypersonic<cr>')
 
 -- open link with default program
 map('n', '<leader>x', ':!xdg-open %<cr><cr>')

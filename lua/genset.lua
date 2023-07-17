@@ -26,13 +26,13 @@ vim.opt.scrolloff = 3
 vim.opt.sidescrolloff = 3
 vim.opt.joinspaces = false
 vim.opt.exrc = true
-vim.o.updatetime = 150
-vim.opt.updatetime = 300 -- Reduce time for highlighting other references
+vim.opt.updatetime = 600 -- Reduce time for highlighting other references
 vim.opt.redrawtime = 13000 -- Allow more time for loading syntax on large files
 vim.opt.showmatch = true
 vim.opt.showmode = false
 vim.opt.swapfile = false
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.confirm = true
 -- vim.opt.formatoptions = { 'j' }
 
 -- " set backup

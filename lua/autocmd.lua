@@ -11,11 +11,11 @@ vim.api.nvim_create_autocmd(
     -- { pattern = "\\\.(?!md).*", command = "%s/\\s\\+$//e" }
 )
 
--- autoformat terraform files
-vim.api.nvim_create_autocmd(
-    "BufWritePre",
-    { pattern = "tf$", command = "terraform fmt" }
-)
+-- -- autoformat terraform files
+-- vim.api.nvim_create_autocmd(
+--     "BufWritePre",
+--     { pattern = "*.tf", command = "terraform fmt" }
+-- )
 
 vim.api.nvim_create_autocmd(
     "BufWritePost",

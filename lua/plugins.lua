@@ -10,17 +10,6 @@ require("lazy").setup({
             vim.cmd('colorscheme everforest')
         end
     },
-    {
-        'glacambre/firenvim',
-
-        -- Lazy load firenvim
-        -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
-        -- cond = not not vim.g.started_by_firenvim,
-        build = function()
-            require("lazy").load({ plugins = "firenvim", wait = true })
-            vim.fn["firenvim#install"](0)
-        end
-    },
     'junegunn/fzf',
     'jiangmiao/auto-pairs',
     'folke/lsp-colors.nvim',
@@ -109,7 +98,6 @@ require("lazy").setup({
             vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
         end,
     },
-
     {
         "folke/which-key.nvim",
         config = function()
@@ -117,6 +105,13 @@ require("lazy").setup({
             vim.o.timeoutlen = 300
             require("which-key").setup()
         end,
+    },
+    {
+        'tomiis4/Hypersonic.nvim',
+        event = "CmdlineEnter", cmd = "Hypersonic",
+        config = function()
+            require('hypersonic').setup()
+        end
     },
     {
         'lukas-reineke/indent-blankline.nvim',
@@ -153,6 +148,7 @@ require("lazy").setup({
         'folke/trouble.nvim',
         opts = {
             auto_close = true,
+            height = 5,
             signs = { error = '😡', warning = '⚡', hint = '💡', information = '🧠' },
             use_diagnostic_signs = true
         }
@@ -380,7 +376,6 @@ function PrintDiagnostics(opts, bufnr, line_nr, _)
     local diagnostic_message = ""
     for i, diagnostic in ipairs(line_diagnostics) do
         diagnostic_message = diagnostic_message .. string.format("%d: %s", i, diagnostic.message or "")
-        print(diagnostic_message)
         if i ~= #line_diagnostics then
             diagnostic_message = diagnostic_message .. "\n"
         end
@@ -388,9 +383,10 @@ function PrintDiagnostics(opts, bufnr, line_nr, _)
     vim.api.nvim_echo({ { diagnostic_message, "Normal" } }, false, {})
 end
 
-vim.cmd [[ autocmd! CursorHold * lua PrintDiagnostics() ]]
 
-vim.diagnostic.config({ virtual_text = false, severity_sort = true, float = { source = "if_many", } })
+vim.api.nvim_create_autocmd("CursorHold", {  callback = function(  ) PrintDiagnostics()end })
+
+vim.diagnostic.config({ virtual_text = true, severity_sort = true, float = { source = "if_many", } })
 
 --null-ls
 local null_ls = require("null-ls")
@@ -403,3 +399,19 @@ null_ls.setup({
         null_ls.builtins.formatting.jq,
     }
 })
+
+
+lspconfig.lua_ls.setup {
+  settings = {
+    Lua = { runtime = { version = 'LuaJIT', },
+      diagnostics = {
+        globals = {
+          'vim',
+          'require'
+        },
+      },
+      workspace = { library = vim.api.nvim_get_runtime_file("", true), },
+      telemetry = { enable = false, },
+    },
+  },
+}
