@@ -1,6 +1,24 @@
 local vim = vim
 local opt = vim.opt
+local wk = require("which-key")
+local whichkeyOptDefaults = {
+  mode = "n", -- NORMAL mode
+  -- prefix: use "<leader>f" for example for mapping everything related to finding files
+  -- the prefix is prepended to every mapping part of `mappings`
+  prefix = "",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = false, -- use `nowait` when creating keymaps
+  expr = false, -- use `expr` when creating keymaps
+}
+wk.register({
+  f = { name = "Telescope",
+    f = { "<cmd>Telescope fd<cr>", "Find File" },
+  },
+}, { prefix = "<leader>" })
 
+-- old head
 function map(mode, shortcut, command)
     vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
