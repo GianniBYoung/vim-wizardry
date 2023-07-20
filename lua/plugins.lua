@@ -24,7 +24,13 @@ require("lazy").setup({
     'machakann/vim-highlightedyank',
     'nvim-telescope/telescope.nvim',
     'nvim-lua/plenary.nvim',
+    "axieax/typo.nvim",
     'lewis6991/gitsigns.nvim',
+    {  'TobinPalmer/pastify.nvim', cmd = { 'Pastify' },
+    config = function()
+        require('pastify').setup { ft = { vimwiki = '![]($IMG$)'} }
+    end
+    },
 
     { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
     { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
