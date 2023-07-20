@@ -108,7 +108,6 @@ require("lazy").setup({
                     padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
                 },
                 layout = { height = { min = 4, max = 20 }, align = "center"},
-                hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "^:", "^ ", "^call ", "^lua " }, -- hide mapping boilerplate
             }
         end,
     },
