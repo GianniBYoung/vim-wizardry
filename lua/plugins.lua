@@ -279,16 +279,6 @@ local lsp_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>F', function() vim.lsp.buf.format { async = true } end, bufopts)
-
-    -- if client.server_capabilities.document_highlight then
-    --     vim.cmd [[ hi! LspReferenceRead cterm=bold ctermbg=235 guibg=LightPink
-    --   hi! LspReferenceText cterm=bold ctermbg=235 guibg=LightPink
-    --   hi! LspReferenceWrite cterm=bold ctermbg=235 guibg=LightPink ]]
-
-    --     vim.api.nvim_create_augroup('lsp_document_highlight', {})
-    --     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, { group = 'lsp_document_highlight', buffer = 0, callback = vim.lsp.buf.document_highlight, })
-    --     vim.api.nvim_create_autocmd('CursorMoved', { group = 'lsp_document_highlight', buffer = 0, callback = vim.lsp.buf.clear_references, })
-    -- end
 end
 
 local lspconfig = require('lspconfig')
