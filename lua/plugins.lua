@@ -251,20 +251,12 @@ require("lazy").setup({
             require("luasnip.loaders.from_vscode").lazy_load()
         end
     },
-
     {
         'hrsh7th/nvim-cmp',
         dependencies = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip' },
     },
 
-    --                float_boarder = 'rounded',
-    --            lsp.set_sign_icons({
-    --                error = '😡',
-    --                warn = '⚡',
-    --                hint = '💡',
-    --                info = '🧠'
 })
----- end of lazy
 
 -- lsp stuff
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
