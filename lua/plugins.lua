@@ -282,7 +282,9 @@ local lsp_attach = function(_, bufnr)
         ["gi"] ={vim.lsp.buf.implementation, "Go to Implementation", bufopts},
         ["<C-k>"] ={vim.lsp.buf.signature_help, "Signature Help", bufopts},
         ["<space>D"] ={vim.lsp.buf.type_definition, "Go to Type", bufopts},
-        ["<space>ca"] ={vim.lsp.buf.code_action, "Code Action", bufopts},
+        ["<leader>ca"] ={vim.lsp.buf.code_action, "Code Action", bufopts},
+        ["<leader>rn"] ={vim.lsp.buf.rename, "Refactor Name", bufopts},
+        -- ["<space>p"] ={vim.lsp.buf.format{async = true}, "Format", bufopts},
     })
 end
 
