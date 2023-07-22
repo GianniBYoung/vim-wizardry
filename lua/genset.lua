@@ -33,6 +33,10 @@ vim.opt.showmode = false
 vim.opt.swapfile = false
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.confirm = true
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevelstart = 40
+
 -- vim.opt.formatoptions = { 'j' }
 
 -- " set backup

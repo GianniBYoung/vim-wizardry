@@ -82,7 +82,7 @@ require("lazy").setup({
     {
         'toppair/peek.nvim',
         lazy = true,
-        ft = { 'md', "markdown" },
+        ft = { 'md', "markdown", "vimwiki" },
         event = { 'BufRead', 'BufNewFile' },
         build = 'deno task --quiet build:fast',
         opts = {
@@ -93,7 +93,7 @@ require("lazy").setup({
             update_on_change = true,
             throttle_at = 200000,
             throttle_time = 'auto',
-            filetype = { 'markdown', 'md' },
+            filetype = { 'markdown', 'md', 'vimwiki' },
         },
         config = function()
             vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
@@ -183,7 +183,6 @@ require("lazy").setup({
     {
         'vimwiki/vimwiki',
         lazy = false,
-        keys = { { '<leader>ww', '<cmd>VimwikiIndex<cr>', desc = 'Vim Wiki Index' } },
         init = function() vim.g.vimwiki_list = { { path = '~/vimwiki', syntax = 'markdown', ext = '.md' } } end
     },
 
@@ -247,9 +246,7 @@ require("lazy").setup({
             extensions = { 'quickfix' }
         }
     },
-
     'neovim/nvim-lspconfig',
-
     {
         'williamboman/mason-lspconfig.nvim',
         dependencies = { { 'williamboman/mason.nvim', build = ":MasonUpdate", config = true } },
@@ -274,18 +271,19 @@ require("lazy").setup({
 })
 
 -- lsp stuff
+local wk = require("which-key")
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-local lsp_attach = function(client, bufnr)
+local lsp_attach = function(_, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<space>F', function() vim.lsp.buf.format { async = true } end, bufopts)
+    wk.register({
+        ["gD"] ={vim.lsp.buf.declaration, "Go to Declaration", bufopts},
+        ["gd"] ={vim.lsp.buf.definition, "Go to Definition", bufopts},
+        ["K"] ={vim.lsp.buf.hover, "Lsp Docs", bufopts},
+        ["gi"] ={vim.lsp.buf.implementation, "Go to Implementation", bufopts},
+        ["<C-k>"] ={vim.lsp.buf.signature_help, "Signature Help", bufopts},
+        ["<space>D"] ={vim.lsp.buf.type_definition, "Go to Type", bufopts},
+        ["<space>ca"] ={vim.lsp.buf.code_action, "Code Action", bufopts},
+    })
 end
 
 local lspconfig = require('lspconfig')
@@ -357,54 +355,26 @@ for type, icon in pairs(signs) do
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
--- show diagnostics in message window at the bottom of the screen
--- function PrintDiagnostics(opts, bufnr, line_nr, _)
---     bufnr = bufnr or 0
---     line_nr = line_nr or (vim.api.nvim_win_get_cursor(0)[1] - 1)
---     opts = opts or { ['lnum'] = line_nr }
-
---     local line_diagnostics = vim.diagnostic.get(bufnr, opts)
---     if vim.tbl_isempty(line_diagnostics) then return end
-
---     local diagnostic_message = ""
---     for i, diagnostic in ipairs(line_diagnostics) do
---         diagnostic_message = diagnostic_message .. string.format("%d: %s", i, diagnostic.message or "")
---         if i ~= #line_diagnostics then
---             diagnostic_message = diagnostic_message .. "\n"
---         end
---     end
---     vim.api.nvim_echo({ { diagnostic_message, "Normal" } }, false, {})
--- end
-
-
--- vim.api.nvim_create_autocmd("CursorHold", {  callback = function(  ) PrintDiagnostics()end })
-
-vim.diagnostic.config({ virtual_text = true, severity_sort = true, float = { source = "if_many", } })
+vim.diagnostic.config({ virtual_text = true, severity_sort = true, float = { source = "if_many"}})
 
 --null-ls
 local null_ls = require("null-ls")
 
 null_ls.setup({
     sources = {
-        null_ls.builtins.formatting.beautysh,
-        null_ls.builtins.formatting.terraform_fmt,
-        null_ls.builtins.formatting.yamlfmt,
-        null_ls.builtins.formatting.jq,
+        null_ls.builtins.formatting.beautysh, null_ls.builtins.formatting.terraform_fmt,
+        null_ls.builtins.formatting.yamlfmt, null_ls.builtins.formatting.jq,
     }
 })
 
 
 lspconfig.lua_ls.setup {
   settings = {
-    Lua = { runtime = { version = 'LuaJIT', },
+    Lua = { runtime = { version = 'LuaJIT'},
       diagnostics = {
-        globals = {
-          'vim',
-          'require'
-        },
-      },
-      workspace = { library = vim.api.nvim_get_runtime_file("", true), },
-      telemetry = { enable = false, },
+        globals = {'vim', 'require'}},
+        workspace = {library = vim.api.nvim_get_runtime_file("", true)},
+        telemetry = {enable = false}
     },
   },
 }

@@ -1,175 +1,103 @@
-local vim = vim
-local opt = vim.opt
-local wk = require("which-key")
-local whichkeyOptDefaults = {
-  mode = "n", -- NORMAL mode
-  -- prefix: use "<leader>f" for example for mapping everything related to finding files
-  -- the prefix is prepended to every mapping part of `mappings`
-  prefix = "",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = false, -- use `nowait` when creating keymaps
-  expr = false, -- use `expr` when creating keymaps
-}
-wk.register({
-  f = { name = "Telescope",
-    f = { "<cmd>Telescope fd<cr>", "Find File" },
-  },
-}, { prefix = "<leader>" })
-
--- old head
-function map(mode, shortcut, command)
-    vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
-end
-
--- leader
 vim.g.mapleader = ' '
-local opts = { noremap = true, silent = true }
-vim.keymap.set('n', 'gl', vim.diagnostic.open_float, opts)
-
--- trouble
-map('n', '<leader>dr', ':TroubleToggle lsp_references<CR>')
-map('n', '<leader>d', ':TroubleToggle<CR>')
-map('n', '<leader>dd', ':TroubleToggle document_diagnostics<CR>')
-map('n', '<leader>df', ':TroubleToggle quickfix<CR>')
-map('n', '<leader>ww', ':VimwikiIndex<CR>')
-map('n', '<leader>lc', ':set cursorbind<CR>')
-
-local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
-
 local telescope = require("telescope")
-
-telescope.setup {
-    defaults = {
-        mappings = {
-            i = { ["<c-t>"] = trouble.open_with_trouble },
-            n = { ["<c-t>"] = trouble.open_with_trouble },
-        },
-    },
+telescope.setup { defaults = { mappings = {
+    i = { ["<c-t>"] = trouble.open_with_trouble },
+    n = { ["<c-t>"] = trouble.open_with_trouble },
+},},
 }
 
--- resize splits
-map('n', '<CM-J>', ':resize -2<CR>')
-map('n', '<CM-K>', ':resize +2<CR>')
-map('n', '<CM-H>', ':vertical resize -2<CR>')
-map('n', '<CM-L>', ':vertical resize +2<CR>')
+local vim = vim
+local wk = require("which-key")
 
--- navigate splits
-map('n', '<CM-h>', '<C-w>h')
-map('n', '<CM-j>', '<C-w>j')
-map('n', '<CM-k>', '<C-w>k')
-map('n', '<CM-l>', '<C-w>l')
-map('n', '<leader>Q', ':bufdo bdelete<CR>')
+wk.register({
+    ["<leader>t"] = { name = "Telescope",
+    f = { "<cmd>Telescope fd<cr>", "Find File" },
+    z = { "<cmd>Telescope spell_suggest<cr>", "Fix Spelling" },
+    g = { "<cmd>Telescope live_grep<cr>", "Grep" },
+    q = { "<cmd>Telescope colorscheme<cr>", "Color Schemes" },
+    d = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
+    r = { "<cmd>Telescope lsp_references<cr>", "Lsp References" },
+    s = { "<cmd>Telescope lsp_document_symbols<cr>", "Lsp Symbols" },
+    t = { "<cmd>Telescope lsp_type_definitions<cr>", "Lsp Type Defs" },
+},
+-- Individuals
+["<leader>g"] = { "<cmd>Telescope live_grep<cr>", "Grep" },
+["<C-e>"] = { "<cmd>Telescope fd<cr>", "Find Files" },
+["<C-d>"] = { "<cmd>Telescope live_grep<cr>", "Diagnostics" },
+["g"] = {
+    l = { vim.diagnostic.open_float, "Float Diagnostics" },
+    t = { "<cmd>Telescope lsp_type_definitions<cr>", "Lsp Type Defs" },
+    j = { "<cmd>bp<cr>", "Previous Buffer" },
+    k = { "<cmd>bn<cr>", "Next Buffer" },
+},
+["d"] = { "<cmd>TroubleToggle<cr>", "Trouble" },
+["<leader>d"] = { name = "Trouble",
+d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Diagnostics" },
+r = { "<cmd>TroubleToggle lsp_references<cr>", "Lsp References" },
+f = { "<cmd>TroubleToggle quickfix<cr>", "Quick Fix" },
+  },
+  -- Splits find better binds
+  ["<M-J>"] = { "<cmd>resize -2<cr>", "Resize Splits"},
+  ["<M-K>"] = { "<cmd>resize +2<cr>"},
+  ["<M-H>"] = { "<cmd>vertical resize +2<cr>"},
+  ["<M-L>"] = {"<cmd>vertical resize +2<cr>" },
+  -- ["<M-j>"] = { "<C-w>j"},
+  -- ["<M-k>"] = { "<C-w>k"},
+  ["<M-h>"] = { "<C-w>h"},
+  ["<M-l>"] = { "<C-w>l", "Navigate Split" },
+  ["<leader>"] = {name = "Vim Wiki",
+  ww = { "<cmd>VimwikiIndex<cr>", "Vim Wiki" },
+  lc = { "<cmd>set cursorbind<cr>", "Vim Wiki" },
+  },
+  ["<leader>l"] = {name = "LazyGit",
+  g = { "<cmd>cd %:h<cr>:LazyGitCurrentFile<cr>", "LazyGit" },
+  l = { "<cmd>Lazy<cr>", "Lazy" },
+  m = { "<cmd>Mason<cr>", "Lazy" },
+  },
+  ["<leader>y"] = {name = "Surround",
+  y = { 'ysiw"', "Surround in Quotes" },
+  p = { 'ysiw(', "Surround in Parens" },
+  },
+  ["<leader>v"] = {name = "File Hopping",
+  k = { "<cmd>e ~/.config/nvim/keymaps.lua<cr>", "Edit Vim Keybinds" },
+  p = { "<cmd>e ~/.config/nvim/plugins.lua<cr>", "Edit Vim Plugins" },
+  e = { "<cmd>e ~/.config/nvim/keymaps.lua<cr>", "Edit Vim Plugins" },
+  z = { "<cmd>e ~/.zshrc<cr>", "Edit Zshrc" },
+  a = { "<cmd>e ~/.config/nvim/autocmd.lua<cr>", "Edit Autocmds" },
+  r = { "<cmd>luafile %<cr>", "Reload Vim Confs" },
+  },
+  ["<leader>cd"] = { "<cmd>cd %:h<cr>", "Cd" },
+  ["<leader>s"] = { "<cmd>w<cr>", "Save Buffer" },
+  ["<leader>S"] = { "<cmd>wa<cr>", "Save All Buffers" },
+  ["<leader>kk"] = { "<cmd>ColorizerToggle<cr>", "Colorizer" },
+  ["<leader>H"] = { "<cmd>nohlsearch<cr>", "Clear Highlights" },
+  ["<leader>C"] = { "<cmd>set cuc!<cr>", "Cursor Column" },
+  ["<leader>R"] = { "<cmd>set relativenumber!<cr>", "Toggle Relative Numbers" },
+  ["gf"] = { "<cmd>edit <cfile><cr>", "Edit File Under Cursor" },
+  ["<cr>"] = { "ciw", "Change Word Under Cursor" },
+  ["<leader>m"] = { "<cmd>set ft=markdown<CR>:PeekOpen <CR>", "Open in Peek" },
+  ["<leader>x"] = { "<cmd>!xdg-open %<cr><cr>", "Open" },
+  ["<leader>q"] = { "<cmd>Sayonara<cr>", "Close Buffer" },
+  ["<M-k>"] = { "<cmd>call smooth_scroll#up(10, 5, 2)<cr>", "Smooth Scroll"},
+  ["<M-j>"] = { "<cmd>call smooth_scroll#down(10, 5, 2)cr>", "Smooth Scroll"},
+  ["Y"] = { "y$", "Papa Yank"},
+  ["<leader>n"] = { "<cmd>cd %:h<bar>RnvimrToggle<cr>", "Ranger" },
+  ["<leader>n"] = { "<C-\\><C-n>:RnvimrToggle<CR>", "Ranger", mode = "t" },
+  ["<leader>gr"] = { "<cmd>w<cr><cmd>GoRun<cr>", "Go Run" },
+  ["ii"] = { "<esc>", "which_key_ignore", mode = "i"},
+  ["<F1>"]= { "<cmd>FloatermToggle<cr>", "Terminal" },
+  ["<F1>"]= { "<C-\\><C-n>::FloatermToggle<CR>", "Terminal", mode = "t" },
+  ["<"]= { "<gv", "Indent", mode = "v" },
+  [">"]= { ">gv", "Dedent", mode = "v" },
+  ["y"]= { "myy`y", mode = "v" },
+  ["Y"]= { "myY`y", mode = "v" },
+  ["<leader>p"]= { '"_dP', mode = "v" },
+  ["<leader>r"]= { "<cmd>Hypersonic<cr>", mode = "v" },
 
--- navigate buffers
-map('n', 'gk', ':bn<CR>')
-map('n', 'gj', ':bp<CR>')
-map('n', '<leader>K', ':tabn<CR>')
-map('n', '<leader>J', ':tabp<CR>')
+  })
 
--- git
-map('n', '<leader>lg', ':cd %:h<cr>:LazyGitCurrentFile<cr>')
-map('n', '<leader>lr', ':source $MYVIMRC<cr>')
-
--- file hopping
-map('n', '<leader>ve', ':edit ~/.config/nvim/init.lua<cr>')
-map('n', '<leader>vk', ':edit ~/.config/nvim/lua/keymaps.lua<cr>')
-map('n', '<leader>vp', ':edit ~/.config/nvim/lua/plugins.lua<cr>')
-map('n', '<leader>vl', ':edit ~/.config/nvim/lua/lsp.lua<cr>')
-map('n', '<leader>vz', ':edit ~/.zshrc<cr>')
-map('n', '<leader>va', ':edit ~/.config/nvim/lua/autocmd.lua<cr>')
-map('n', '<leader>cd', ':cd %:h<cr>')
-map('n', '<leader>a', ':Alpha<cr>')
-
--- saving
-map('n', '<leader>s', ':w<CR>')
-map('n', '<leader>S', ':wa<CR>')
-
--- misc
-map('n', '<leader>H', ':nohlsearch<CR>')
-map('n', '<leader>C', ':set cuc!<CR>')
-map('n', '<leader>R', ':set relativenumber!<CR>')
-map('n', 'gf', ':edit <cfile><cr>')
--- map('n', ' <Enter>', ' o<ESC>')
-map('n', '<leader>m', ':set ft=markdown<CR>:PeekOpen <CR>')
-map('n', '<Leader>kk', ':ColorizerToggle<CR>')
--- reload current file
-map('n', '<Leader>vr', ':luafile %<CR>')
-
-
--- smooth scrolling
-
-map('n', '<M-k>', ':call smooth_scroll#up(10, 5, 2)<CR>')
-map('n', '<M-j>', ':call smooth_scroll#down(10, 5, 2)<CR>')
-
--- Make Y behave like the other capitals
-map('n', 'Y', 'y$')
-
-
--- Reselect visual selection after indenting
-map('v', '<', '<gv')
-map('v', '>', '>gv')
-
--- Maintain the cursor position when yanking a visual selection
--- http://ddrscott.github.io/blog/2016/yank-without-jank/
-map('v', 'y', 'myy`y')
-map('v', 'Y', 'myY`y')
-
--- Paste replace visual selection without copying it
-map('v', '<leader>p', '"_dP')
-map('v', '<leader>r', ':Hypersonic<cr>')
-
--- open link with default program
-map('n', '<leader>x', ':!xdg-open %<cr><cr>')
--- nmap <leader>x :!xdg-open %<cr><cr>
-
--- Quicky escape to normal mode
-map('i', 'ii', '<esc>')
-map('c', 'w!!', '%!sudo tee > /dev/null %')
-
-map('n', '<leader>q', ':Sayonara<CR>')
-
--- Ranger
-map('n', '<leader>n', ':cd %:h<bar>RnvimrToggle<CR>')
-map('t', '<leader>n', '<C-\\><C-n>:RnvimrToggle<CR>')
-
--- vim-go
-map('n', '<Leader>gr', ':w<CR>:GoRun<CR>')
-
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldlevelstart = 40
-
--- FloatTerm
-
-map('n', '<F4>', ':FloatermNew<CR>')
-map('t', '<F4>', '<C-\\><C-n>::FloatermNew<CR>')
-map('t', '<F2>', '<C-\\><C-n>::FloatermNext<CR>')
-map('n', '<F1>', ':FloatermToggle<CR>')
-map('t', '<F1>', '<C-\\><C-n>::FloatermToggle<CR>')
-map('t', '<F9>', '<C-\\><C-n>::FloatermKill<CR>')
-
--- telescope
-map('n', '<Leader>tf', ':Telescope fd<CR>')
-map('n', '<C-e>', ':Telescope fd<CR>')
-map('n', '<Leader>z', ':Telescope spell_suggest<CR>')
-map('n', '<Leader>tg', ':Telescope live_grep<CR>')
-map('n', '<Leader>g', ':Telescope live_grep<CR>')
-map('n', '<C-g>', ':Telescope live_grep<CR>')
-map('n', '<Leader>tq', ':Telescope colorscheme<CR>')
-map('n', '<Leader>td', ':Telescope diagnostics<CR>')
-map('n', '<C-d>', ':Telescope diagnostics<CR>')
--- map('n', '<Leader>tt', ':Telescope filetypes<CR>')
-map('n', '<Leader>tr', ':Telescope lsp_references<CR>')
-map('n', '<Leader>tr', ':Telescope lsp_document_symbols<CR>')
-map('n', '<Leader>tt', ':Telescope lsp_type_definitions<CR>')
-
--- |g:AutoPairsMapBS|                                                          int
-
--- Default: 1
-
--- Map <BS> to delete brackets and quotes in pair, executes:
-
---     inoremap <buffer> <silent> <BS> <C-R>=AutoPairsDelete()<CR>
+  -- |g:AutoPairsMapBS|                                                          int
+  -- Default: 1
+  -- Map <BS> to delete brackets and quotes in pair, executes:
+  --     inoremap <buffer> <silent> <BS> <C-R>=AutoPairsDelete()<CR>
