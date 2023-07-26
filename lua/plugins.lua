@@ -1,8 +1,6 @@
 require("lazy").setup({
-    {
-        'sainnhe/everforest',
-        lazy = false,
-        priority = 1000,
+
+    {'sainnhe/everforest', lazy = false, priority = 1000,
         config = function()
             vim.cmd('set background=light')
             vim.cmd("let g:everforest_background = 'soft'")
@@ -21,11 +19,22 @@ require("lazy").setup({
     'jessarcher/vim-heritage',
     'terryma/vim-smooth-scroll',
     'wellle/targets.vim',
+    '/tpope/vim-repeat',
     'machakann/vim-highlightedyank',
     'nvim-telescope/telescope.nvim',
     'nvim-lua/plenary.nvim',
     "axieax/typo.nvim",
+    { "folke/noice.nvim", event = "VeryLazy",
+        opts = {
+            config = function ()
+            end
+
+            -- add any options here
+        },
+        dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify"}
+    },
     'lewis6991/gitsigns.nvim',
+    'serenevoid/kiwi.nvim', dependencies = { 'nvim-lua/plenary.nvim' },
     {  'TobinPalmer/pastify.nvim', cmd = { 'Pastify' },
     config = function()
         require('pastify').setup { ft = { vimwiki = '![]($IMG$)'} }
@@ -38,18 +47,13 @@ require("lazy").setup({
         'kdheepak/lazygit.nvim',
         lazy = true,
         cmd = 'LazyGitCurrentFile',
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = { "nvim-lua/plenary.nvim" }
     },
-    {
-        'jose-elias-alvarez/null-ls.nvim',
-        dependencies = { "nvim-lua/plenary.nvim",
-
-        },
+    { 'jose-elias-alvarez/null-ls.nvim', dependencies = { "nvim-lua/plenary.nvim" }
     },
     { 'fatih/vim-go',           lazy = true,   ft = "go" },
     {
-        'unblevable/quick-scope',
-        lazy = false,
+        'unblevable/quick-scope', lazy = false,
         init = function()
             vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
             vim.g.qs_max_chars = 150
@@ -114,7 +118,9 @@ require("lazy").setup({
                     padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
                 },
                 layout = { height = { min = 4, max = 20 }, align = "center"},
+                triggers_blacklist = { n = { "i", "j", "k" }, },
             }
+
         end,
     },
     {
@@ -146,13 +152,10 @@ require("lazy").setup({
                 'IndentBlanklineIndent4', 'IndentBlanklineIndent5', 'IndentBlanklineIndent6', }
         },
     },
-
-    {
-        'justinmk/vim-sneak',
-        init = function()
-            vim.g['sneak#label'] = 1
-            vim.g['sneak#use_ic_scs'] = 1
-        end
+    {'ggandor/leap.nvim', dependencies = {'nvim-treesitter/playground'},
+    config = function()
+        require("leap").add_default_mappings()
+    end,
     },
 
     {
@@ -178,12 +181,6 @@ require("lazy").setup({
             ensure_installed = { 'python', 'ruby', 'yaml', 'go', 'bash', 'dockerfile', 'hcl', 'json' },
             highlight = { enable = true },
         }
-    },
-
-    {
-        'vimwiki/vimwiki',
-        lazy = false,
-        init = function() vim.g.vimwiki_list = { { path = '~/vimwiki', syntax = 'markdown', ext = '.md' } } end
     },
 
     {
@@ -285,6 +282,7 @@ local lsp_attach = function(_, bufnr)
         ["<leader>ca"] ={vim.lsp.buf.code_action, "Code Action", bufopts},
         ["<leader>rn"] ={vim.lsp.buf.rename, "Refactor Name", bufopts},
         -- ["<space>p"] ={vim.lsp.buf.format{async = true}, "Format", bufopts},
+        ["<space>r"] ={vim.lsp.buf.format, "Format", bufopts},
     })
 end
 
@@ -380,3 +378,21 @@ lspconfig.lua_ls.setup {
     },
   },
 }
+vim.notify = require("notify")
+require("noice").setup({
+    lsp = {
+        override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+        },
+    },
+    -- you can enable a preset for easier configuration
+    presets = {
+        bottom_search = true, -- use a classic bottom cmdline for search
+        command_palette = true, -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = false, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true, -- add a border to hover docs and signature help
+    },
+})
