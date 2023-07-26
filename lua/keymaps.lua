@@ -90,7 +90,7 @@ j = { "<cmd>TroubleToggle<cr>", "Trouble"},
 
   wk.register({
   ["<F1>"]= { "<C-\\><C-n>::FloatermToggle<CR>", "Terminal", mode = "t" },
-  ["<leader>n"] = { "<C-\\><C-n>:RnvimrToggle<CR>", "Ranger", mode = "t" },
+  -- ["<leader>n"] = { "<C-\\><C-ESC>:RnvimrToggle<CR>", "Exit Term Mode", mode = "t" },
   })
 
 

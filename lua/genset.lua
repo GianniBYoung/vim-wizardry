@@ -1,6 +1,3 @@
----
--- General Settings
----
 HOME = os.getenv("HOME")
 vim.opt.clipboard = vim.opt.clipboard + 'unnamedplus'
 vim.opt.wildmode = { longest = 'full', 'full' }

@@ -18,54 +18,47 @@ require("lazy").setup({
     'jessarcher/vim-sayonara',
     'jessarcher/vim-heritage',
     'terryma/vim-smooth-scroll',
+    'neovim/nvim-lspconfig',
     'wellle/targets.vim',
     '/tpope/vim-repeat',
     'machakann/vim-highlightedyank',
     'nvim-telescope/telescope.nvim',
     'nvim-lua/plenary.nvim',
     "axieax/typo.nvim",
-    { "folke/noice.nvim", event = "VeryLazy",
-        opts = {
-            config = function ()
-            end
-
-            -- add any options here
-        },
-        dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify"}
-    },
     'lewis6991/gitsigns.nvim',
     'serenevoid/kiwi.nvim', dependencies = { 'nvim-lua/plenary.nvim' },
+    { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
+    { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
+    { 'jose-elias-alvarez/null-ls.nvim', dependencies = { "nvim-lua/plenary.nvim" } },
+    { "kylechui/nvim-surround", version = "*", event = "VeryLazy", config = true },
+    { 'fatih/vim-go',           lazy = true,   ft = "go" },
     {  'TobinPalmer/pastify.nvim', cmd = { 'Pastify' },
     config = function()
         require('pastify').setup { ft = { vimwiki = '![]($IMG$)'} }
     end
     },
-
-    { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
-    { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
-    {
-        'kdheepak/lazygit.nvim',
-        lazy = true,
-        cmd = 'LazyGitCurrentFile',
-        dependencies = { "nvim-lua/plenary.nvim" }
-    },
-    { 'jose-elias-alvarez/null-ls.nvim', dependencies = { "nvim-lua/plenary.nvim" }
-    },
-    { 'fatih/vim-go',           lazy = true,   ft = "go" },
-    {
-        'unblevable/quick-scope', lazy = false,
-        init = function()
-            vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
-            vim.g.qs_max_chars = 150
-            vim.g.qs_delay = 1
-        end
+    { "folke/noice.nvim", event = "VeryLazy",
+        opts = {
+            config = function ()
+            end
+        },
+        dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify"}
     },
 
-    { "kylechui/nvim-surround", version = "*", event = "VeryLazy", config = true },
-    {
-        'kevinhwang91/rnvimr',
-        lazy = true,
-        cmd = "RnvimrToggle",
+    { 'kdheepak/lazygit.nvim', lazy = true,
+        cmd = 'LazyGitCurrentFile', dependencies = { "nvim-lua/plenary.nvim" }
+    },
+    -- {
+    --     'unblevable/quick-scope', lazy = false,
+    --     init = function()
+    --         vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
+    --         vim.g.qs_max_chars = 150
+    --         vim.g.qs_delay = 1
+    --     end
+    -- },
+
+    { 'kevinhwang91/rnvimr',
+        lazy = true, cmd = "RnvimrToggle",
         init = function()
             vim.g.rnvimr_enable_ex = 1
             vim.g.rnvimr_enable_bw = 1
@@ -75,16 +68,14 @@ require("lazy").setup({
         end
     },
 
-    {
-        'kyazdani42/nvim-web-devicons',
+    { 'kyazdani42/nvim-web-devicons',
         opts = {
             override = { zsh = { icon = '📺', color = '#428850', cterm_color = '65', name = 'Zsh' } },
             default = true
         }
     },
 
-    {
-        'toppair/peek.nvim',
+    { 'toppair/peek.nvim',
         lazy = true,
         ft = { 'md', "markdown", "vimwiki" },
         event = { 'BufRead', 'BufNewFile' },
@@ -120,27 +111,22 @@ require("lazy").setup({
                 layout = { height = { min = 4, max = 20 }, align = "center"},
                 triggers_blacklist = { n = { "i", "j", "k" }, },
             }
-
         end,
     },
-    {
-        'tomiis4/Hypersonic.nvim',
+    { 'tomiis4/Hypersonic.nvim',
         event = "CmdlineEnter", cmd = "Hypersonic",
         config = function()
             require('hypersonic').setup()
         end
     },
-    {
-        'lukas-reineke/indent-blankline.nvim',
+    { 'lukas-reineke/indent-blankline.nvim',
         config = function()
-            vim.opt.termguicolors = true
             vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
             vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
             vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
             vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
             vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
             vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-            vim.opt.list = true
             vim.opt.listchars:append 'space:⋅'
         end,
         opts = {
@@ -149,27 +135,23 @@ require("lazy").setup({
             show_current_context = true,
             show_current_context_start = true,
             char_highlight_list = { 'IndentBlanklineIndent1', 'IndentBlanklineIndent2', 'IndentBlanklineIndent3',
-                'IndentBlanklineIndent4', 'IndentBlanklineIndent5', 'IndentBlanklineIndent6', }
-        },
+                'IndentBlanklineIndent4', 'IndentBlanklineIndent5', 'IndentBlanklineIndent6' }
+        }
     },
     {'ggandor/leap.nvim', dependencies = {'nvim-treesitter/playground'},
     config = function()
         require("leap").add_default_mappings()
-    end,
+    end
     },
 
-    {
-        'folke/trouble.nvim',
+    { 'folke/trouble.nvim',
         opts = {
-            auto_close = true,
-            height = 5,
-            signs = { error = '😡', warning = '⚡', hint = '💡', information = '🧠' },
-            use_diagnostic_signs = true
+            auto_close = true, height = 5, use_diagnostic_signs = true,
+            signs = { error = '😡', warning = '⚡', hint = '💡', information = '🧠' }
         }
     },
 
-    {
-        'nvim-treesitter/nvim-treesitter',
+    { 'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         dependencies = {
             'nvim-treesitter/playground',
@@ -178,7 +160,7 @@ require("lazy").setup({
             'JoosepAlviste/nvim-ts-context-commentstring',
         },
         opts = {
-            ensure_installed = { 'python', 'ruby', 'yaml', 'go', 'bash', 'dockerfile', 'hcl', 'json' },
+            ensure_installed = { 'python', 'regex','markdown','markdown_inline','ruby', 'yaml', 'go', 'bash', 'dockerfile', 'hcl', 'json' },
             highlight = { enable = true },
         }
     },
@@ -243,25 +225,19 @@ require("lazy").setup({
             extensions = { 'quickfix' }
         }
     },
-    'neovim/nvim-lspconfig',
-    {
-        'williamboman/mason-lspconfig.nvim',
+    { 'williamboman/mason-lspconfig.nvim',
         dependencies = { { 'williamboman/mason.nvim', build = ":MasonUpdate", config = true } },
     },
-    {
-        'L3MON4D3/LuaSnip',
-        version = "v1.*",
-        run = "make install_jsregexp",
+    { 'L3MON4D3/LuaSnip',
+        version = "v1.*", run = "make install_jsregexp", lazy = true,
         dependencies = { 'kmf/vim-chef-snippets', "rafamadriz/friendly-snippets" },
 
-        lazy = true,
         config = function()
             require("luasnip")
             require("luasnip.loaders.from_vscode").lazy_load()
         end
     },
-    {
-        'hrsh7th/nvim-cmp',
+    { 'hrsh7th/nvim-cmp',
         dependencies = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip' },
     },
 
@@ -378,6 +354,7 @@ lspconfig.lua_ls.setup {
     },
   },
 }
+
 vim.notify = require("notify")
 require("noice").setup({
     lsp = {
@@ -387,7 +364,6 @@ require("noice").setup({
             ["cmp.entry.get_documentation"] = true,
         },
     },
-    -- you can enable a preset for easier configuration
     presets = {
         bottom_search = true, -- use a classic bottom cmdline for search
         command_palette = true, -- position the cmdline and popupmenu together
