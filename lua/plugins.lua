@@ -20,7 +20,7 @@ require("lazy").setup({
     'terryma/vim-smooth-scroll',
     'neovim/nvim-lspconfig',
     'wellle/targets.vim',
-    '/tpope/vim-repeat',
+    'tpope/vim-repeat',
     'machakann/vim-highlightedyank',
     'nvim-telescope/telescope.nvim',
     'nvim-lua/plenary.nvim',
@@ -32,30 +32,30 @@ require("lazy").setup({
     { 'jose-elias-alvarez/null-ls.nvim', dependencies = { "nvim-lua/plenary.nvim" } },
     { "kylechui/nvim-surround", version = "*", event = "VeryLazy", config = true },
     { 'fatih/vim-go',           lazy = true,   ft = "go" },
-    {  'TobinPalmer/pastify.nvim', cmd = { 'Pastify' },
-    config = function()
-        require('pastify').setup { ft = { vimwiki = '![]($IMG$)'} }
-    end
-    },
+    {  'TobinPalmer/pastify.nvim', cmd = { 'Pastify' }, opts = { ft = { vimwiki = '![]($IMG$)'}} },
     { "folke/noice.nvim", event = "VeryLazy",
-        opts = {
-            config = function ()
-            end
-        },
-        dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify"}
+    opts = {
+        {
+            lsp = {
+                override = { ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true
+                },
+            },
+            presets = {
+                bottom_search = false, -- use a classic bottom cmdline for search
+                command_palette = true, -- position the cmdline and popupmenu together
+                long_message_to_split = false, -- long messages will be sent to a split
+                lsp_doc_border = true, -- add a border to hover docs and signature help
+            },
+        }
     },
+    dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify"}
+},
 
     { 'kdheepak/lazygit.nvim', lazy = true,
         cmd = 'LazyGitCurrentFile', dependencies = { "nvim-lua/plenary.nvim" }
     },
-    -- {
-    --     'unblevable/quick-scope', lazy = false,
-    --     init = function()
-    --         vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
-    --         vim.g.qs_max_chars = 150
-    --         vim.g.qs_delay = 1
-    --     end
-    -- },
 
     { 'kevinhwang91/rnvimr',
         lazy = true, cmd = "RnvimrToggle",
@@ -75,25 +75,25 @@ require("lazy").setup({
         }
     },
 
-    { 'toppair/peek.nvim',
-        lazy = true,
-        ft = { 'md', "markdown", "vimwiki" },
-        event = { 'BufRead', 'BufNewFile' },
-        build = 'deno task --quiet build:fast',
-        opts = {
+    { 'toppair/peek.nvim', lazy = true,
+    ft = { 'md', "markdown", "vimwiki" },
+    event = { 'BufRead', 'BufNewFile' },
+    build = 'deno task --quiet build:fast',
+    config = function()
+        require("peek").setup{
             auto_load = true,
             close_on_bdelete = true,
             syntax = true,
-            theme = 'light',
+            theme = 'dark',
             update_on_change = true,
             throttle_at = 200000,
             throttle_time = 'auto',
             filetype = { 'markdown', 'md', 'vimwiki' },
-        },
-        config = function()
-            vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
-            vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
-        end,
+
+        }
+        vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
+        vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
+    end
     },
     {
         "folke/which-key.nvim",
@@ -115,9 +115,7 @@ require("lazy").setup({
     },
     { 'tomiis4/Hypersonic.nvim',
         event = "CmdlineEnter", cmd = "Hypersonic",
-        config = function()
-            require('hypersonic').setup()
-        end
+        config = function() require('hypersonic').setup() end
     },
     { 'lukas-reineke/indent-blankline.nvim',
         config = function()
@@ -154,10 +152,9 @@ require("lazy").setup({
     { 'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         dependencies = {
-            'nvim-treesitter/playground',
+            'nvim-treesitter/playground', 'lewis6991/spellsitter.nvim',
             'nvim-treesitter/nvim-treesitter-textobjects',
-            'lewis6991/spellsitter.nvim',
-            'JoosepAlviste/nvim-ts-context-commentstring',
+            'JoosepAlviste/nvim-ts-context-commentstring'
         },
         opts = {
             ensure_installed = { 'python', 'regex','markdown','markdown_inline','ruby', 'yaml', 'go', 'bash', 'dockerfile', 'hcl', 'json' },
@@ -173,7 +170,6 @@ require("lazy").setup({
                 theme = 'auto',
                 section_separators = { left = '', right = '' },
                 component_separators = { left = '', right = '' },
-                disabled_filetypes = {},
                 always_divide_middle = false,
                 globalstatus = false,
             },
@@ -208,7 +204,9 @@ require("lazy").setup({
                 lualine_b = {},
                 lualine_c = {},
                 lualine_x = {},
-                lualine_y = {},
+                lualine_y = {
+
+                },
                 lualine_z = {
                     {
                         'filename',
@@ -356,21 +354,5 @@ lspconfig.lua_ls.setup {
 }
 
 vim.notify = require("notify")
-require("noice").setup({
-    lsp = {
-        override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
-        },
-    },
-    -- These are not actually doing anything right now
-    presets = {
-        bottom_search = true, -- use a classic bottom cmdline for search
-        command_palette = true, -- position the cmdline and popupmenu together
-        long_message_to_split = true, -- long messages will be sent to a split
-        long_message_to_split = false, -- long messages will be sent to a split
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true, -- add a border to hover docs and signature help
-    },
-})
+
+vim.g.sayonara_confirm_quit = 1
