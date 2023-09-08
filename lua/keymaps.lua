@@ -13,7 +13,7 @@ local wk = require("which-key")
 wk.register({
     ["<leader>t"] = { name = "Telescope",
     z = { "<cmd>Telescope spell_suggest<cr>", "Fix Spelling" },
-    p = { "<cmd>Telescope builtins<cr>", "All Telescope Builtins" },
+    p = { "<cmd>Telescope builtin<cr>", "All Telescope Builtins" },
     g = { "<cmd>Telescope live_grep<cr>", "Grep" },
     d = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
     R = { "<cmd>Telescope lsp_references<cr>", "Lsp References" },

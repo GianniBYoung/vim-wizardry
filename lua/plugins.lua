@@ -1,59 +1,6 @@
 
 require("lazy").setup({
-
-    -- {'sainnhe/everforest', lazy = false, priority = 1000,
-    --     config = function()
-    --         vim.cmd('set background=dark')
-    --         -- vim.cmd("let g:everforest_background = 'soft'")
-    --         -- vim.cmd("let g:everforest_colors_override = {'bg1': ['#B0C145', '5'],'bg5': ['#d699b6', '223']}")
-    --         vim.cmd('colorscheme everforest')
-    --     end
-    -- },
-    {
-        'rose-pine/neovim', name = 'rose-pine',
-        config = function()
-            require('rose-pine').setup({
-                variant = 'moon',
-                dark_variant = 'moon',
-                bold_vert_split = true,
-                dim_nc_background = false,
-                groups = {
-                    background = 'base',
-                    background_nc = '_experimental_nc',
-                    panel = 'surface',
-                    panel_nc = 'base',
-                    border = 'highlight_med',
-                    comment = 'rose',
-                    link = 'iris',
-                    punctuation = 'subtle',
-
-                    error = 'love',
-                    hint = 'iris',
-                    info = 'foam',
-                    warn = 'gold',
-
-                    headings = {
-                        h1 = 'iris',
-                        h2 = 'foam',
-                        h3 = 'rose',
-                        h4 = 'gold',
-                        h5 = 'pine',
-                        h6 = 'foam',
-                    }
-                },
-                highlight_groups = {
-                    TelescopeBorder = { fg = "highlight_high", bg = "none" },
-                    TelescopeNormal = { bg = "none" },
-                    TelescopePromptNormal = { bg = "base" },
-                    TelescopeResultsNormal = { fg = "subtle", bg = "none" },
-                    TelescopeSelection = { fg = "text", bg = "base" },
-                    TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
-                },
-
-            })
-            vim.cmd('colorscheme rose-pine')
-        end
-},
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     'junegunn/fzf',
     'jiangmiao/auto-pairs',
     'folke/lsp-colors.nvim',
@@ -401,44 +348,47 @@ lspconfig.lua_ls.setup {
 }
 
 vim.notify = require("notify")
-
-require('rose-pine').setup({
-    variant = 'moon',
-    dark_variant = 'moon',
-    bold_vert_split = true,
-    dim_nc_background = false,
-    groups = {
-        background = 'base',
-        background_nc = '_experimental_nc',
-        panel = 'surface',
-        panel_nc = 'base',
-        border = 'highlight_med',
-        comment = 'gold',
-        link = 'iris',
-        punctuation = 'subtle',
-
-        error = 'love',
-        hint = 'iris',
-        info = 'foam',
-        warn = 'gold',
-
-        headings = {
-            h1 = 'iris',
-            h2 = 'foam',
-            h3 = 'rose',
-            h4 = 'gold',
-            h5 = 'pine',
-            h6 = 'foam',
+require("catppuccin").setup({
+    flavour = "frappe", -- latte, frappe, macchiato, mocha
+    background = { -- :h background
+        light = "latte",
+        dark = "mocha",
+    },
+    transparent_background = true,
+    no_underline = false, -- Force no underline
+    styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+        comments = { "italic" }, -- Change the style of comments
+        conditionals = { "italic" },
+        loops = {},
+        functions = {},
+        keywords = {},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+    },
+    color_overrides = {},
+    custom_highlights = {},
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = true,
+        noice = true,
+        which_key = true,
+        lsp_trouble = true,
+        indent_blankline = {
+            enabled = true,
+            colored_indent_levels = true,
+        },
+        telescope = {
+            enabled = true,
+            -- style = "nvchad"
         }
     },
-    highlight_groups = {
-		TelescopeBorder = { fg = "highlight_high", bg = "none" },
-		TelescopeNormal = { bg = "none" },
-		TelescopePromptNormal = { bg = "base" },
-		TelescopeResultsNormal = { fg = "subtle", bg = "none" },
-		TelescopeSelection = { fg = "text", bg = "base" },
-		TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
-	},
-
 })
-vim.cmd('colorscheme rose-pine')
+vim.cmd.colorscheme "catppuccin-frappe"
