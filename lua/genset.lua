@@ -20,7 +20,7 @@ vim.opt.wrap = false
 vim.opt.list = true
 vim.opt.mouse = 'a'
 vim.opt.scrolloff = 3
-vim.opt.sidescrolloff = 3
+vim.opt.sidescrolloff = 7
 vim.opt.joinspaces = false
 vim.opt.exrc = true
 vim.opt.updatetime = 600 -- Reduce time for highlighting other references
@@ -32,6 +32,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.confirm = true
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 vim.opt.foldlevelstart = 40
 
 -- vim.opt.formatoptions = { 'j' }

@@ -1,6 +1,5 @@
-
 require("lazy").setup({
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    { "catppuccin/nvim",                 name = "catppuccin",                       priority = 1000 },
     'junegunn/fzf',
     'jiangmiao/auto-pairs',
     'folke/lsp-colors.nvim',
@@ -19,39 +18,40 @@ require("lazy").setup({
     'nvim-lua/plenary.nvim',
     "axieax/typo.nvim",
     'lewis6991/gitsigns.nvim',
-    'serenevoid/kiwi.nvim', dependencies = { 'nvim-lua/plenary.nvim' },
-    { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
-    { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
+    'serenevoid/kiwi.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    { 'voldikss/vim-floaterm',           lazy = true,                               cmd = 'FloatermToggle' },
+    { 'norcalli/nvim-colorizer.lua',     lazy = true,                               cmd = 'ColorizerToggle' },
     { 'jose-elias-alvarez/null-ls.nvim', dependencies = { "nvim-lua/plenary.nvim" } },
-    { "kylechui/nvim-surround", version = "*", event = "VeryLazy", config = true },
-    { 'fatih/vim-go',           lazy = true,   ft = "go" },
-    {  'TobinPalmer/pastify.nvim', cmd = { 'Pastify' }, opts = { ft = { vimwiki = '![]($IMG$)'}} },
-    { "folke/noice.nvim", event = "VeryLazy",
-    opts = {
-        {
-            lsp = {
-                override = { ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                    ["vim.lsp.util.stylize_markdown"] = true,
-                    ["cmp.entry.get_documentation"] = true
+    { "kylechui/nvim-surround",          version = "*",                             event = "VeryLazy",                        config = true },
+    { 'fatih/vim-go',                    lazy = true,                               ft = "go" },
+    { 'TobinPalmer/pastify.nvim',        cmd = { 'Pastify' },                       opts = {
+        ft = { vimwiki = '![]($IMG$)' } } },
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+            {
+                presets = {
+                    command_palette = true,
+                    lsp_doc_border = true,
                 },
-            },
-            presets = {
-                bottom_search = false, -- use a classic bottom cmdline for search
-                command_palette = true, -- position the cmdline and popupmenu together
-                long_message_to_split = false, -- long messages will be sent to a split
-                lsp_doc_border = true, -- add a border to hover docs and signature help
-            },
-        }
-    },
-    dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify"}
-},
-
-    { 'kdheepak/lazygit.nvim', lazy = true,
-        cmd = 'LazyGitCurrentFile', dependencies = { "nvim-lua/plenary.nvim" }
+            }
+        },
+        dependencies = { "MunifTanjim/nui.nvim" }
     },
 
-    { 'kevinhwang91/rnvimr',
-        lazy = true, cmd = "RnvimrToggle",
+    {
+        'kdheepak/lazygit.nvim',
+        lazy = true,
+        cmd = 'LazyGitCurrentFile',
+        dependencies = { "nvim-lua/plenary.nvim" }
+    },
+
+    {
+        'kevinhwang91/rnvimr',
+        lazy = true,
+        cmd = "RnvimrToggle",
         init = function()
             vim.g.rnvimr_enable_ex = 1
             vim.g.rnvimr_enable_bw = 1
@@ -61,56 +61,63 @@ require("lazy").setup({
         end
     },
 
-    { 'kyazdani42/nvim-web-devicons',
+    {
+        'kyazdani42/nvim-web-devicons',
         opts = {
             override = { zsh = { icon = '📺', color = '#428850', cterm_color = '65', name = 'Zsh' } },
             default = true
         }
     },
 
-    { 'toppair/peek.nvim', lazy = true,
-    ft = { 'md', "markdown", "vimwiki" },
-    event = { 'BufRead', 'BufNewFile' },
-    build = 'deno task --quiet build:fast',
-    config = function()
-        require("peek").setup{
-            auto_load = true,
-            close_on_bdelete = true,
-            syntax = true,
-            theme = 'dark',
-            update_on_change = true,
-            throttle_at = 200000,
-            throttle_time = 'auto',
-            filetype = { 'markdown', 'md', 'vimwiki' },
+    {
+        'toppair/peek.nvim',
+        lazy = true,
+        ft = { 'md', "markdown", "vimwiki" },
+        event = { 'BufRead', 'BufNewFile' },
+        build = 'deno task --quiet build:fast',
+        config = function()
+            require("peek").setup {
+                auto_load = true,
+                close_on_bdelete = true,
+                syntax = true,
+                theme = 'dark',
+                update_on_change = true,
+                throttle_at = 200000,
+                throttle_time = 'auto',
+                filetype = { 'markdown', 'md', 'vimwiki' },
 
-        }
-        vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
-        vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
-    end
+            }
+            vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
+            vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
+        end
     },
     {
         "folke/which-key.nvim",
         config = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 600
-            require("which-key").setup{
+            require("which-key").setup {
                 spelling = false,
                 presets = { windows = false },
-                key_labels = { ["<space>"] = "Space"},
-                window = { border = "single", -- none, single, double, shadow
-                    margin = { 1, 3, 1, 3 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
+                key_labels = { ["<space>"] = "Space" },
+                window = {
+                    border = "single",        -- none, single, double, shadow
+                    margin = { 1, 3, 1, 3 },  -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
                     padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
                 },
-                layout = { height = { min = 4, max = 20 }, align = "center"},
+                layout = { height = { min = 4, max = 20 }, align = "center" },
                 triggers_blacklist = { n = { "i", "j", "k" }, },
             }
         end,
     },
-    { 'tomiis4/Hypersonic.nvim',
-        event = "CmdlineEnter", cmd = "Hypersonic",
+    {
+        'tomiis4/Hypersonic.nvim',
+        event = "CmdlineEnter",
+        cmd = "Hypersonic",
         config = function() require('hypersonic').setup() end
     },
-    { 'lukas-reineke/indent-blankline.nvim',
+    {
+        'lukas-reineke/indent-blankline.nvim',
         config = function()
             vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
             vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
@@ -129,20 +136,26 @@ require("lazy").setup({
                 'IndentBlanklineIndent4', 'IndentBlanklineIndent5', 'IndentBlanklineIndent6' }
         }
     },
-    {'ggandor/leap.nvim', dependencies = {'nvim-treesitter/playground'},
-    config = function()
-        require("leap").add_default_mappings()
-    end
+    {
+        'ggandor/leap.nvim',
+        dependencies = { 'nvim-treesitter/playground' },
+        config = function()
+            require("leap").add_default_mappings()
+        end
     },
 
-    { 'folke/trouble.nvim',
+    {
+        'folke/trouble.nvim',
         opts = {
-            auto_close = true, height = 5, use_diagnostic_signs = true,
+            auto_close = true,
+            height = 5,
+            use_diagnostic_signs = true,
             signs = { error = '😡', warning = '⚡', hint = '💡', information = '🧠' }
         }
     },
 
-    { 'nvim-treesitter/nvim-treesitter',
+    {
+        'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         dependencies = {
             'nvim-treesitter/playground', 'lewis6991/spellsitter.nvim',
@@ -150,7 +163,8 @@ require("lazy").setup({
             'JoosepAlviste/nvim-ts-context-commentstring'
         },
         opts = {
-            ensure_installed = { 'python', 'regex','markdown','markdown_inline','ruby', 'yaml', 'go', 'bash', 'dockerfile', 'hcl', 'json' },
+            ensure_installed = { 'python', 'regex', 'markdown', 'markdown_inline', 'ruby', 'yaml', 'go', 'bash',
+                'dockerfile', 'hcl', 'json' },
             highlight = { enable = true },
         }
     },
@@ -207,7 +221,7 @@ require("lazy").setup({
                         path = 4,
                         symbols = {
                             modified = '➕',
-                            readonly = '➖',      -- Text to show when the file is non-modifiable or readonly.
+                            readonly = '➖', -- Text to show when the file is non-modifiable or readonly.
                             unnamed = '[No Name]', -- Text to show for unnamed buffers.
                             newfile = '🐤',
                         }
@@ -217,11 +231,15 @@ require("lazy").setup({
             extensions = { 'quickfix' }
         }
     },
-    { 'williamboman/mason-lspconfig.nvim',
+    {
+        'williamboman/mason-lspconfig.nvim',
         dependencies = { { 'williamboman/mason.nvim', build = ":MasonUpdate", config = true } },
     },
-    { 'L3MON4D3/LuaSnip',
-        version = "v1.*", run = "make install_jsregexp", lazy = true,
+    {
+        'L3MON4D3/LuaSnip',
+        version = "v1.*",
+        run = "make install_jsregexp",
+        lazy = true,
         dependencies = { 'kmf/vim-chef-snippets', "rafamadriz/friendly-snippets" },
 
         config = function()
@@ -229,7 +247,8 @@ require("lazy").setup({
             require("luasnip.loaders.from_vscode").lazy_load()
         end
     },
-    { 'hrsh7th/nvim-cmp',
+    {
+        'hrsh7th/nvim-cmp',
         dependencies = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip' },
     },
 
@@ -241,16 +260,16 @@ local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lsp_attach = function(_, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     wk.register({
-        ["gD"] ={vim.lsp.buf.declaration, "Go to Declaration", bufopts},
-        ["gd"] ={vim.lsp.buf.definition, "Go to Definition", bufopts},
-        ["K"] ={vim.lsp.buf.hover, "Lsp Docs", bufopts},
-        ["gi"] ={vim.lsp.buf.implementation, "Go to Implementation", bufopts},
-        ["<C-k>"] ={vim.lsp.buf.signature_help, "Signature Help", bufopts},
-        ["<space>D"] ={vim.lsp.buf.type_definition, "Go to Type", bufopts},
-        ["<leader>ca"] ={vim.lsp.buf.code_action, "Code Action", bufopts},
-        ["<leader>rn"] ={vim.lsp.buf.rename, "Refactor Name", bufopts},
-        -- ["<space>p"] ={vim.lsp.buf.format{async = true}, "Format", bufopts},
-        ["<leader>lr"] ={vim.lsp.buf.format, "Format", bufopts},
+        ["gD"] = { vim.lsp.buf.declaration, "Go to Declaration", bufopts },
+        ["gd"] = { vim.lsp.buf.definition, "Go to Definition", bufopts },
+        -- something is overidding K binding and sending it to a split
+        ["K"] = { vim.lsp.buf.hover, "Lsp Docs", bufopts },
+        ["gi"] = { vim.lsp.buf.implementation, "Go to Implementation", bufopts },
+        ["<C-k>"] = { vim.lsp.buf.signature_help, "Signature Help", bufopts },
+        ["<space>D"] = { vim.lsp.buf.type_definition, "Go to Type", bufopts },
+        ["<leader>ca"] = { vim.lsp.buf.code_action, "Code Action", bufopts },
+        ["<leader>rn"] = { vim.lsp.buf.rename, "Refactor Name", bufopts },
+        ["<leader>lr"] = { vim.lsp.buf.format, "Format", bufopts },
     })
 end
 
@@ -323,7 +342,7 @@ for type, icon in pairs(signs) do
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-vim.diagnostic.config({ virtual_text = false, severity_sort = true, float = { source = "if_many"}})
+vim.diagnostic.config({ virtual_text = false, severity_sort = true, float = { source = "if_many" } })
 
 --null-ls
 local null_ls = require("null-ls")
@@ -337,26 +356,26 @@ null_ls.setup({
 
 
 lspconfig.lua_ls.setup {
-  settings = {
-    Lua = { runtime = { version = 'LuaJIT'},
-      diagnostics = {
-        globals = {'vim', 'require'}},
-        workspace = {library = vim.api.nvim_get_runtime_file("", true)},
-        telemetry = {enable = false}
+    settings = {
+        Lua = {
+            runtime = { version = 'LuaJIT' },
+            diagnostics = {
+                globals = { 'vim', 'require' } },
+            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            telemetry = { enable = false }
+        },
     },
-  },
 }
 
-vim.notify = require("notify")
 require("catppuccin").setup({
     flavour = "frappe", -- latte, frappe, macchiato, mocha
-    background = { -- :h background
+    background = {      -- :h background
         light = "latte",
         dark = "mocha",
     },
     transparent_background = true,
-    no_underline = false, -- Force no underline
-    styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+    no_underline = false,        -- Force no underline
+    styles = {                   -- Handles the styles of general hi groups (see `:h highlight-args`):
         comments = { "italic" }, -- Change the style of comments
         conditionals = { "italic" },
         loops = {},
@@ -377,7 +396,6 @@ require("catppuccin").setup({
         gitsigns = true,
         nvimtree = true,
         treesitter = true,
-        notify = true,
         noice = true,
         which_key = true,
         lsp_trouble = true,
@@ -392,3 +410,12 @@ require("catppuccin").setup({
     },
 })
 vim.cmd.colorscheme "catppuccin-frappe"
+require("noice").setup({
+    lsp = {
+        override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+        },
+    },
+})
