@@ -18,15 +18,28 @@ require("lazy").setup({
     'nvim-lua/plenary.nvim',
     "axieax/typo.nvim",
     'lewis6991/gitsigns.nvim',
-    'serenevoid/kiwi.nvim',
+    'lervag/wiki.vim',
+    -- 'serenevoid/kiwi.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     { 'voldikss/vim-floaterm',           lazy = true,                               cmd = 'FloatermToggle' },
     { 'norcalli/nvim-colorizer.lua',     lazy = true,                               cmd = 'ColorizerToggle' },
     { 'jose-elias-alvarez/null-ls.nvim', dependencies = { "nvim-lua/plenary.nvim" } },
     { "kylechui/nvim-surround",          version = "*",                             event = "VeryLazy",                        config = true },
     { 'fatih/vim-go',                    lazy = true,                               ft = "go" },
+
     { 'TobinPalmer/pastify.nvim',        cmd = { 'Pastify' },                       opts = {
         ft = { vimwiki = '![]($IMG$)' } } },
+-- Lua
+{ '0x00-ketsu/markdown-preview.nvim',
+  ft = {'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki'},
+  config = function()
+    require('markdown-preview').setup {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the setup section below
+    }
+  end
+},
     {
         "folke/noice.nvim",
         event = "VeryLazy",
@@ -70,28 +83,6 @@ require("lazy").setup({
     },
 
     {
-        'toppair/peek.nvim',
-        lazy = true,
-        ft = { 'md', "markdown", "vimwiki" },
-        event = { 'BufRead', 'BufNewFile' },
-        build = 'deno task --quiet build:fast',
-        config = function()
-            require("peek").setup {
-                auto_load = true,
-                close_on_bdelete = true,
-                syntax = true,
-                theme = 'dark',
-                update_on_change = true,
-                throttle_at = 200000,
-                throttle_time = 'auto',
-                filetype = { 'markdown', 'md', 'vimwiki' },
-
-            }
-            vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
-            vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
-        end
-    },
-    {
         "folke/which-key.nvim",
         config = function()
             vim.o.timeout = true
@@ -109,12 +100,6 @@ require("lazy").setup({
                 triggers_blacklist = { n = { "i", "j", "k" }, },
             }
         end,
-    },
-    {
-        'tomiis4/Hypersonic.nvim',
-        event = "CmdlineEnter",
-        cmd = "Hypersonic",
-        config = function() require('hypersonic').setup() end
     },
     {
         'lukas-reineke/indent-blankline.nvim',
@@ -349,8 +334,8 @@ local null_ls = require("null-ls")
 
 null_ls.setup({
     sources = {
-        null_ls.builtins.formatting.beautysh, null_ls.builtins.formatting.terraform_fmt,
-        null_ls.builtins.formatting.yamlfmt, null_ls.builtins.formatting.jq,
+        null_ls.builtins.formatting.beautysh, null_ls.builtins.formatting.terraform_fmt, null_ls.builtins.formatting.terraform_validate,
+        null_ls.builtins.formatting.yamlfmt, null_ls.builtins.formatting.jq, null_ls.builtins.formatting.prettierd, null_ls.builtins.formatting.markdownlint
     }
 })
 
@@ -419,3 +404,4 @@ require("noice").setup({
         },
     },
 })
+

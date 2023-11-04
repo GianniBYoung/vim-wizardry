@@ -33,3 +33,5 @@ vim.api.nvim_create_autocmd(
     "BufWritePost",
     { pattern = "*.go", command = "!gofmt -w %" }
 )
+
+-- vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])

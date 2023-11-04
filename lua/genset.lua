@@ -35,6 +35,7 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 vim.opt.foldlevelstart = 40
 
+vim.g.wiki_root = '~/wiki'
 -- vim.opt.formatoptions = { 'j' }
 
 -- " set backup
