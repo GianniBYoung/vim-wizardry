@@ -1,5 +1,5 @@
 require("lazy").setup({
-    { "catppuccin/nvim",                 name = "catppuccin",                       priority = 1000 },
+{ "EdenEast/nightfox.nvim" },
     'junegunn/fzf',
     'jiangmiao/auto-pairs',
     'folke/lsp-colors.nvim',
@@ -19,29 +19,42 @@ require("lazy").setup({
     "axieax/typo.nvim",
     'lewis6991/gitsigns.nvim',
     'lervag/wiki.vim',
-    -- 'serenevoid/kiwi.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     { 'voldikss/vim-floaterm',           lazy = true,                               cmd = 'FloatermToggle' },
     { 'norcalli/nvim-colorizer.lua',     lazy = true,                               cmd = 'ColorizerToggle' },
-    { 'jose-elias-alvarez/null-ls.nvim', dependencies = { "nvim-lua/plenary.nvim" } },
+    { 'nvimtools/none-ls.nvim', dependencies = { "nvim-lua/plenary.nvim" } },
     { "kylechui/nvim-surround",          version = "*",                             event = "VeryLazy",                        config = true },
     { 'fatih/vim-go',                    lazy = true,                               ft = "go" },
-
+    { "coffebar/neovim-project",
+    opts = {
+        projects = {
+        "~/chef/nulsc/*",
+        "~/git/icon/*",
+        "~/.config/*",
+    },
+},
+init = function()
+    -- enable saving the state of plugins in the session
+    vim.opt.sessionoptions:append("globals") -- save global variables that start with an uppercase letter and contain at least one lowercase letter.
+end,
+dependencies = {
+    { "nvim-lua/plenary.nvim" },
+    { "nvim-telescope/telescope.nvim"},
+    { "Shatur/neovim-session-manager"},
+},
+lazy = false,
+priority = 100,
+},
     { 'TobinPalmer/pastify.nvim',        cmd = { 'Pastify' },                       opts = {
         ft = { vimwiki = '![]($IMG$)' } } },
--- Lua
-{ '0x00-ketsu/markdown-preview.nvim',
-  ft = {'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki'},
-  config = function()
-    require('markdown-preview').setup {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the setup section below
-    }
-  end
-},
-    {
-        "folke/noice.nvim",
+        -- Lua
+        { '0x00-ketsu/markdown-preview.nvim',
+        ft = {'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki'},
+        config = function()
+            require('markdown-preview').setup {}
+        end
+    },
+    { "folke/noice.nvim",
         event = "VeryLazy",
         opts = {
             {
@@ -54,15 +67,13 @@ require("lazy").setup({
         dependencies = { "MunifTanjim/nui.nvim" }
     },
 
-    {
-        'kdheepak/lazygit.nvim',
+    { 'kdheepak/lazygit.nvim',
         lazy = true,
         cmd = 'LazyGitCurrentFile',
         dependencies = { "nvim-lua/plenary.nvim" }
     },
 
-    {
-        'kevinhwang91/rnvimr',
+    { 'kevinhwang91/rnvimr',
         lazy = true,
         cmd = "RnvimrToggle",
         init = function()
@@ -74,16 +85,14 @@ require("lazy").setup({
         end
     },
 
-    {
-        'kyazdani42/nvim-web-devicons',
+    { 'kyazdani42/nvim-web-devicons',
         opts = {
             override = { zsh = { icon = '📺', color = '#428850', cterm_color = '65', name = 'Zsh' } },
             default = true
         }
     },
 
-    {
-        "folke/which-key.nvim",
+    { "folke/which-key.nvim",
         config = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 600
@@ -160,7 +169,7 @@ require("lazy").setup({
         opts = {
             options = {
                 icons_enabled = true,
-                theme = 'auto',
+                theme = 'papercolor_light',
                 section_separators = { left = '', right = '' },
                 component_separators = { left = '', right = '' },
                 always_divide_middle = false,
@@ -197,20 +206,16 @@ require("lazy").setup({
                 lualine_b = {},
                 lualine_c = {},
                 lualine_x = {},
-                lualine_y = {
-
-                },
+                lualine_y = { },
                 lualine_z = {
-                    {
-                        'filename',
+                    { 'filename',
                         path = 4,
                         symbols = {
                             modified = '➕',
                             readonly = '➖', -- Text to show when the file is non-modifiable or readonly.
                             unnamed = '[No Name]', -- Text to show for unnamed buffers.
                             newfile = '🐤',
-                        }
-                    }
+                        } }
                 },
             },
             extensions = { 'quickfix' }
@@ -334,7 +339,7 @@ local null_ls = require("null-ls")
 
 null_ls.setup({
     sources = {
-        null_ls.builtins.formatting.beautysh, null_ls.builtins.formatting.terraform_fmt, null_ls.builtins.formatting.terraform_validate,
+        null_ls.builtins.formatting.beautysh, null_ls.builtins.formatting.terraform_fmt,
         null_ls.builtins.formatting.yamlfmt, null_ls.builtins.formatting.jq, null_ls.builtins.formatting.prettierd, null_ls.builtins.formatting.markdownlint
     }
 })
@@ -351,50 +356,38 @@ lspconfig.lua_ls.setup {
         },
     },
 }
-
-require("catppuccin").setup({
-    flavour = "frappe", -- latte, frappe, macchiato, mocha
-    background = {      -- :h background
-        light = "latte",
-        dark = "mocha",
+-- Default options
+require('nightfox').setup({
+  options = {
+    transparent = false,
+    -- dim_inactive = true,
+    styles = {               -- Style to be applied to different syntax groups
+      comments = "italic",     -- Value is any valid attr-list value `:help attr-list`
+      conditionals = "italic",
+      constants = "italic",
+      functions = "underdotted",
+      keywords = "bold",
+      numbers = "NONE",
+      operators = "bold",
+      strings = "NONE",
+      types = "italic",
+      variables = "bold",
     },
-    transparent_background = true,
-    no_underline = false,        -- Force no underline
-    styles = {                   -- Handles the styles of general hi groups (see `:h highlight-args`):
-        comments = { "italic" }, -- Change the style of comments
-        conditionals = { "italic" },
-        loops = {},
-        functions = {},
-        keywords = {},
-        strings = {},
-        variables = {},
-        numbers = {},
-        booleans = {},
-        properties = {},
-        types = {},
-        operators = {},
+    inverse = { visual = false},
+    modules = {             -- List of various plugins and additional options
+    telescope = false,
+    whichkey = false,
+      -- ...
     },
-    color_overrides = {},
-    custom_highlights = {},
-    integrations = {
-        cmp = true,
-        gitsigns = true,
-        nvimtree = true,
-        treesitter = true,
-        noice = true,
-        which_key = true,
-        lsp_trouble = true,
-        indent_blankline = {
-            enabled = true,
-            colored_indent_levels = true,
-        },
-        telescope = {
-            enabled = true,
-            -- style = "nvchad"
-        }
+  },
+  palettes = {
+   dayfox = {
+      bg1 = "#ffc2cd", -- Black background
     },
+  },
 })
-vim.cmd.colorscheme "catppuccin-frappe"
+
+vim.cmd.colorscheme "dayfox"
 require("noice").setup({
     lsp = {
         override = {
