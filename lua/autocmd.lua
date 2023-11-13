@@ -3,13 +3,17 @@ vim.api.nvim_create_autocmd(
     { "BufRead", "BufNewFile" },
     { pattern = { "*.txt", "*.md", "*.tex" }, command = "setlocal spell" }
 )
-
+-- autocmd FileType apache setlocal commentstring=#\ %s
 -- Set spellcheck on markdown and text
 vim.api.nvim_create_autocmd(
     { "BufRead"},
-    { pattern = "*tfvars", command = "set ft=tf" }
+    { pattern = "*tf*", command = "set ft=tf" }
 )
 
+vim.api.nvim_create_autocmd(
+    { "BufRead"},
+    { pattern = "*tf*", command = "setlocal commentstring=#\\ %s" }
+)
 
 -- Strip trailing whitespaces on save → figure our how to exclude markdown
 vim.api.nvim_create_autocmd(
@@ -20,8 +24,8 @@ vim.api.nvim_create_autocmd(
 
 -- -- autoformat terraform files
 -- vim.api.nvim_create_autocmd(
---     "BufWritePre",
---     { pattern = "*.tf", command = "terraform fmt" }
+--     "BufWrite",
+--     { pattern = "*.tf", command = "!terraform fmt %" }
 -- )
 
 vim.api.nvim_create_autocmd(

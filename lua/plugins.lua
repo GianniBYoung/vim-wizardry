@@ -1,7 +1,5 @@
 require("lazy").setup({
-{ "EdenEast/nightfox.nvim" },
     'junegunn/fzf',
-    'jiangmiao/auto-pairs',
     'folke/lsp-colors.nvim',
     'tpope/vim-commentary',
     'tpope/vim-eunuch',
@@ -19,44 +17,69 @@ require("lazy").setup({
     "axieax/typo.nvim",
     'lewis6991/gitsigns.nvim',
     'lervag/wiki.vim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    { 'voldikss/vim-floaterm',           lazy = true,                               cmd = 'FloatermToggle' },
-    { 'norcalli/nvim-colorizer.lua',     lazy = true,                               cmd = 'ColorizerToggle' },
-    { 'nvimtools/none-ls.nvim', dependencies = { "nvim-lua/plenary.nvim" } },
-    { "kylechui/nvim-surround",          version = "*",                             event = "VeryLazy",                        config = true },
-    { 'fatih/vim-go',                    lazy = true,                               ft = "go" },
-    { "coffebar/neovim-project",
-    opts = {
-        projects = {
-        "~/chef/nulsc/*",
-        "~/git/icon/*",
-        "~/.config/*",
-    },
+ {
+    'windwp/nvim-autopairs', event = "InsertEnter", opts = {check_ts = true}
 },
-init = function()
-    -- enable saving the state of plugins in the session
-    vim.opt.sessionoptions:append("globals") -- save global variables that start with an uppercase letter and contain at least one lowercase letter.
-end,
-dependencies = {
-    { "nvim-lua/plenary.nvim" },
-    { "nvim-telescope/telescope.nvim"},
-    { "Shatur/neovim-session-manager"},
-},
-lazy = false,
-priority = 100,
-},
-    { 'TobinPalmer/pastify.nvim',        cmd = { 'Pastify' },                       opts = {
-        ft = { vimwiki = '![]($IMG$)' } } },
-        -- Lua
-        { '0x00-ketsu/markdown-preview.nvim',
-        ft = {'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki'},
+    { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
+    { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
+    {
+        'nvimtools/none-ls.nvim',
+        dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
-            require('markdown-preview').setup {}
+            local null_ls = require("null-ls")
+            null_ls.setup({
+                sources = {
+                    null_ls.builtins.formatting.beautysh, null_ls.builtins.formatting.terraform_fmt,
+                    null_ls.builtins.formatting.yamlfmt, null_ls.builtins.formatting.jq, null_ls.builtins.formatting
+                    .prettierd, null_ls.builtins.formatting.markdownlint
+                }
+            })
         end
     },
-    { "folke/noice.nvim",
+    { "kylechui/nvim-surround", version = "*", event = "VeryLazy", config = true },
+    { 'fatih/vim-go',           lazy = true,   ft = "go" },
+    {
+        "coffebar/neovim-project",
+        lazy = false,
+        priority = 100,
+        opts = {
+            projects = {
+                "~/chef/nulsc/*",
+                "~/chef/nulsc/cookbooks/*",
+                "~/chef/nulsc/policies/*",
+                "~/chef/nulsc/profiles/*",
+                "~/chef/nulsc/cookbooks/linux_cookbooks/*",
+                "~/git/icon/*",
+                "~/.config/*",
+            },
+        },
+        init = function()
+            -- enable saving the state of plugins in the session
+            vim.opt.sessionoptions:append("globals") -- save global variables that start with an uppercase letter and contain at least one lowercase letter.
+        end,
+        dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-telescope/telescope.nvim" }, { "Shatur/neovim-session-manager" } },
+    },
+    {
+        'TobinPalmer/pastify.nvim',
+        cmd = { 'Pastify' },
+        opts = { ft = { vimwiki = '![]($IMG$)' } }
+    },
+    -- Lua
+    {
+        '0x00-ketsu/markdown-preview.nvim',
+        ft = { 'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki' },
+    },
+    {
+        "folke/noice.nvim",
         event = "VeryLazy",
         opts = {
+            lsp = {
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true,
+                },
+            },
             {
                 presets = {
                     command_palette = true,
@@ -67,13 +90,15 @@ priority = 100,
         dependencies = { "MunifTanjim/nui.nvim" }
     },
 
-    { 'kdheepak/lazygit.nvim',
+    {
+        'kdheepak/lazygit.nvim',
         lazy = true,
         cmd = 'LazyGitCurrentFile',
         dependencies = { "nvim-lua/plenary.nvim" }
     },
 
-    { 'kevinhwang91/rnvimr',
+    {
+        'kevinhwang91/rnvimr',
         lazy = true,
         cmd = "RnvimrToggle",
         init = function()
@@ -84,15 +109,16 @@ priority = 100,
             vim.g.rnvimr_vanilla = 0
         end
     },
-
-    { 'kyazdani42/nvim-web-devicons',
+    {
+        'kyazdani42/nvim-web-devicons',
         opts = {
             override = { zsh = { icon = '📺', color = '#428850', cterm_color = '65', name = 'Zsh' } },
             default = true
         }
     },
 
-    { "folke/which-key.nvim",
+    {
+        "folke/which-key.nvim",
         config = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 600
@@ -111,24 +137,30 @@ priority = 100,
         end,
     },
     {
-        'lukas-reineke/indent-blankline.nvim',
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
         config = function()
-            vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-            vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-            vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-            vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-            vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-            vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-            vim.opt.listchars:append 'space:⋅'
-        end,
-        opts = {
-            indent_blankline_char = '/',
-            space_char_blankline = ' ',
-            show_current_context = true,
-            show_current_context_start = true,
-            char_highlight_list = { 'IndentBlanklineIndent1', 'IndentBlanklineIndent2', 'IndentBlanklineIndent3',
-                'IndentBlanklineIndent4', 'IndentBlanklineIndent5', 'IndentBlanklineIndent6' }
-        }
+            local hooks = require "ibl.hooks"
+            hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+                vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+                vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#FFD700" })
+                vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+                vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+                vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+                vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+                vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+            end)
+
+            require("ibl").setup {
+
+                indent = {
+                    highlight = { "RainbowRed", "RainbowYellow", "RainbowBlue",
+                        "RainbowOrange", "RainbowGreen", "RainbowViolet", "RainbowCyan",
+                    }
+                }
+
+            }
+        end
     },
     {
         'ggandor/leap.nvim',
@@ -169,7 +201,8 @@ priority = 100,
         opts = {
             options = {
                 icons_enabled = true,
-                theme = 'papercolor_light',
+                theme = 'auto',
+                -- theme = 'papercolor_light',
                 section_separators = { left = '', right = '' },
                 component_separators = { left = '', right = '' },
                 always_divide_middle = false,
@@ -206,16 +239,18 @@ priority = 100,
                 lualine_b = {},
                 lualine_c = {},
                 lualine_x = {},
-                lualine_y = { },
+                lualine_y = {},
                 lualine_z = {
-                    { 'filename',
+                    {
+                        'filename',
                         path = 4,
                         symbols = {
                             modified = '➕',
                             readonly = '➖', -- Text to show when the file is non-modifiable or readonly.
                             unnamed = '[No Name]', -- Text to show for unnamed buffers.
                             newfile = '🐤',
-                        } }
+                        }
+                    }
                 },
             },
             extensions = { 'quickfix' }
@@ -240,6 +275,40 @@ priority = 100,
     {
         'hrsh7th/nvim-cmp',
         dependencies = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip' },
+    },
+    {
+        "EdenEast/nightfox.nvim",
+        config = function()
+            require('nightfox').setup({
+                options = {
+                    transparent = false,
+                    -- dim_inactive = true,
+                    styles = {       -- Style to be applied to different syntax groups
+                        comments = "italic", -- Value is any valid attr-list value `:help attr-list`
+                        conditionals = "italic",
+                        constants = "italic",
+                        functions = "underdotted",
+                        keywords = "bold",
+                        numbers = "NONE",
+                        operators = "bold",
+                        strings = "NONE",
+                        types = "italic",
+                        variables = "bold",
+                    },
+                    inverse = { visual = false },
+                    modules = { -- List of various plugins and additional options
+                        telescope = false,
+                        whichkey = false,
+                        -- ...
+                    },
+                },
+                palettes = {
+                    dayfox = {
+                        -- bg1 = "#ffc2cd", -- Black background
+                    },
+                },
+            })
+        end
     },
 
 })
@@ -334,17 +403,6 @@ end
 
 vim.diagnostic.config({ virtual_text = false, severity_sort = true, float = { source = "if_many" } })
 
---null-ls
-local null_ls = require("null-ls")
-
-null_ls.setup({
-    sources = {
-        null_ls.builtins.formatting.beautysh, null_ls.builtins.formatting.terraform_fmt,
-        null_ls.builtins.formatting.yamlfmt, null_ls.builtins.formatting.jq, null_ls.builtins.formatting.prettierd, null_ls.builtins.formatting.markdownlint
-    }
-})
-
-
 lspconfig.lua_ls.setup {
     settings = {
         Lua = {
@@ -356,45 +414,5 @@ lspconfig.lua_ls.setup {
         },
     },
 }
--- Default options
-require('nightfox').setup({
-  options = {
-    transparent = false,
-    -- dim_inactive = true,
-    styles = {               -- Style to be applied to different syntax groups
-      comments = "italic",     -- Value is any valid attr-list value `:help attr-list`
-      conditionals = "italic",
-      constants = "italic",
-      functions = "underdotted",
-      keywords = "bold",
-      numbers = "NONE",
-      operators = "bold",
-      strings = "NONE",
-      types = "italic",
-      variables = "bold",
-    },
-    inverse = { visual = false},
-    modules = {             -- List of various plugins and additional options
-    telescope = false,
-    whichkey = false,
-      -- ...
-    },
-  },
-  palettes = {
-   dayfox = {
-      bg1 = "#ffc2cd", -- Black background
-    },
-  },
-})
 
 vim.cmd.colorscheme "dayfox"
-require("noice").setup({
-    lsp = {
-        override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
-        },
-    },
-})
-
