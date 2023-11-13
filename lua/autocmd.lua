@@ -1,9 +1,8 @@
 -- Set spellcheck on markdown and text
 vim.api.nvim_create_autocmd(
     { "BufRead", "BufNewFile" },
-    { pattern = { "*.txt", "*.md", "*.tex" }, command = "setlocal spell" }
+    { pattern = { "*.txt", "*.md", "*.tex", "*.wiki" }, command = "setlocal spell" }
 )
--- autocmd FileType apache setlocal commentstring=#\ %s
 -- Set spellcheck on markdown and text
 vim.api.nvim_create_autocmd(
     { "BufRead"},
@@ -22,20 +21,20 @@ vim.api.nvim_create_autocmd(
     -- { pattern = "\\\.(?!md).*", command = "%s/\\s\\+$//e" }
 )
 
--- -- autoformat terraform files
--- vim.api.nvim_create_autocmd(
---     "BufWrite",
---     { pattern = "*.tf", command = "!terraform fmt %" }
--- )
+-- autoformat terraform files
+vim.api.nvim_create_autocmd(
+    "BufWritePre",
+    { pattern = "*.tf", command = 'lua vim.lsp.buf.format()' }
+)
+
+-- autoformat terraform files
+vim.api.nvim_create_autocmd(
+    "BufWritePre",
+    { pattern = "*.go", command = 'lua vim.lsp.buf.format()' }
+)
 
 vim.api.nvim_create_autocmd(
     "BufWritePost",
     { pattern = ".*default.yml", command = "!espanso restart" }
 )
 
-vim.api.nvim_create_autocmd(
-    "BufWritePost",
-    { pattern = "*.go", command = "!gofmt -w %" }
-)
-
--- vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])
