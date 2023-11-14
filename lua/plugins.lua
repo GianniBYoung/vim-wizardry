@@ -98,17 +98,13 @@ require("lazy").setup({
     },
 
     {
-        'kevinhwang91/rnvimr',
-        lazy = true,
-        cmd = "RnvimrToggle",
-        init = function()
-            vim.g.rnvimr_enable_ex = 1
-            vim.g.rnvimr_enable_bw = 1
-            vim.g.rnvimr_enable_picker = 1
-            vim.g.rnvimr_edit_cmd = 'drop'
-            vim.g.rnvimr_vanilla = 0
-        end
+        "kelly-lin/ranger.nvim",
+        config = function()
+            require("ranger-nvim").setup({ replace_netrw = true,
+            ui = { border = "rounded", height = .45, width = .65, x = 0.5, y = 0.5 }})
+        end,
     },
+
     {
         'kyazdani42/nvim-web-devicons',
         opts = {
