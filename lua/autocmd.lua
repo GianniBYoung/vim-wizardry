@@ -6,12 +6,12 @@ vim.api.nvim_create_autocmd(
 -- Set spellcheck on markdown and text
 vim.api.nvim_create_autocmd(
     { "BufRead"},
-    { pattern = "*tf*", command = "set ft=tf" }
+    { pattern = "*tf.*", command = "set ft=tf" }
 )
 
 vim.api.nvim_create_autocmd(
     { "BufRead"},
-    { pattern = "*tf*", command = "setlocal commentstring=#\\ %s" }
+    { pattern = "*tf.*", command = "setlocal commentstring=#\\ %s" }
 )
 
 -- Strip trailing whitespaces on save → figure our how to exclude markdown
