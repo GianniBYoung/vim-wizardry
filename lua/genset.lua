@@ -31,10 +31,14 @@ vim.opt.swapfile = false
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.confirm = true
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
--- vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
 vim.opt.foldlevelstart = 40
-
+vim.opt.breakindent = true
+vim.opt.cursorline = true
+-- vim.opt.shortmess =  -- skip errors on startup
+vim.g.go_doc_balloon = 1
+vim.g.go_doc_popup_window = 1
 vim.g.wiki_root = '~/wiki'
 -- vim.opt.formatoptions = { 'j' }
 

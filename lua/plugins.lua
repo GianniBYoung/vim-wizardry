@@ -1,6 +1,5 @@
 require("lazy").setup({
     'junegunn/fzf',
-    'folke/lsp-colors.nvim',
     'tpope/vim-eunuch',
     'tpope/vim-endwise',
     'jessarcher/vim-heritage',
@@ -13,7 +12,7 @@ require("lazy").setup({
     "axieax/typo.nvim",
     'lewis6991/gitsigns.nvim',
     'lervag/wiki.vim',
-    { 'echasnovski/mini.nvim', version = false },
+
     { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
     { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
     {
@@ -30,7 +29,6 @@ require("lazy").setup({
             })
         end
     },
-    { "kylechui/nvim-surround", version = "*", event = "VeryLazy", config = true },
     { 'fatih/vim-go',           lazy = true,   ft = "go" },
     {
         "coffebar/neovim-project",
@@ -81,7 +79,7 @@ require("lazy").setup({
                 },
             }
         },
-        dependencies = { "MunifTanjim/nui.nvim" }
+        dependencies = { "MunifTanjim/nui.nvim",{ 'echasnovski/mini.nvim', version = false }, }
     },
 
     {
@@ -125,13 +123,15 @@ require("lazy").setup({
                 triggers_blacklist = { n = { "i", "j", "k" }, },
             }
         end,
+        lazy = true
     },
     {
         'ggandor/leap.nvim',
         dependencies = { 'nvim-treesitter/playground' },
         config = function()
             require("leap").add_default_mappings()
-        end
+        end,
+        -- lazy = true
     },
 
     {
@@ -141,7 +141,8 @@ require("lazy").setup({
             height = 5,
             use_diagnostic_signs = true,
             signs = { error = '😡', warning = '⚡', hint = '💡', information = '🧠' }
-        }
+        },
+        -- event = "VeryLazy"
     },
 
     {
@@ -286,9 +287,10 @@ local lsp_attach = function(_, bufnr)
         ["gD"] = { vim.lsp.buf.declaration, "Go to Declaration", bufopts },
         ["gd"] = { vim.lsp.buf.definition, "Go to Definition", bufopts },
         -- something is overidding K binding and sending it to a split
-        ["K"] = { vim.lsp.buf.hover, "Lsp Docs", bufopts },
+        -- Its go-doc T-T I think an autocommand
+        ["<C-k>"] = { vim.lsp.buf.hover, "Lsp Docs", bufopts },
         ["gi"] = { vim.lsp.buf.implementation, "Go to Implementation", bufopts },
-        ["<C-k>"] = { vim.lsp.buf.signature_help, "Signature Help", bufopts },
+        ["K"] = { vim.lsp.buf.signature_help, "Signature Help", bufopts },
         ["<space>D"] = { vim.lsp.buf.type_definition, "Go to Type", bufopts },
         ["<leader>ca"] = { vim.lsp.buf.code_action, "Code Action", bufopts },
         ["<leader>rn"] = { vim.lsp.buf.rename, "Refactor Name", bufopts },
