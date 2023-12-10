@@ -6,7 +6,6 @@ require("lazy").setup({
     'jessarcher/vim-heritage',
     'terryma/vim-smooth-scroll',
     'neovim/nvim-lspconfig',
-    -- 'wellle/targets.vim', -- mini.ai
     'tpope/vim-repeat',
     'machakann/vim-highlightedyank',
     'nvim-telescope/telescope.nvim',
@@ -14,7 +13,7 @@ require("lazy").setup({
     "axieax/typo.nvim",
     'lewis6991/gitsigns.nvim',
     'lervag/wiki.vim',
-{ 'echasnovski/mini.nvim', version = false },
+    { 'echasnovski/mini.nvim', version = false },
     { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
     { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
     {
