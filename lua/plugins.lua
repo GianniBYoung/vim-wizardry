@@ -1,17 +1,17 @@
 require("lazy").setup({
-    'junegunn/fzf',
-    'tpope/vim-eunuch',
-    'tpope/vim-endwise',
-    'jessarcher/vim-heritage',
-    'terryma/vim-smooth-scroll',
-    'neovim/nvim-lspconfig',
-    'tpope/vim-repeat',
-    'machakann/vim-highlightedyank',
-    'nvim-telescope/telescope.nvim',
-    'nvim-lua/plenary.nvim',
-    "axieax/typo.nvim",
+    -- 'junegunn/fzf', I don't think i need this besides some dependencies maybe
+    { 'tpope/vim-eunuch', event = "VeryLazy" },
+    {'tpope/vim-endwise', event = "VeryLazy"},
+    {'jessarcher/vim-heritage', event = "VeryLazy"},
+    {'terryma/vim-smooth-scroll', event = "VeryLazy"},
+    {'neovim/nvim-lspconfig'},
+    {'tpope/vim-repeat', event = "VeryLazy"},
+    {'machakann/vim-highlightedyank'},
+    -- 'nvim-telescope/telescope.nvim', dep
+    -- 'nvim-lua/plenary.nvim', dep of none-ls
+    {"axieax/typo.nvim", event = "VeryLazy"},
     'lewis6991/gitsigns.nvim',
-    'lervag/wiki.vim',
+    { 'lervag/wiki.vim', lazy = true, cmd = 'WikiIndex'  },
 
     { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
     { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
@@ -51,12 +51,7 @@ require("lazy").setup({
         end,
         dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-telescope/telescope.nvim" }, { "Shatur/neovim-session-manager" } },
     },
-    {
-        'TobinPalmer/pastify.nvim',
-        cmd = { 'Pastify' },
-        opts = { ft = { vimwiki = '![]($IMG$)' } }
-    },
-    -- Lua
+    { 'TobinPalmer/pastify.nvim', cmd = { 'Pastify' }},
     {
         '0x00-ketsu/markdown-preview.nvim',
         ft = { 'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki' },
@@ -84,13 +79,13 @@ require("lazy").setup({
 
     {
         'kdheepak/lazygit.nvim',
-        lazy = true,
-        cmd = 'LazyGitCurrentFile',
+        lazy = true, cmd = 'LazyGitCurrentFile',
         dependencies = { "nvim-lua/plenary.nvim" }
     },
 
     {
         "kelly-lin/ranger.nvim",
+        cmd ="Lua require(\"ranger-nvim\").open(true)",
         config = function()
             require("ranger-nvim").setup({ replace_netrw = true,
             ui = { border = "rounded", height = .45, width = .65, x = 0.5, y = 0.5 }})
@@ -239,7 +234,7 @@ require("lazy").setup({
     },
     {
         'hrsh7th/nvim-cmp',
-        dependencies = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip' },
+        dependencies = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-nvim-lua' },
     },
     {
         "EdenEast/nightfox.nvim",
@@ -262,8 +257,8 @@ require("lazy").setup({
                     },
                     inverse = { visual = false },
                     modules = { -- List of various plugins and additional options
-                        telescope = false,
-                        whichkey = false,
+                        -- telescope = false,
+                        -- whichkey = false,
                         -- ...
                     },
                 },
