@@ -1,15 +1,12 @@
 require("lazy").setup({
     'junegunn/fzf',
     'folke/lsp-colors.nvim',
-    'tpope/vim-commentary',
     'tpope/vim-eunuch',
     'tpope/vim-endwise',
-    'jessarcher/vim-context-commentstring',
-    'jessarcher/vim-sayonara',
     'jessarcher/vim-heritage',
     'terryma/vim-smooth-scroll',
     'neovim/nvim-lspconfig',
-    'wellle/targets.vim',
+    -- 'wellle/targets.vim', -- mini.ai
     'tpope/vim-repeat',
     'machakann/vim-highlightedyank',
     'nvim-telescope/telescope.nvim',
@@ -17,9 +14,7 @@ require("lazy").setup({
     "axieax/typo.nvim",
     'lewis6991/gitsigns.nvim',
     'lervag/wiki.vim',
- {
-    'windwp/nvim-autopairs', event = "InsertEnter", opts = {check_ts = true}
-},
+{ 'echasnovski/mini.nvim', version = false },
     { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
     { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
     {
@@ -133,32 +128,6 @@ require("lazy").setup({
         end,
     },
     {
-        "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
-        config = function()
-            local hooks = require "ibl.hooks"
-            hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-                vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-                vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#FFD700" })
-                vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-                vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-                vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-                vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-                vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-            end)
-
-            require("ibl").setup {
-
-                indent = {
-                    highlight = { "RainbowRed", "RainbowYellow", "RainbowBlue",
-                        "RainbowOrange", "RainbowGreen", "RainbowViolet", "RainbowCyan",
-                    }
-                }
-
-            }
-        end
-    },
-    {
         'ggandor/leap.nvim',
         dependencies = { 'nvim-treesitter/playground' },
         config = function()
@@ -181,7 +150,7 @@ require("lazy").setup({
         build = ':TSUpdate',
         dependencies = {
             'nvim-treesitter/playground', 'lewis6991/spellsitter.nvim',
-            'nvim-treesitter/nvim-treesitter-textobjects',
+            'nvim-treesitter/nvim-treesitter-textobjects', -- mini.ai and move
             'JoosepAlviste/nvim-ts-context-commentstring'
         },
         opts = {
@@ -410,5 +379,32 @@ lspconfig.lua_ls.setup {
         },
     },
 }
-
-vim.cmd.colorscheme "dayfox"
+require('mini.cursorword').setup()
+require('mini.ai').setup()
+require('mini.files').setup({windows = { preview = true, },})
+require('mini.bufremove').setup()
+require('mini.comment').setup({ignore_blank_line = true})
+require('mini.indentscope').setup({symbol = '╎'})
+require('mini.operators').setup()
+require('mini.pairs').setup()
+require('mini.surround').setup( {
+  mappings = {
+    add = 'ta', -- Add surrounding in Normal and Visual modes
+    delete = 'td', -- Delete surrounding
+    find = 'tf', -- Find surrounding (to the right)
+    find_left = 'tF', -- Find surrounding (to the left)
+    highlight = 'th', -- Highlight surrounding
+    replace = 'tr', -- Replace surrounding
+    update_n_lines = 'tn', -- Update `n_lines`
+  }}
+)
+require('mini.move').setup( {
+  mappings = {
+    left = '<M-h>',
+    right = '<M-l>',
+    down = '<M-j>',
+    up = '<M-k>',
+line_left = '', line_right = '', line_down = '', line_up = '',
+  } }
+)
+vim.cmd.colorscheme "terafox"
