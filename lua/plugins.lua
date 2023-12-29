@@ -122,7 +122,6 @@ require("lazy").setup({
     },
     {
         'ggandor/leap.nvim',
-        dependencies = { 'nvim-treesitter/playground' },
         config = function()
             require("leap").add_default_mappings()
         end,
@@ -144,7 +143,6 @@ require("lazy").setup({
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         dependencies = {
-            'nvim-treesitter/playground', 'lewis6991/spellsitter.nvim',
             'nvim-treesitter/nvim-treesitter-textobjects', -- mini.ai and move
             'JoosepAlviste/nvim-ts-context-commentstring'
         },
