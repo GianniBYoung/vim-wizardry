@@ -1,6 +1,5 @@
 require("lazy").setup({
-    -- 'junegunn/fzf', I don't think i need this besides some dependencies maybe
-    { 'tpope/vim-eunuch', event = "VeryLazy" },
+    {'tpope/vim-eunuch', event = "VeryLazy"},
     {'tpope/vim-endwise', event = "VeryLazy"},
     {'jessarcher/vim-heritage', event = "VeryLazy"},
     {'terryma/vim-smooth-scroll', event = "VeryLazy"},
@@ -12,6 +11,7 @@ require("lazy").setup({
     {"axieax/typo.nvim", event = "VeryLazy"},
     'lewis6991/gitsigns.nvim',
     { 'lervag/wiki.vim', lazy = true, cmd = 'WikiIndex'  },
+    -- { 'hashivim/vim-terraform',           lazy = true,   ft = "terraform" },
 
     { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
     { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
@@ -232,7 +232,16 @@ require("lazy").setup({
     },
     {
         'hrsh7th/nvim-cmp',
-        dependencies = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-nvim-lua' },
+        dependencies = {
+            { 'hrsh7th/cmp-nvim-lsp',event = "InsertEnter", },
+            { 'hrsh7th/cmp-buffer',event = "InsertEnter", },
+            { 'hrsh7th/cmp-cmdline',event = "InsertEnter", },
+            { 'hrsh7th/cmp-path',event = "InsertEnter", },
+            { 'hrsh7th/cmp-buffer',event = "InsertEnter", },
+            { 'hrsh7th/cmp-emoji',event = "InsertEnter", },
+            { 'saadparwaiz1/cmp_luasnip',event = "InsertEnter", },
+            { 'hrsh7th/cmp-nvim-lua',event = "InsertEnter", }
+        },
     },
     {
         "EdenEast/nightfox.nvim",
@@ -281,9 +290,9 @@ local lsp_attach = function(_, bufnr)
         ["gd"] = { vim.lsp.buf.definition, "Go to Definition", bufopts },
         -- something is overidding K binding and sending it to a split
         -- Its go-doc T-T I think an autocommand
-        ["<C-k>"] = { vim.lsp.buf.hover, "Lsp Docs", bufopts },
+        ["K"] = { vim.lsp.buf.hover, "Lsp Docs", bufopts },
         ["gi"] = { vim.lsp.buf.implementation, "Go to Implementation", bufopts },
-        ["K"] = { vim.lsp.buf.signature_help, "Signature Help", bufopts },
+        ["<C-k>"] = { vim.lsp.buf.signature_help, "Signature Help", bufopts },
         ["<space>D"] = { vim.lsp.buf.type_definition, "Go to Type", bufopts },
         ["<leader>ca"] = { vim.lsp.buf.code_action, "Code Action", bufopts },
         ["<leader>rn"] = { vim.lsp.buf.rename, "Refactor Name", bufopts },
@@ -298,10 +307,14 @@ require('mason-lspconfig').setup_handlers({
     end,
 })
 
+lspconfig.terraformls.setup{filetypes={ "terraform" }}
+lspconfig.tflint.setup{filetypes={ "terraform","tf","tfvars"}}
+
 
 local luasnip = require 'luasnip'
 local cmp = require 'cmp'
 
+local types = require "cmp.types"
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -309,6 +322,18 @@ cmp.setup {
         end,
     },
     mapping = cmp.mapping.preset.insert({
+        ["<C-k>"] = cmp.mapping(
+        cmp.mapping.select_prev_item { behavior = types.cmp.SelectBehavior.Select },
+        { "i", "c" }
+      ),
+      ["<C-j>"] = cmp.mapping(
+        cmp.mapping.select_next_item { behavior = types.cmp.SelectBehavior.Select },
+        { "i", "c" }
+      ),
+        ["<C-e>"] = cmp.mapping {
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      },
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
@@ -341,18 +366,49 @@ cmp.setup {
         { name = "treesitter", keyword_length = 2 },
         { name = "nvim_lua",   keyword_length = 2 },
         { name = "path" },
+        { name = "emoji" },
         { name = "buffer",     keyword_length = 3 },
     }),
     formatting = {
         fields = { 'menu', 'abbr', 'kind' },
         format = function(entry, item)
-            local menu_icon = { luasnip = '🔪', nvim_lsp = '🤓', buffer = '🧾', path = '🥾' }
+            local menu_icon = { emoji='🥶',luasnip = '🔪', nvim_lsp = '🤓', buffer = '🧾', path = '🥾' }
             item.menu = menu_icon[entry.source.name]
             return item
         end,
     },
+    window = {
+        completion = {
+            border = "rounded",
+            winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,FloatBorder:FloatBorder,Search:None",
+            col_offset = -3,
+            side_padding = 1,
+            scrollbar = false,
+            scrolloff = 8,
+        },
+        documentation = {
+            border = "rounded",
+            winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,Search:None",
+        },
+    },
 }
 
+cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
 -- Diagnostic config
 local signs = { Error = "😡", Warn = "⚡", Hint = "💡", Info = "🧠" }
 for type, icon in pairs(signs) do
@@ -375,7 +431,14 @@ lspconfig.lua_ls.setup {
 }
 require('mini.cursorword').setup()
 require('mini.ai').setup()
-require('mini.files').setup({windows = { preview = true, },})
+require('mini.files').setup({windows = { preview = true, },
+mappings = {
+    go_in       = 'L',
+    go_in_plus  = 'l',
+    go_out      = 'H',
+    go_out_plus = 'h',
+},
+})
 require('mini.bufremove').setup()
 require('mini.comment').setup({ignore_blank_line = true})
 require('mini.indentscope').setup({symbol = '╎'})
@@ -398,7 +461,12 @@ require('mini.move').setup( {
     right = '<M-l>',
     down = '<M-j>',
     up = '<M-k>',
-line_left = '', line_right = '', line_down = '', line_up = '',
+
+        -- Move current line in Normal mode
+    line_left = '<M-h>',
+    line_right = '<M-l>',
+    line_down = '<M-j>',
+    line_up = '<M-k>',
   } }
 )
 vim.cmd.colorscheme "terafox"
