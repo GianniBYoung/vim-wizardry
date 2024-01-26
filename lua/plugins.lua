@@ -9,8 +9,15 @@ require("lazy").setup({
     -- 'nvim-telescope/telescope.nvim', dep
     -- 'nvim-lua/plenary.nvim', dep of none-ls
     {"axieax/typo.nvim", event = "VeryLazy"},
-    'lewis6991/gitsigns.nvim',
-    { 'lervag/wiki.vim', lazy = true, cmd = 'WikiIndex'  },
+    { 'lewis6991/gitsigns.nvim',
+    opts = {
+        signs = {
+            add = { text = '│' }, change = { text = '│' }, delete  = { text = '_' },
+            topdelete = { text = '‾' }, changedelete = { text = '~' }, untracked = { text = '┆' },
+        },
+    }
+},
+{ 'lervag/wiki.vim', lazy = true, cmd = 'WikiIndex'  },
     -- { 'hashivim/vim-terraform',           lazy = true,   ft = "terraform" },
 
     { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
