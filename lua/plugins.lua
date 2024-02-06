@@ -5,6 +5,7 @@ require("lazy").setup({
     {'terryma/vim-smooth-scroll', event = "VeryLazy"},
     {'neovim/nvim-lspconfig'},
     {'tpope/vim-repeat', event = "VeryLazy"},
+    {"LintaoAmons/bookmarks.nvim"},
     {'machakann/vim-highlightedyank'},
     -- 'nvim-telescope/telescope.nvim', dep
     -- 'nvim-lua/plenary.nvim', dep of none-ls
@@ -167,7 +168,6 @@ require("lazy").setup({
             options = {
                 icons_enabled = true,
                 theme = 'auto',
-                -- theme = 'papercolor_light',
                 section_separators = { left = '', right = '' },
                 component_separators = { left = '', right = '' },
                 always_divide_middle = false,
@@ -197,6 +197,7 @@ require("lazy").setup({
                 lualine_a = { {
                     'buffers',
                     symbols = {
+                        -- TODO: Change this
                         modified = ' ●',
                         directory = '🗂️',
                     }
@@ -251,38 +252,12 @@ require("lazy").setup({
         },
     },
     {
-        "EdenEast/nightfox.nvim",
-        config = function()
-            require('nightfox').setup({
-                options = {
-                    transparent = false,
-                    -- dim_inactive = true,
-                    styles = {       -- Style to be applied to different syntax groups
-                        comments = "italic", -- Value is any valid attr-list value `:help attr-list`
-                        conditionals = "italic",
-                        constants = "italic",
-                        functions = "underdotted",
-                        keywords = "bold",
-                        numbers = "NONE",
-                        operators = "bold",
-                        strings = "NONE",
-                        types = "italic",
-                        variables = "bold",
-                    },
-                    inverse = { visual = false },
-                    modules = { -- List of various plugins and additional options
-                        -- telescope = false,
-                        -- whichkey = false,
-                        -- ...
-                    },
-                },
-                palettes = {
-                    dayfox = {
-                        -- bg1 = "#ffc2cd", -- Black background
-                    },
-                },
-            })
-        end
+        "sontungexpt/witch",
+        priority = 1000,
+        lazy = false,
+        config = function(_, opts)
+            require("witch").setup(opts)
+        end,
     },
 
 })
@@ -476,4 +451,3 @@ require('mini.move').setup( {
     line_up = '<M-k>',
   } }
 )
-vim.cmd.colorscheme "terafox"
