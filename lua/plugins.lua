@@ -1,5 +1,6 @@
 require("lazy").setup({
     {'tpope/vim-eunuch', event = "VeryLazy"},
+    {'sathishmanohar/quick-buffer-jump', config = function() require "quick_buffer_jump" end},
     {'tpope/vim-endwise', event = "VeryLazy"},
     {'jessarcher/vim-heritage', event = "VeryLazy"},
     {'terryma/vim-smooth-scroll', event = "VeryLazy"},
@@ -7,8 +8,6 @@ require("lazy").setup({
     {'tpope/vim-repeat', event = "VeryLazy"},
     {"LintaoAmons/bookmarks.nvim"},
     {'machakann/vim-highlightedyank'},
-    -- 'nvim-telescope/telescope.nvim', dep
-    -- 'nvim-lua/plenary.nvim', dep of none-ls
     {"axieax/typo.nvim", event = "VeryLazy"},
     { 'lewis6991/gitsigns.nvim',
     opts = {
@@ -163,7 +162,7 @@ require("lazy").setup({
 
     {
         'nvim-lualine/lualine.nvim',
-        event = 'ColorScheme',
+        -- event = 'ColorScheme',
         opts = {
             options = {
                 icons_enabled = true,
@@ -443,7 +442,6 @@ require('mini.move').setup( {
     right = '<M-l>',
     down = '<M-j>',
     up = '<M-k>',
-
         -- Move current line in Normal mode
     line_left = '<M-h>',
     line_right = '<M-l>',
@@ -451,3 +449,4 @@ require('mini.move').setup( {
     line_up = '<M-k>',
   } }
 )
+

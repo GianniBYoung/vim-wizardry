@@ -23,6 +23,7 @@ wk.register({
 },
 -- Individuals
 ["<leader>g"] = { "<cmd>Telescope live_grep prompt_prefix=🔦<cr>", "Grep" },
+["<leader>,"] = { "<cmd>QuickBufferJump<cr>", "Buffer Jump" },
 ["<C-n>"] = { "<cmd>Telescope fd prompt_prefix=🔍<cr>", "Find Files" },
 ["<C-b>"] = { "<cmd>Telescope buffers prompt_prefix=📜<cr>", "Find Open Buffers" },
 ["<leader>r"] = { "<cmd>Telescope registers prompt_prefix=📠<cr>", "Paste From Register" },
