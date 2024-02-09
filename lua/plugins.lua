@@ -165,32 +165,25 @@ require("lazy").setup({
         -- event = 'ColorScheme',
         opts = {
             options = {
-                icons_enabled = true,
                 theme = 'auto',
                 section_separators = { left = '', right = '' },
                 component_separators = { left = '', right = '' },
                 always_divide_middle = false,
-                globalstatus = false,
             },
             sections = {
                 lualine_a = { 'mode' },
-                lualine_b = { 'branch', 'diff', {
-                    'diagnostics',
+                lualine_b = { 'branch', 'diff', { 'diagnostics',
                     sources = { 'nvim_diagnostic', 'nvim_lsp' },
-                    symbols = { error = '😡', warning = '⚡', info = '🧠', hint = '💡' },
+                    symbols = { error = '😡', warning = '⚡', info = '🧠', hint = '💡' }
                 } },
-                lualine_c = { { 'filename', path = 3, shortening_target = 20 } },
+                lualine_c = { { 'filename', path = 3, shortening_target = 30 } },
                 lualine_x = { 'encoding', 'fileformat', 'filetype' },
                 lualine_y = { 'progress' },
                 lualine_z = { 'location' }
             },
             inactive_sections = {
-                lualine_a = {},
-                lualine_b = {},
                 lualine_c = { { 'filename', path = 0 } },
                 lualine_x = { 'location' },
-                lualine_y = {},
-                lualine_z = {}
             },
             tabline = {
                 lualine_a = { {
