@@ -14,7 +14,7 @@ wk.register({
     ["<leader>t"] = { name = "Telescope",
     z = { "<cmd>Telescope spell_suggest<cr>", "Fix Spelling" },
     p = { "<cmd>Telescope builtin<cr>", "All Telescope Builtins" },
-    m = { "<cmd>BookmarksGoTo<cr>", "Bookmarks" },
+    m = { "<cmd>BookmarksGoto<cr>", "Bookmarks" },
     g = { "<cmd>Telescope live_grep<cr>", "Grep" },
     d = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
     R = { "<cmd>Telescope lsp_references<cr>", "Lsp References" },
@@ -23,7 +23,7 @@ wk.register({
 },
 -- Individuals
 ["<leader>g"] = { "<cmd>Telescope live_grep prompt_prefix=🔦<cr>", "Grep" },
-["<leader>,"] = { "<cmd>QuickBufferJump<cr>", "Buffer Jump" },
+[","] = { "<cmd>QuickBufferJump<cr>", "Buffer Jump" },
 ["<C-n>"] = { "<cmd>Telescope fd prompt_prefix=🔍<cr>", "Find Files" },
 ["<C-b>"] = { "<cmd>Telescope buffers prompt_prefix=📜<cr>", "Find Open Buffers" },
 ["<leader>r"] = { "<cmd>Telescope registers prompt_prefix=📠<cr>", "Paste From Register" },

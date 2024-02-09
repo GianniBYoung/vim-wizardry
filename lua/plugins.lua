@@ -1,6 +1,6 @@
 require("lazy").setup({
     {'tpope/vim-eunuch', event = "VeryLazy"},
-    {'sathishmanohar/quick-buffer-jump', config = function() require "quick_buffer_jump" end},
+    {'sathishmanohar/quick-buffer-jump',  config = function() require "quick_buffer_jump".setup{ergonomic_alphabet = true} end},
     {'tpope/vim-endwise', event = "VeryLazy"},
     {'jessarcher/vim-heritage', event = "VeryLazy"},
     {'terryma/vim-smooth-scroll', event = "VeryLazy"},
