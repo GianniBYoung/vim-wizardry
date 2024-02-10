@@ -9,6 +9,7 @@ require("lazy").setup({
     {"LintaoAmons/bookmarks.nvim"},
     {'machakann/vim-highlightedyank'},
     {"axieax/typo.nvim", event = "VeryLazy"},
+    {'nvim-tree/nvim-web-devicons'},
     { 'lewis6991/gitsigns.nvim',
     opts = {
         signs = {
@@ -98,15 +99,6 @@ require("lazy").setup({
             ui = { border = "rounded", height = .45, width = .65, x = 0.5, y = 0.5 }})
         end,
     },
-
-    {
-        'kyazdani42/nvim-web-devicons',
-        opts = {
-            override = { zsh = { icon = '📺', color = '#428850', cterm_color = '65', name = 'Zsh' } },
-            default = true
-        }
-    },
-
     {
         "folke/which-key.nvim",
         config = function()
@@ -165,7 +157,8 @@ require("lazy").setup({
         -- event = 'ColorScheme',
         opts = {
             options = {
-                theme = 'auto',
+                theme = 'horizon',
+                -- theme = 'auto',
                 section_separators = { left = '', right = '' },
                 component_separators = { left = '', right = '' },
                 always_divide_middle = false,
