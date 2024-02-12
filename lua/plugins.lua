@@ -5,9 +5,7 @@ require("lazy").setup({
     {'tpope/vim-eunuch', event = "VeryLazy"},
     {'sathishmanohar/quick-buffer-jump',  opts = {ergonomic_alphabet = true}},
     {'tpope/vim-endwise', event = "VeryLazy"},
-    {'mfussenegger/nvim-dap'},
     {'fatih/vim-go',lazy = true, ft = "go" },
-    {'leoluz/nvim-dap-go', config = true},
     {'jessarcher/vim-heritage', event = "VeryLazy"},
     {'terryma/vim-smooth-scroll', event = "VeryLazy"},
     {'neovim/nvim-lspconfig'},
@@ -19,6 +17,28 @@ require("lazy").setup({
     {'nvim-tree/nvim-web-devicons'},
     {'TobinPalmer/pastify.nvim', cmd = { 'Pastify' }},
     {'0x00-ketsu/markdown-preview.nvim', ft = { 'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki' } },
+    {'mfussenegger/nvim-dap',
+    dependencies = {'leoluz/nvim-dap-go','rcarriga/nvim-dap-ui'},
+    config = function ()
+        require("dapui").setup()
+        require("dap-go").setup()
+        local dap, dapui = require("dap"), require("dapui")
+
+        dap.listeners.before.attach.dapui_config = function()
+            dapui.open()
+        end
+        dap.listeners.before.launch.dapui_config = function()
+            dapui.open()
+        end
+        dap.listeners.before.event_terminated.dapui_config = function()
+            dapui.close()
+        end
+        dap.listeners.before.event_exited.dapui_config = function()
+            dapui.close()
+        end
+    end
+
+},
     {'lewis6991/gitsigns.nvim',
     opts = {
         signs = {
