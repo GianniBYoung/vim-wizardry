@@ -1,6 +1,6 @@
 require("lazy").setup({
     {'tpope/vim-eunuch', event = "VeryLazy"},
-    {'sathishmanohar/quick-buffer-jump',  config = function() require "quick_buffer_jump".setup{ergonomic_alphabet = true} end},
+    {'sathishmanohar/quick-buffer-jump',  opts = {ergonomic_alphabet = true}},
     {'tpope/vim-endwise', event = "VeryLazy"},
     {'leoluz/nvim-dap-go', config = true},
     {'jessarcher/vim-heritage', event = "VeryLazy"},
@@ -95,11 +95,8 @@ require("lazy").setup({
 
     {
         "kelly-lin/ranger.nvim",
-        cmd ="Lua require(\"ranger-nvim\").open(true)",
-        config = function()
-            require("ranger-nvim").setup({ replace_netrw = true,
-            ui = { border = "rounded", height = .45, width = .65, x = 0.5, y = 0.5 }})
-        end,
+        cmd = "Lua require(\"ranger-nvim\").open(true)",
+        opts = { replace_netrw = true, ui = { border = "rounded", height = .65, width = .75, x = 0.5, y = 0.5 }}
     },
     {
         "folke/which-key.nvim",
