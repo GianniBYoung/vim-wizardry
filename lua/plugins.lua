@@ -24,13 +24,12 @@ require("lazy").setup({
         signs = {
             add = { text = '│' }, change = { text = '│' }, delete  = { text = '_' },
             topdelete = { text = '‾' }, changedelete = { text = '~' }, untracked = { text = '┆' },
-        },
+        }
     }
-},
+    },
     -- { 'hashivim/vim-terraform',           lazy = true,   ft = "terraform" },
 
-    {
-        'nvimtools/none-ls.nvim',
+    { 'nvimtools/none-ls.nvim',
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             local null_ls = require("null-ls")
@@ -67,6 +66,7 @@ require("lazy").setup({
     {
         "folke/noice.nvim",
         event = "VeryLazy",
+        dependencies = { "MunifTanjim/nui.nvim",{ 'echasnovski/mini.nvim', version = false }},
         opts = {
             lsp = {
                 override = {
@@ -81,13 +81,12 @@ require("lazy").setup({
                     lsp_doc_border = true,
                 },
             }
-        },
-        dependencies = { "MunifTanjim/nui.nvim",{ 'echasnovski/mini.nvim', version = false }}
+        }
     },
 
     { 'kdheepak/lazygit.nvim',
-        lazy = true, cmd = 'LazyGitCurrentFile',
-        dependencies = { "nvim-lua/plenary.nvim" }
+        dependencies = { "nvim-lua/plenary.nvim" },
+        lazy = true, cmd = 'LazyGitCurrentFile'
     },
 
     {
@@ -123,13 +122,11 @@ require("lazy").setup({
     },
 
     { 'folke/trouble.nvim',
+        event = "VeryLazy",
         opts = {
-            auto_close = true,
-            height = 5,
-            use_diagnostic_signs = true,
+            auto_close = true, height = 5, use_diagnostic_signs = true,
             signs = { error = '😡', warning = '⚡', hint = '💡', information = '🧠' }
-        },
-        -- event = "VeryLazy"
+        }
     },
 
     {
@@ -207,7 +204,7 @@ require("lazy").setup({
     },
     {
         'L3MON4D3/LuaSnip',
-        version = "v1.*",
+        version = "v2.*",
         run = "make install_jsregexp",
         lazy = true,
         dependencies = { 'kmf/vim-chef-snippets', "rafamadriz/friendly-snippets" },
