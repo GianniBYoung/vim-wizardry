@@ -1,18 +1,25 @@
 require("lazy").setup({
+    {'sontungexpt/witch', priority = 1000, config = true },
+    { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
+    { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
     {'tpope/vim-eunuch', event = "VeryLazy"},
     {'sathishmanohar/quick-buffer-jump',  opts = {ergonomic_alphabet = true}},
     {'tpope/vim-endwise', event = "VeryLazy"},
+    {'mfussenegger/nvim-dap'},
+    {'fatih/vim-go',lazy = true, ft = "go" },
     {'leoluz/nvim-dap-go', config = true},
     {'jessarcher/vim-heritage', event = "VeryLazy"},
     {'terryma/vim-smooth-scroll', event = "VeryLazy"},
     {'neovim/nvim-lspconfig'},
-    {'mfussenegger/nvim-dap'},
     {'tpope/vim-repeat', event = "VeryLazy"},
-    {"LintaoAmons/bookmarks.nvim"},
+    {'LintaoAmons/bookmarks.nvim', event = "VeryLazy"},
     {'machakann/vim-highlightedyank'},
-    {"axieax/typo.nvim", event = "VeryLazy"},
+    {'axieax/typo.nvim', event = "VeryLazy"},
+    {'lervag/wiki.vim', lazy = true, cmd = 'WikiIndex'},
     {'nvim-tree/nvim-web-devicons'},
-    { 'lewis6991/gitsigns.nvim',
+    {'TobinPalmer/pastify.nvim', cmd = { 'Pastify' }},
+    {'0x00-ketsu/markdown-preview.nvim', ft = { 'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki' } },
+    {'lewis6991/gitsigns.nvim',
     opts = {
         signs = {
             add = { text = '│' }, change = { text = '│' }, delete  = { text = '_' },
@@ -20,11 +27,8 @@ require("lazy").setup({
         },
     }
 },
-{ 'lervag/wiki.vim', lazy = true, cmd = 'WikiIndex'  },
     -- { 'hashivim/vim-terraform',           lazy = true,   ft = "terraform" },
 
-    { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
-    { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
     {
         'nvimtools/none-ls.nvim',
         dependencies = { "nvim-lua/plenary.nvim" },
@@ -39,7 +43,6 @@ require("lazy").setup({
             })
         end
     },
-    { 'fatih/vim-go',           lazy = true,   ft = "go" },
     {
         "coffebar/neovim-project",
         lazy = false,
@@ -53,18 +56,13 @@ require("lazy").setup({
                 "~/chef/nulsc/cookbooks/linux_cookbooks/*",
                 "~/git/icon/*",
                 "~/.config/*",
-            },
+            }
         },
         init = function()
             -- enable saving the state of plugins in the session
             vim.opt.sessionoptions:append("globals") -- save global variables that start with an uppercase letter and contain at least one lowercase letter.
         end,
         dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-telescope/telescope.nvim" }, { "Shatur/neovim-session-manager" } },
-    },
-    { 'TobinPalmer/pastify.nvim', cmd = { 'Pastify' }},
-    {
-        '0x00-ketsu/markdown-preview.nvim',
-        ft = { 'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki' },
     },
     {
         "folke/noice.nvim",
@@ -84,11 +82,10 @@ require("lazy").setup({
                 },
             }
         },
-        dependencies = { "MunifTanjim/nui.nvim",{ 'echasnovski/mini.nvim', version = false }, }
+        dependencies = { "MunifTanjim/nui.nvim",{ 'echasnovski/mini.nvim', version = false }}
     },
 
-    {
-        'kdheepak/lazygit.nvim',
+    { 'kdheepak/lazygit.nvim',
         lazy = true, cmd = 'LazyGitCurrentFile',
         dependencies = { "nvim-lua/plenary.nvim" }
     },
@@ -118,16 +115,14 @@ require("lazy").setup({
         end,
         lazy = true
     },
-    {
-        'ggandor/leap.nvim',
+    { 'ggandor/leap.nvim',
         config = function()
             require("leap").add_default_mappings()
         end,
         -- lazy = true
     },
 
-    {
-        'folke/trouble.nvim',
+    { 'folke/trouble.nvim',
         opts = {
             auto_close = true,
             height = 5,
@@ -234,14 +229,6 @@ require("lazy").setup({
             { 'saadparwaiz1/cmp_luasnip',event = "InsertEnter", },
             { 'hrsh7th/cmp-nvim-lua',event = "InsertEnter", }
         },
-    },
-    {
-        "sontungexpt/witch",
-        priority = 1000,
-        lazy = false,
-        config = function(_, opts)
-            require("witch").setup(opts)
-        end,
     },
 
 })
