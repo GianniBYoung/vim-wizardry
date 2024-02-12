@@ -21,6 +21,13 @@ wk.register({
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Lsp Symbols" },
     t = { "<cmd>Telescope lsp_type_definitions<cr>", "Lsp Type Defs" },
 },
+    ["<leader>b"] = { name = "DAP",
+    b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoints" },
+    c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
+    n = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
+    i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
+    r = { "<cmd>lua require'dap'.repl.open()<cr>", "Repl" },
+},
 -- Individuals
 ["<leader>g"] = { "<cmd>Telescope live_grep prompt_prefix=🔦<cr>", "Grep" },
 [","] = { "<cmd>QuickBufferJump<cr>", "Buffer Jump" },
