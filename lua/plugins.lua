@@ -1,7 +1,13 @@
 require("lazy").setup({
-    {'sontungexpt/witch', priority = 1000, config = true },
-    { 'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
-    { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
+    {'sontungexpt/witch', priority = 1000, config = function ()
+
+        opts = {
+            dim_inactive = { enabled = true, level = 0.88 }
+        }
+                require("witch").setup(opts)
+    end },
+    {'voldikss/vim-floaterm',       lazy = true, cmd = 'FloatermToggle' },
+    {'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
     {'tpope/vim-eunuch', event = "VeryLazy"},
     {'sathishmanohar/quick-buffer-jump',  opts = {ergonomic_alphabet = true}},
     {'tpope/vim-endwise', event = "VeryLazy"},
@@ -18,9 +24,25 @@ require("lazy").setup({
     {'TobinPalmer/pastify.nvim', cmd = { 'Pastify' }},
     {'0x00-ketsu/markdown-preview.nvim', ft = { 'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki' } },
     {'mfussenegger/nvim-dap',
-    dependencies = {'leoluz/nvim-dap-go','rcarriga/nvim-dap-ui'},
+    dependencies = {'leoluz/nvim-dap-go','rcarriga/nvim-dap-ui', {'mfussenegger/nvim-dap-python', config = function ()
+        require('dap-python').setup('/Users/gyoung/.local/share/nvim/mason/packages/debugpy/venv/bin/python')
+    end}},
     config = function ()
-        require("dapui").setup()
+        require("dapui").setup({
+            layouts = {
+                {
+                    elements = {
+                        { id = "scopes", size = 0.50 },
+                        { id = "breakpoints", size = 0.35 },
+                        { id = "watches", size = 0.15 },
+                    },
+                    size = 60,
+                    position = "left",
+                },
+            },
+        }
+
+        )
         require("dap-go").setup()
         local dap, dapui = require("dap"), require("dapui")
 
@@ -57,7 +79,7 @@ require("lazy").setup({
                 sources = {
                     null_ls.builtins.formatting.beautysh, null_ls.builtins.formatting.terraform_fmt,
                     null_ls.builtins.formatting.yamlfmt, null_ls.builtins.formatting.jq, null_ls.builtins.formatting
-                    .prettierd, null_ls.builtins.formatting.markdownlint
+                    .prettierd, null_ls.builtins.formatting.markdownlint, null_ls.builtins.formatting.autopep8
                 }
             })
         end
