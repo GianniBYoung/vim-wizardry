@@ -39,6 +39,11 @@ require("lazy").setup({
                     size = 60,
                     position = "left",
                 },
+                {
+                    elements = { "repl", "console", },
+                    size = 0.25, -- 25% of total lines
+                    position = "bottom",
+                },
             },
         }
 
@@ -190,6 +195,11 @@ require("lazy").setup({
         -- event = 'ColorScheme',
         opts = {
             options = {
+                ignore_focus = {
+                    "dapui_watches", "dapui_breakpoints",
+                    "dapui_scopes", "dapui_console",
+                    "dapui_stacks", "dap-repl"
+                },
                 theme = 'horizon',
                 -- theme = 'auto',
                 section_separators = { left = '', right = '' },
