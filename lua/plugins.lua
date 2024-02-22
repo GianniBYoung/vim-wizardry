@@ -284,7 +284,7 @@ local lsp_attach = function(_, bufnr)
         -- Its go-doc T-T I think an autocommand
         ["K"] = { vim.lsp.buf.hover, "Lsp Docs", bufopts },
         ["gi"] = { vim.lsp.buf.implementation, "Go to Implementation", bufopts },
-        ["<C-k>"] = { vim.lsp.buf.signature_help, "Signature Help", bufopts },
+        ["<C-i>"] = { vim.lsp.buf.signature_help, "Signature Help", bufopts },
         ["<space>D"] = { vim.lsp.buf.type_definition, "Go to Type", bufopts },
         ["<leader>ca"] = { vim.lsp.buf.code_action, "Code Action", bufopts },
         ["<leader>rn"] = { vim.lsp.buf.rename, "Refactor Name", bufopts },

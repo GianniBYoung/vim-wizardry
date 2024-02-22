@@ -37,8 +37,11 @@ wk.register({
 ["<C-n>"] = { "<cmd>Telescope fd prompt_prefix=🔍<cr>", "Find Files" },
 ["<C-b>"] = { "<cmd>Telescope buffers prompt_prefix=📜<cr>", "Find Open Buffers" },
 ["<leader>r"] = { "<cmd>Telescope registers prompt_prefix=📠<cr>", "Paste From Register" },
-["<C-j>"] = { "<cmd>bn<cr>", "Next Buffer" },
 ["<C-t>"] = { "<cmd>Telescope resume<cr>", "Resume Last Telscope" },
+["<C-h>"] = { "<C-w>h", "Select 'Left' Window" },
+["<C-j>"] = { "<C-w>j", "Select 'Lower' Window" },
+["<C-k>"] = { "<C-w>k", "Select 'Upper' Window", noremap=true },
+["<C-l>"] = { "<C-w>l", "Select 'Right' Window" },
 ["g"] = {
     l = { vim.diagnostic.open_float, "Float Diagnostics" },
     t = { "<cmd>Telescope lsp_type_definitions<cr>", "Lsp Type Defs" },
