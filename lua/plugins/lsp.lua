@@ -1,7 +1,7 @@
 return{
     {'fatih/vim-go',lazy = true, ft = "go" },
     {'neovim/nvim-lspconfig'},
-    { 'nvimtools/none-ls.nvim',
+    {'nvimtools/none-ls.nvim',
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             local null_ls = require("null-ls")
