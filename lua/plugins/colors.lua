@@ -1,14 +1,18 @@
 return {
     {
-        'sontungexpt/witch', priority = 1000, config = function ()
+        'sontungexpt/witch',
+        priority = 1000,
+        config = function()
             opts = { dim_inactive = { enabled = true, level = 0.88 } }
             require("witch").setup(opts)
-        end },
-    {'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
-    {'nvim-tree/nvim-web-devicons'},
-    {"folke/noice.nvim",
+        end
+    },
+    { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
+    { 'nvim-tree/nvim-web-devicons' },
+    {
+        "folke/noice.nvim",
         event = "VeryLazy",
-        dependencies = { "MunifTanjim/nui.nvim",},
+        dependencies = { "MunifTanjim/nui.nvim", },
         opts = {
             lsp = {
                 override = {
@@ -26,7 +30,8 @@ return {
         }
     },
 
-    {'nvim-lualine/lualine.nvim',
+    {
+        'nvim-lualine/lualine.nvim',
         -- event = 'ColorScheme',
         opts = {
             options = {
@@ -43,7 +48,8 @@ return {
             },
             sections = {
                 lualine_a = { 'mode' },
-                lualine_b = { 'branch', 'diff', { 'diagnostics',
+                lualine_b = { 'branch', 'diff', {
+                    'diagnostics',
                     sources = { 'nvim_diagnostic', 'nvim_lsp' },
                     symbols = { error = '😡', warning = '⚡', info = '🧠', hint = '💡' }
                 } },

@@ -11,16 +11,16 @@ vim.api.nvim_create_autocmd(
 )
 
 -- from terrafor-ls docs
-vim.api.nvim_create_autocmd({"BufWritePre"}, {
-  pattern = {"*.tf", "*.tfvars"},
-  callback = function()
-    vim.lsp.buf.format()
-  end,
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    pattern = { "*.tf", "*.tfvars" },
+    callback = function()
+        vim.lsp.buf.format()
+    end,
 })
 
 -- This is not being set by the lsp, I need to set the option below somehow (add a condition to the mini config function)
 vim.api.nvim_create_autocmd(
-    { "BufRead"},
+    { "BufRead" },
     { pattern = "*tfvars", command = "lua vim.bo.commentstring='# %s'" }
 )
 
@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd(
 vim.api.nvim_create_autocmd(
     "BufWritePre",
     { pattern = "*", command = "%s/\\s\\+$//e" }
-    -- { pattern = "\\\.(?!md).*", command = "%s/\\s\\+$//e" }
+-- { pattern = "\\\.(?!md).*", command = "%s/\\s\\+$//e" }
 )
 
 vim.api.nvim_create_autocmd(
@@ -43,5 +43,5 @@ vim.api.nvim_create_autocmd(
 
 vim.api.nvim_create_autocmd(
     "TextYankPost",
-    {  command = "lua vim.highlight.on_yank({higroup=\"Visual\", timeout=400})" }
+    { command = "lua vim.highlight.on_yank({higroup=\"Visual\", timeout=400})" }
 )

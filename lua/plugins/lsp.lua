@@ -1,7 +1,8 @@
-return{
-    {'fatih/vim-go',lazy = true, ft = "go" },
-    {'neovim/nvim-lspconfig'},
-    {'nvimtools/none-ls.nvim',
+return {
+    { 'fatih/vim-go',         lazy = true, ft = "go" },
+    { 'neovim/nvim-lspconfig' },
+    {
+        'nvimtools/none-ls.nvim',
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             local null_ls = require("null-ls")
@@ -14,7 +15,8 @@ return{
             })
         end
     },
-    {'nvim-treesitter/nvim-treesitter',
+    {
+        'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects', -- mini.ai and move, do i need?
@@ -27,10 +29,12 @@ return{
         }
     },
 
-    {'williamboman/mason-lspconfig.nvim',
+    {
+        'williamboman/mason-lspconfig.nvim',
         dependencies = { { 'williamboman/mason.nvim', build = ":MasonUpdate", config = true } },
     },
-    {'L3MON4D3/LuaSnip',
+    {
+        'L3MON4D3/LuaSnip',
         version = "v2.*",
         run = "make install_jsregexp",
         lazy = true,
@@ -41,16 +45,17 @@ return{
             require("luasnip.loaders.from_vscode").lazy_load()
         end
     },
-    {'hrsh7th/nvim-cmp',
+    {
+        'hrsh7th/nvim-cmp',
         dependencies = {
-            { 'hrsh7th/cmp-nvim-lsp',event = "InsertEnter", },
-            { 'hrsh7th/cmp-buffer',event = "InsertEnter", },
-            { 'hrsh7th/cmp-cmdline',event = "InsertEnter", },
-            { 'hrsh7th/cmp-path',event = "InsertEnter", },
-            { 'hrsh7th/cmp-buffer',event = "InsertEnter", },
-            { 'hrsh7th/cmp-emoji',event = "InsertEnter", },
-            { 'saadparwaiz1/cmp_luasnip',event = "InsertEnter", },
-            { 'hrsh7th/cmp-nvim-lua',event = "InsertEnter", }
+            { 'hrsh7th/cmp-nvim-lsp',     event = "InsertEnter", },
+            { 'hrsh7th/cmp-buffer',       event = "InsertEnter", },
+            { 'hrsh7th/cmp-cmdline',      event = "InsertEnter", },
+            { 'hrsh7th/cmp-path',         event = "InsertEnter", },
+            { 'hrsh7th/cmp-buffer',       event = "InsertEnter", },
+            { 'hrsh7th/cmp-emoji',        event = "InsertEnter", },
+            { 'saadparwaiz1/cmp_luasnip', event = "InsertEnter", },
+            { 'hrsh7th/cmp-nvim-lua',     event = "InsertEnter", }
         },
     },
 }
