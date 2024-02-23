@@ -3,10 +3,7 @@ return {
     {'tpope/vim-endwise', event = "VeryLazy"},
     --- misc
     {'tpope/vim-eunuch', event = "VeryLazy"},
-    {'TobinPalmer/pastify.nvim', cmd = { 'Pastify' }},
     {'voldikss/vim-floaterm',lazy = true, cmd = 'FloatermToggle' },
-    {'lervag/wiki.vim', lazy = true, cmd = 'WikiIndex'},
-    {'0x00-ketsu/markdown-preview.nvim', ft = { 'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki' } },
     {'lewis6991/gitsigns.nvim',
     opts = {
         signs = {
@@ -15,12 +12,9 @@ return {
         }
     }
 },
-{ 'kdheepak/lazygit.nvim',
-dependencies = { "nvim-lua/plenary.nvim" },
+{ 'kdheepak/lazygit.nvim', dependencies = { "nvim-lua/plenary.nvim" }, -- idk if i need plenary anymore
 lazy = true, cmd = 'LazyGitCurrentFile'
     },
-
-
 
 }
 
