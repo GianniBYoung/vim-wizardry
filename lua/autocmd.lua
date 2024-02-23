@@ -41,3 +41,7 @@ vim.api.nvim_create_autocmd(
     { pattern = ".*default.yml", command = "!espanso restart" }
 )
 
+vim.api.nvim_create_autocmd(
+    "TextYankPost",
+    {  command = "lua vim.highlight.on_yank({higroup=\"Visual\", timeout=400})" }
+)
