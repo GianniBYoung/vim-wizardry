@@ -1,17 +1,17 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins",{ui = {border="rounded"}})
+require("lazy").setup("plugins", { ui = { border = "rounded" } })
 
 require('genset')
 require('keymaps')
@@ -37,6 +37,8 @@ local lsp_attach = function(_, bufnr)
     })
 end
 
+require("neodev").setup({ })
+
 local lspconfig = require('lspconfig')
 require('mason-lspconfig').setup_handlers({
     function(server_name)
@@ -44,8 +46,8 @@ require('mason-lspconfig').setup_handlers({
     end,
 })
 
-lspconfig.terraformls.setup{filetypes={ "terraform" }}
-lspconfig.tflint.setup{filetypes={ "terraform","tf","tfvars"}}
+lspconfig.terraformls.setup { filetypes = { "terraform" } }
+lspconfig.tflint.setup { filetypes = { "terraform", "tf", "tfvars" } }
 
 
 local luasnip = require 'luasnip'
@@ -60,17 +62,17 @@ cmp.setup {
     },
     mapping = cmp.mapping.preset.insert({
         ["<C-k>"] = cmp.mapping(
-        cmp.mapping.select_prev_item { behavior = types.cmp.SelectBehavior.Select },
-        { "i", "c" }
-      ),
-      ["<C-j>"] = cmp.mapping(
-        cmp.mapping.select_next_item { behavior = types.cmp.SelectBehavior.Select },
-        { "i", "c" }
-      ),
+            cmp.mapping.select_prev_item { behavior = types.cmp.SelectBehavior.Select },
+            { "i", "c" }
+        ),
+        ["<C-j>"] = cmp.mapping(
+            cmp.mapping.select_next_item { behavior = types.cmp.SelectBehavior.Select },
+            { "i", "c" }
+        ),
         ["<C-e>"] = cmp.mapping {
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      },
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
+        },
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
@@ -109,7 +111,7 @@ cmp.setup {
     formatting = {
         fields = { 'menu', 'abbr', 'kind' },
         format = function(entry, item)
-            local menu_icon = { emoji='🥶',luasnip = '🔪', nvim_lsp = '🤓', buffer = '🧾', path = '🥾' }
+            local menu_icon = { emoji = '🥶', luasnip = '🔪', nvim_lsp = '🤓', buffer = '🧾', path = '🥾' }
             item.menu = menu_icon[entry.source.name]
             return item
         end,
@@ -133,19 +135,19 @@ cmp.setup {
 cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-      { name = 'buffer' }
+        { name = 'buffer' }
     }
-  })
+})
 
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline(':', {
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-      { name = 'path' }
+        { name = 'path' }
     }, {
-      { name = 'cmdline' }
+        { name = 'cmdline' }
     })
-  })
+})
 -- Diagnostic config
 local signs = { Error = "😡", Warn = "⚡", Hint = "💡", Info = "🧠" }
 for type, icon in pairs(signs) do

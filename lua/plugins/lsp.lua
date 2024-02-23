@@ -1,6 +1,7 @@
 return {
     { 'fatih/vim-go',         lazy = true, ft = "go" },
     { 'neovim/nvim-lspconfig' },
+    { "folke/neodev.nvim", opts = {} },
     {
         'nvimtools/none-ls.nvim',
         dependencies = { "nvim-lua/plenary.nvim" },
