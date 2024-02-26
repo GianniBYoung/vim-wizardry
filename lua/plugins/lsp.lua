@@ -8,10 +8,11 @@ return {
         config = function()
             local null_ls = require("null-ls")
             null_ls.setup({
+                -- currently missing python
                 sources = {
-                    null_ls.builtins.formatting.beautysh, null_ls.builtins.formatting.terraform_fmt,
-                    null_ls.builtins.formatting.yamlfmt, null_ls.builtins.formatting.jq, null_ls.builtins.formatting
-                    .prettierd, null_ls.builtins.formatting.markdownlint, null_ls.builtins.formatting.autopep8
+                    null_ls.builtins.formatting.shfmt, null_ls.builtins.formatting.terraform_fmt,
+                    null_ls.builtins.formatting.yamlfmt, null_ls.builtins.formatting
+                    .prettierd, null_ls.builtins.formatting.markdownlint
                 }
             })
         end
