@@ -28,11 +28,12 @@ return {
         cmd = "Lua require(\"ranger-nvim\").open(true)",
         opts = { replace_netrw = true, ui = { border = "rounded", height = .65, width = .75, x = 0.5, y = 0.5 } }
     },
-    {
-        'ggandor/leap.nvim',
-        config = function()
-            require("leap").add_default_mappings()
-        end,
-        -- lazy = true
-    },
+{
+  'rasulomaroff/telepath.nvim',
+  dependencies = {'ggandor/leap.nvim', config = function() require("leap").add_default_mappings() end },
+  lazy = false,
+  config = function()
+    require('telepath').use_default_mappings()
+  end
+},
 }

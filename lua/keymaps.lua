@@ -6,6 +6,7 @@ wk.register({
     ["<leader>t"] = {
         name = "Telescope",
         z = { "<cmd>Telescope spell_suggest<cr>", "Fix Spelling" },
+        f = { "<cmd>Telescope fd<cr>", "Find Files" },
         p = { "<cmd>Telescope builtin<cr>", "All Telescope Builtins" },
         h = { "<cmd>Telescope help_tags<cr>", "Help" },
         m = { "<cmd>BookmarksGoto<cr>", "Bookmarks" },
