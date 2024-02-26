@@ -168,3 +168,5 @@ lspconfig.lua_ls.setup {
         },
     },
 }
+
+require("everforest").load()

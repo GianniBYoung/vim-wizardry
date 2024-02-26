@@ -1,11 +1,38 @@
 return {
     {
-        'sontungexpt/witch',
+        "neanias/everforest-nvim",
+        version = false,
+        lazy = false,
         priority = 1000,
         config = function()
-            opts = { dim_inactive = { enabled = true, level = 0.88 } }
-            require("witch").setup(opts)
-        end
+            vim.o.background='light'
+            require("everforest").setup({
+  background = "soft",
+  ---How much of the background should be transparent. 2 will have more UI
+  transparent_background_level = 2,
+  ---Whether italics should be used for keywords and more.
+  italics = false,
+  disable_italic_comments = false,
+  ui_contrast = "high",
+  dim_inactive_windows = false,
+  diagnostic_text_highlight = false,
+  diagnostic_virtual_text = "coloured",
+  diagnostic_line_highlight = false,
+  spell_foreground = false,
+  show_eob = true,
+  float_style = "bright",
+  ---You can override specific highlights to use other groups or a hex colour.
+  ---This function will be called with the highlights and colour palette tables.
+  ---@param highlight_groups Highlights
+  ---@param palette Palette
+  on_highlights = function(highlight_groups, palette) end,
+  ---You can override colours in the palette to use different hex colours.
+  ---This function will be called once the base and background colours have
+  ---been mixed on the palette.
+  ---@param palette Palette
+  colours_override = function(palette) end,
+            })
+        end,
     },
     { 'norcalli/nvim-colorizer.lua', lazy = true, cmd = 'ColorizerToggle' },
     { 'nvim-tree/nvim-web-devicons' },
@@ -40,7 +67,8 @@ return {
                     "dapui_scopes", "dapui_console",
                     "dapui_stacks", "dap-repl"
                 },
-                theme = 'horizon',
+                -- theme = 'horizon',
+                theme = 'everforest',
                 -- theme = 'auto',
                 section_separators = { left = '', right = '' },
                 component_separators = { left = '', right = '' },
