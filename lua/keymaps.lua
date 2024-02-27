@@ -107,7 +107,7 @@ wk.register({
     ["<M-f>"] = { "<cmd>call smooth_scroll#down(10, 5, 2)<cr>", "Smooth Scroll" },
     ["Y"] = { "y$", "Papa Yank" },
     ["<leader>N"] = { "<cmd>lua require(\"ranger-nvim\").open(true)<cr>", "Ranger" },
-    ["<leader>n"] = { "<cmd>lua MiniFiles.open()<cr>", "Ranger" },
+    ["<leader>n"] = { "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", "Ranger" },
     ["<leader>gr"] = { "<cmd>w<cr><cmd>GoRun<cr>", "Go Run" },
     ["ii"] = { "<esc>", "which_key_ignore", mode = "i" },
     ["<F1>"] = { "<cmd>FloatermToggle<cr>", "Terminal" },
