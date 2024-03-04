@@ -3,3 +3,4 @@ plugin/packer_compiled.lua
 plugin/packer_compiled.lua
 lazy-lock.json
 bookmarks.db.json
+tmp.lua
