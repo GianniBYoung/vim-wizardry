@@ -15,6 +15,7 @@ return {
                 "~/chef/nulsc/cookbooks/linux_cookbooks/*",
                 "~/git/icon/*",
                 "~/.config/*",
+                "~/git/linux/*"
             }
         },
         init = function()
