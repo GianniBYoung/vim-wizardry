@@ -1,7 +1,17 @@
-vim.g.mapleader = ' '
--- local vim = vim
 local wk = require("which-key")
+-- kickstart binds idk if i want to keep using whichkey for this
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 
+local builtin = require 'telescope.builtin'
+vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+vim.keymap.set('n', '<leader>tw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>tr', builtin.resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+
+-- swap this to 's'
 wk.register({
     ["<leader>t"] = {
         name = "Telescope",
@@ -12,6 +22,7 @@ wk.register({
         m = { "<cmd>BookmarksGoto<cr>", "Bookmarks" },
         g = { "<cmd>Telescope live_grep<cr>", "Grep" },
         d = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
+        -- r = { "<cmd>Telescope builtin<cr>", "Lsp References" },
         R = { "<cmd>Telescope lsp_references<cr>", "Lsp References" },
         s = { "<cmd>Telescope lsp_document_symbols<cr>", "Lsp Symbols" },
         t = { "<cmd>Telescope lsp_type_definitions<cr>", "Lsp Type Defs" },
@@ -82,12 +93,6 @@ wk.register({
         R = { "<cmd>lua vim.lsp.buf.format()<cr>", "lsp format that shouldn't be here" },
     },
     ["<leader>v"] = {
-        name = "File Hopping",
-        k = { "<cmd>e ~/.config/nvim/lua/keymaps.lua<cr>", "Edit Vim Keybinds" },
-        p = { "<cmd>e ~/.config/nvim/lua/plugins/plugs.lua<cr>", "Edit Vim Plugins" },
-        e = { "<cmd>e ~/.config/nvim/lua/keymaps.lua<cr>", "Edit Vim Key Maps" },
-        z = { "<cmd>e $ZSHRC<cr>", "Edit Zshrc" },
-        a = { "<cmd>e ~/.config/nvim/lua/autocmd.lua<cr>", "Edit Autocmds" },
         r = { "<cmd>luafile %<cr>", "Reload a File" },
     },
     ["<leader>cd"] = { "<cmd>cd %:h<cr>", "Cd" },

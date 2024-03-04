@@ -1,5 +1,6 @@
 HOME = os.getenv("HOME")
-vim.opt.clipboard = vim.opt.clipboard + 'unnamedplus'
+vim.opt.clipboard = 'unnamedplus'
+vim.opt.undofile = true
 vim.opt.wildmode = { longest = 'full', 'full' }
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
@@ -8,7 +9,8 @@ vim.opt.shiftround = true
 vim.opt.hidden = true
 vim.opt.relativenumber = true
 vim.o.signcolumn = 'yes:2'
-vim.o.listchars = 'tab:▸ ,trail:·'
+-- vim.o.listchars = 'tab:▸ ,trail:·'
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.number = true
@@ -40,6 +42,7 @@ vim.opt.cursorline = false
 vim.g.go_doc_balloon = 1
 vim.g.go_doc_popup_window = 1
 vim.g.wiki_root = '~/wiki'
+vim.opt.inccommand = 'split'
 -- vim.opt.formatoptions = { 'j' }
 
 -- " set backup

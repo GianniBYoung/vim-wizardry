@@ -41,7 +41,10 @@ vim.api.nvim_create_autocmd(
     { pattern = ".*default.yml", command = "!espanso restart" }
 )
 
-vim.api.nvim_create_autocmd(
-    "TextYankPost",
-    { command = "lua vim.highlight.on_yank({higroup=\"Visual\", timeout=400})" }
-)
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})

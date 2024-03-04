@@ -1,6 +1,7 @@
 return {
     -- Do i need?
     { 'tpope/vim-endwise',     event = "VeryLazy" },
+    { 'tpope/vim-sleuth' },
     --- misc
     { 'tpope/vim-eunuch',      event = "VeryLazy" },
     { 'voldikss/vim-floaterm', lazy = true,       cmd = 'FloatermToggle' },
