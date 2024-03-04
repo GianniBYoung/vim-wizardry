@@ -67,15 +67,6 @@ wk.register({
 		o = { "<cmd>Telescope neovim-project history<cr>", "Open Project History" },
 		l = { "<cmd>NeovimProjectLoadRecent<cr>", "Open Last Project" },
 	},
-	-- Splits find better binds
-	-- ["<C-J>"] = { "<cmd>resize -2<cr>", "Resize Splits"},
-	-- ["<C-K>"] = { "<cmd>resize +2<cr>"},
-	-- ["<C-H>"] = { "<cmd>vertical resize +2<cr>"},
-	-- ["<C-L>"] = {"<cmd>vertical resize +2<cr>" },
-	-- ["<M-Down>"] = { "<C-w>j"},
-	-- ["<M-Up>"] = { "<C-w>k"},
-	-- ["<M-Left>"] = { "<C-w>h"},
-	-- ["<M-Right>"] = { "<C-w>l", "Navigate Split" },
 	["<leader>w"] = {
 		name = "Wiki",
 		w = { "<cmd>WikiIndex<cr>", "Wiki Index" },
