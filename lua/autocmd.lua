@@ -24,10 +24,9 @@ vim.api.nvim_create_autocmd(
 --     { pattern = "*tfvars", command = "lua vim.bo.commentstring='# %s'" }
 -- )
 --
--- Strip trailing whitespaces on save → figure our how to exclude markdown
 vim.api.nvim_create_autocmd(
 	"BufWritePre",
-	{ pattern = "*", command = "%s/\\s\\+$//e" }
+	{ desc = "strip trailing spaces on save", pattern = "*", command = "%s/\\s\\+$//e" }
 	-- { pattern = "\\\.(?!md).*", command = "%s/\\s\\+$//e" }
 )
 
