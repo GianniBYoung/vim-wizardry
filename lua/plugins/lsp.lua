@@ -115,6 +115,7 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			notify_on_error = false,
 			format_on_save = {
@@ -133,6 +134,28 @@ return {
 				python = { "isort", "black" },
 			},
 		},
+	},
+	{
+		"mfussenegger/nvim-lint",
+		config = function()
+			require("lint").linters_by_ft = {
+				markdown = { "markdownlint" },
+				go = { "golangcilint" },
+				json = { "jsonlint" },
+				yaml = { "yamllint" },
+				-- terraform = { "" },
+				python = { "pylint" },
+				ruby = { "rubocop" },
+				bash = { "shellcheck" },
+				zsh = { "zsh" },
+			}
+			-- if this causes probs then switch to "BufWritePost"
+			vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+				callback = function()
+					require("lint").try_lint()
+				end,
+			})
+		end,
 	},
 
 	{ -- Autocompletion
