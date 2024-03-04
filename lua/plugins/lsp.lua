@@ -67,6 +67,7 @@ return {
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 			local servers = {
 				gopls = {},
+				bashls = { filetypes = { "sh", "zsh" } },
 				pyright = {},
 				terraformls = { filetypes = { "terraform", "tf", "tfvars" } },
 				-- lspconfig.tflint.setup { filetypes = { "terraform", "tf", "tfvars" } }
@@ -137,6 +138,7 @@ return {
 	},
 	{
 		"mfussenegger/nvim-lint",
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("lint").linters_by_ft = {
 				markdown = { "markdownlint" },
@@ -145,12 +147,12 @@ return {
 				yaml = { "yamllint" },
 				-- terraform = { "" },
 				python = { "pylint" },
-				ruby = { "rubocop" },
+				-- ruby = { "rubocop" },
 				bash = { "shellcheck" },
 				zsh = { "zsh" },
 			}
 			-- if this causes probs then switch to "BufWritePost"
-			vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+			vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost" }, {
 				callback = function()
 					require("lint").try_lint()
 				end,
@@ -250,10 +252,10 @@ return {
 					{ name = "luasnip" },
 					{ name = "path" },
 					--         { name = "treesitter", keyword_length = 2 },
-					--         { name = "nvim_lua",   keyword_length = 2 },
+					{ name = "nvim_lua", keyword_length = 2 },
 					{ name = "path" },
 					{ name = "emoji" },
-					--         { name = "buffer",     keyword_length = 3 },
+					{ name = "buffer", keyword_length = 3 },
 				},
 			})
 			require("luasnip.loaders.from_vscode").lazy_load()
