@@ -15,18 +15,17 @@ vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" }
 vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
+--DAP
+vim.keymap.set("n", "<leader>b", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { desc = "Toggle  Breakpoints" })
+vim.keymap.set("n", "<leader>e", "<cmd>lua require'dapui'.eval()<cr>", { desc = "Evaluate  Under Cursor" })
+vim.keymap.set("n", "<leader>t", "<cmd>lua require'dapui'.toggle()<cr>", { desc = "Toggle  DAP-UI" })
+vim.keymap.set("n", "<leader>c", "<cmd>lua require'dap'.continue()<cr>", { desc = "Continue" })
+vim.keymap.set("n", "<leader>n", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Step  Over" })
+vim.keymap.set("n", "<leader>i", "<cmd>lua require'dap'.step_into()<cr>", { desc = "Step  Into" })
+vim.keymap.set("n", "<leader>r", "<cmd>lua require'dap'.repl.open()<cr>", { desc = "Repl" })
+
 -- swap this to 's'
 wk.register({
-	["<leader>b"] = {
-		name = "DAP",
-		b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoints" },
-		e = { "<cmd>lua require'dapui'.eval()<cr>", "Evaluate Under Cursor" },
-		t = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle DAP-UI" },
-		c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-		n = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
-		i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
-		r = { "<cmd>lua require'dap'.repl.open()<cr>", "Repl" },
-	},
 	-- Individuals
 	["<leader>g"] = { "<cmd>Telescope live_grep prompt_prefix=🔦<cr>", "Grep" },
 	[","] = { "<cmd>QuickBufferJump<cr>", "Buffer Jump" },
