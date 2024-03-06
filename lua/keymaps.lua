@@ -1,32 +1,22 @@
 local wk = require("which-key")
 -- kickstart binds idk if i want to keep using whichkey for this
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+-- vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" }) same as leader l
 
+-- Telescope
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>h", builtin.help_tags, { desc = "[S]earch [H]elp" })
 vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-vim.keymap.set("n", "<leader>tw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-vim.keymap.set("n", "<leader>tr", builtin.resume, { desc = "[S]earch [R]esume" })
+vim.keymap.set("n", "<leader>sf", "telescope fd", { desc = "Find Files" })
+vim.keymap.set("n", "<leader>sz", "telescope spell_suggest", { desc = "Spelling Corrections" })
+vim.keymap.set("n", "<leader>sb", "BookmarksGoto", { desc = "List Bookmarks" })
+vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
+vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
 -- swap this to 's'
 wk.register({
-	["<leader>t"] = {
-		name = "Telescope",
-		z = { "<cmd>Telescope spell_suggest<cr>", "Fix Spelling" },
-		f = { "<cmd>Telescope fd<cr>", "Find Files" },
-		p = { "<cmd>Telescope builtin<cr>", "All Telescope Builtins" },
-		h = { "<cmd>Telescope help_tags<cr>", "Help" },
-		m = { "<cmd>BookmarksGoto<cr>", "Bookmarks" },
-		g = { "<cmd>Telescope live_grep<cr>", "Grep" },
-		d = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
-		-- r = { "<cmd>Telescope builtin<cr>", "Lsp References" },
-		R = { "<cmd>Telescope lsp_references<cr>", "Lsp References" },
-		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Lsp Symbols" },
-		t = { "<cmd>Telescope lsp_type_definitions<cr>", "Lsp Type Defs" },
-	},
 	["<leader>b"] = {
 		name = "DAP",
 		b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoints" },
