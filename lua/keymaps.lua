@@ -1,5 +1,4 @@
 local wk = require("which-key")
--- kickstart binds idk if i want to keep using whichkey for this
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
@@ -18,13 +17,14 @@ vim.keymap.set("n", "<leader>sb", "<cmd>BookmarksGoto<cr>", { desc = "List Bookm
 vim.keymap.set("n", "<leader>g", "<cmd>Telescope live_grep prompt_prefix=🔦<cr>", { desc = "grep" })
 
 --DAP
-vim.keymap.set("n", "<leader>bc", "<cmd>lua require'dap'.continue()<cr>", { desc = "Continue" })
-vim.keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { desc = "Toggle  Breakpoints" })
+vim.keymap.set("n", "<leader>bc", "<cmd>DapContinue<cr>", { desc = "Continue" })
+vim.keymap.set("n", "<leader>bb", "<cmd>DapToggleBreakpoint<cr>", { desc = "Toggle  Breakpoints" })
+vim.keymap.set("n", "<leader>bn", "<cmd>DapStepOver<cr>", { desc = "Step  Over" })
+vim.keymap.set("n", "<leader>bi", "<cmd>DapStepInto<cr>", { desc = "Step  Into" })
+vim.keymap.set("n", "<leader>bo", "<cmd>DapStepOut<cr>", { desc = "Step  Out" })
+vim.keymap.set("n", "<leader>br", "<cmd>DapToggleRepl<cr>", { desc = "Repl" })
 vim.keymap.set("n", "<leader>be", "<cmd>lua require'dapui'.eval()<cr>", { desc = "Evaluate  Under Cursor" })
 vim.keymap.set("n", "<leader>bt", "<cmd>lua require'dapui'.toggle()<cr>", { desc = "Toggle  DAP-UI" })
-vim.keymap.set("n", "<leader>bn", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Step  Over" })
-vim.keymap.set("n", "<leader>bi", "<cmd>lua require'dap'.step_into()<cr>", { desc = "Step  Into" })
-vim.keymap.set("n", "<leader>br", "<cmd>lua require'dap'.repl.open()<cr>", { desc = "Repl" })
 
 wk.register({
 	-- Individuals
