@@ -1,33 +1,33 @@
 local wk = require("which-key")
 -- kickstart binds idk if i want to keep using whichkey for this
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
--- vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" }) same as leader l
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 
 -- Telescope
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>h", builtin.help_tags, { desc = "[S]earch [H]elp" })
 vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-vim.keymap.set("n", "<leader>sf", "telescope fd", { desc = "Find Files" })
-vim.keymap.set("n", "<leader>sz", "telescope spell_suggest", { desc = "Spelling Corrections" })
-vim.keymap.set("n", "<leader>sb", "BookmarksGoto", { desc = "List Bookmarks" })
 vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+vim.keymap.set("n", "<leader>sf", "<cmd>Telescope fd<cr>", { desc = "Find Files" })
+vim.keymap.set("n", "<leader>sz", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling Corrections" })
+vim.keymap.set("n", "<leader>sb", "<cmd>BookmarksGoto<cr>", { desc = "List Bookmarks" })
+vim.keymap.set("n", "<leader>g", "<cmd>Telescope live_grep prompt_prefix=🔦<cr>", { desc = "grep" })
 
 --DAP
-vim.keymap.set("n", "<leader>b", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { desc = "Toggle  Breakpoints" })
-vim.keymap.set("n", "<leader>e", "<cmd>lua require'dapui'.eval()<cr>", { desc = "Evaluate  Under Cursor" })
-vim.keymap.set("n", "<leader>t", "<cmd>lua require'dapui'.toggle()<cr>", { desc = "Toggle  DAP-UI" })
-vim.keymap.set("n", "<leader>c", "<cmd>lua require'dap'.continue()<cr>", { desc = "Continue" })
-vim.keymap.set("n", "<leader>n", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Step  Over" })
-vim.keymap.set("n", "<leader>i", "<cmd>lua require'dap'.step_into()<cr>", { desc = "Step  Into" })
-vim.keymap.set("n", "<leader>r", "<cmd>lua require'dap'.repl.open()<cr>", { desc = "Repl" })
+vim.keymap.set("n", "<leader>bc", "<cmd>lua require'dap'.continue()<cr>", { desc = "Continue" })
+vim.keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", { desc = "Toggle  Breakpoints" })
+vim.keymap.set("n", "<leader>be", "<cmd>lua require'dapui'.eval()<cr>", { desc = "Evaluate  Under Cursor" })
+vim.keymap.set("n", "<leader>bt", "<cmd>lua require'dapui'.toggle()<cr>", { desc = "Toggle  DAP-UI" })
+vim.keymap.set("n", "<leader>bn", "<cmd>lua require'dap'.step_over()<cr>", { desc = "Step  Over" })
+vim.keymap.set("n", "<leader>bi", "<cmd>lua require'dap'.step_into()<cr>", { desc = "Step  Into" })
+vim.keymap.set("n", "<leader>br", "<cmd>lua require'dap'.repl.open()<cr>", { desc = "Repl" })
 
--- swap this to 's'
 wk.register({
 	-- Individuals
-	["<leader>g"] = { "<cmd>Telescope live_grep prompt_prefix=🔦<cr>", "Grep" },
 	[","] = { "<cmd>QuickBufferJump<cr>", "Buffer Jump" },
 	-- ["<C-n>"] = { "<cmd>Telescope fd prompt_prefix=🔍<cr>", "Find Files" },
 	["<C-b>"] = { "<cmd>Telescope buffers prompt_prefix=📜<cr>", "Find Open Buffers" },
@@ -38,17 +38,9 @@ wk.register({
 	["<C-k>"] = { "<C-w>k", "Select 'Upper' Window", noremap = true },
 	["<C-l>"] = { "<C-w>l", "Select 'Right' Window" },
 	["g"] = {
-		l = { vim.diagnostic.open_float, "Float Diagnostics" },
 		t = { "<cmd>Telescope lsp_type_definitions<cr>", "Lsp Type Defs" },
 		j = { "<cmd>bp<cr>", "Previous Buffer" },
 		k = { "<cmd>bn<cr>", "Next Buffer" },
-	},
-	["<leader>d"] = {
-		name = "Trouble",
-		d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Diagnostics" },
-		r = { "<cmd>TroubleToggle lsp_references<cr>", "Lsp References" },
-		f = { "<cmd>TroubleToggle quickfix<cr>", "Quick Fix" },
-		j = { "<cmd>TroubleToggle<cr>", "Trouble" },
 	},
 	["<leader>p"] = {
 		name = "Projects",
