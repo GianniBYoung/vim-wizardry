@@ -128,7 +128,7 @@ return {
 				go = { "gofmt", "golines", "goimports" },
 				ruby = { "rubocop" },
 				terraform = { "terraform_fmt" },
-				json = { "yq" },
+				-- json = { "yq" },
 				markdown = { "mdformat" },
 				yaml = { "yq" },
 				-- Conform can also run multiple formatters sequentially

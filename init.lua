@@ -14,7 +14,26 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("genset")
-require("lazy").setup("plugins", { ui = { border = "rounded" } })
+require("lazy").setup("plugins", {
+	ui = {
+		border = "rounded",
+		icons = vim.g.have_nerd_font and {} or {
+			cmd = "⌘",
+			config = "🛠",
+			event = "📅",
+			ft = "📂",
+			init = "⚙",
+			keys = "🗝",
+			plugin = "🔌",
+			runtime = "💻",
+			require = "🌙",
+			source = "📄",
+			start = "🚀",
+			task = "📌",
+			lazy = "💤 ",
+		},
+	},
+})
 require("keymaps")
 
 require("autocmd")
