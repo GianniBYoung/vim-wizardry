@@ -23,6 +23,8 @@ vim.keymap.set("n", "<leader>bn", "<cmd>DapStepOver<cr>", { desc = "Step  Over" 
 vim.keymap.set("n", "<leader>bi", "<cmd>DapStepInto<cr>", { desc = "Step  Into" })
 vim.keymap.set("n", "<leader>bo", "<cmd>DapStepOut<cr>", { desc = "Step  Out" })
 vim.keymap.set("n", "<leader>br", "<cmd>DapToggleRepl<cr>", { desc = "Repl" })
+vim.keymap.set("n", "<C-a>", "<cmd>cprev<cr>", { desc = "Prev quick fix" })
+vim.keymap.set("n", "<C-;>", "<cmd>cnext<cr>", { desc = "Next quick fix" })
 
 vim.keymap.set("n", "<leader>be", function()
 	require("dapui").eval()
@@ -36,7 +38,7 @@ end, { desc = "Toggle  DAP-UI" })
 
 wk.register({
 	-- Individuals
-	[","] = { "<cmd>QuickBufferJump<cr>", "Buffer Jump" },
+	-- [","] = { "<cmd>QuickBufferJump<cr>", "Buffer Jump" },
 	-- ["<C-n>"] = { "<cmd>Telescope fd prompt_prefix=🔍<cr>", "Find Files" },
 	["<leader>r"] = { "<cmd>Telescope registers prompt_prefix=📠<cr>", "Paste From Register" },
 	["<C-h>"] = { "<C-w>h", "Select 'Left' Window" },
@@ -62,7 +64,7 @@ wk.register({
 	["<M-Enter>"] = { "<cmd>WikiLinkFollow<cr>", "Follow link" },
 	["<leader>l"] = {
 		name = "LazyGit",
-		g = { "<cmd>cd %:h<cr>:LazyGitCurrentFile<cr>", "LazyGit" },
+		g = { "<cmd>:LazyGitCurrentFile<cr>", "LazyGit" },
 		l = { "<cmd>Lazy<cr>", "Lazy" },
 		m = { "<cmd>Mason<cr>", "Mason" },
 		c = { "<cmd>set cursorbind!<cr>", "Cursor Bind" },
@@ -72,7 +74,7 @@ wk.register({
 	["<leader>v"] = {
 		r = { "<cmd>luafile %<cr>", "Reload a File" },
 	},
-	["<leader>cd"] = { "<cmd>cd %:h<cr>", "Cd" },
+	-- ["<leader>cd"] = { "<cmd>cd %:h<cr>", "Cd" },
 	["<leader>s"] = { "<cmd>w<cr>", "Save Buffer" },
 	["<leader>S"] = { "<cmd>wa<cr>", "Save All Buffers" },
 	["<leader>kk"] = { "<cmd>ColorizerToggle<cr>", "Colorizer" },

@@ -30,7 +30,10 @@ return {
 				---This function will be called once the base and background colours have
 				---been mixed on the palette.
 				---@param palette Palette
-				colours_override = function(palette) end,
+				colours_override = function(palette)
+					palette.bg_visual = "#C6B8D7"
+					palette.bg1 = "#C6B8D7"
+				end,
 			})
 		end,
 	},
