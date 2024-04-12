@@ -91,7 +91,7 @@ return {
 						symbols = { error = "😡", warning = "⚡", info = "🧠", hint = "💡" },
 					},
 				},
-				lualine_c = { { "filename", path = 3, shortening_target = 30 } },
+				lualine_c = { { "filename", path = 3, shortening_target = 30 }, "harpoon2" },
 				lualine_x = { "encoding", "fileformat", "filetype" },
 				lualine_y = { "progress" },
 				lualine_z = { "location" },
