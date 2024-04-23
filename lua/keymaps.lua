@@ -23,7 +23,7 @@ vim.keymap.set("n", "<leader>bn", "<cmd>DapStepOver<cr>", { desc = "Step  Over" 
 vim.keymap.set("n", "<leader>bi", "<cmd>DapStepInto<cr>", { desc = "Step  Into" })
 vim.keymap.set("n", "<leader>bo", "<cmd>DapStepOut<cr>", { desc = "Step  Out" })
 vim.keymap.set("n", "<leader>br", "<cmd>DapToggleRepl<cr>", { desc = "Repl" })
-vim.keymap.set("n", "<C-a>", "<cmd>cprev<cr>", { desc = "Prev quick fix" })
+vim.keymap.set("n", "<C-g>", "<cmd>cprev<cr>", { desc = "Prev quick fix" })
 vim.keymap.set("n", "<C-;>", "<cmd>cnext<cr>", { desc = "Next quick fix" })
 
 vim.keymap.set("n", "<leader>be", function()
