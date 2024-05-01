@@ -74,7 +74,7 @@ wk.register({
 	["<leader>v"] = {
 		r = { "<cmd>luafile %<cr>", "Reload a File" },
 	},
-	-- ["<leader>cd"] = { "<cmd>cd %:h<cr>", "Cd" },
+	["<leader>cd"] = { "<cmd>cd %:h<cr>", "Cd" },
 	["<leader>s"] = { "<cmd>w<cr>", "Save Buffer" },
 	["<leader>S"] = { "<cmd>wa<cr>", "Save All Buffers" },
 	["<leader>kk"] = { "<cmd>ColorizerToggle<cr>", "Colorizer" },

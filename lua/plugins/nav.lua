@@ -116,14 +116,14 @@ return {
 						desc = "harpoon quick menu",
 					},
 					{
-						"<C-a>",
+						"<C-s>",
 						function()
 							require("harpoon"):list():prev()
 						end,
 						desc = "harpoon prev",
 					},
 					{
-						"<C-s>",
+						"<C-d>",
 						function()
 							require("harpoon"):list():next()
 						end,

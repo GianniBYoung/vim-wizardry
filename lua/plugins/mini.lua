@@ -69,7 +69,7 @@ return {
 					line_up = "<M-k>",
 				},
 			})
-			require("mini.splitjoin").setup()
+			-- require("mini.splitjoin").setup()
 		end,
 	},
 }
