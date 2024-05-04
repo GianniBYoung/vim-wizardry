@@ -1,5 +1,4 @@
 return {
-	{ "terryma/vim-smooth-scroll", event = "VeryLazy" },
 	{ "LintaoAmons/bookmarks.nvim", event = "VeryLazy" },
 	{
 		"coffebar/neovim-project",
