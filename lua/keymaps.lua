@@ -26,6 +26,13 @@ vim.keymap.set("n", "<leader>br", "<cmd>DapToggleRepl<cr>", { desc = "Repl" })
 vim.keymap.set("n", "<C-g>", "<cmd>cprev<cr>", { desc = "Prev quick fix" })
 vim.keymap.set("n", "<C-;>", "<cmd>cnext<cr>", { desc = "Next quick fix" })
 
+--Misc
+vim.keymap.set("n", "<leader>m", "<cmd>MPToggle<cr>", { desc = "Open with Glow" })
+vim.keymap.set("n", "Y", "y$", { desc = "Papa Yank" })
+vim.keymap.set("n", "<leader>N", '<cmd>lua require("ranger-nvim").open(true)<cr>', { desc = "Ranger" })
+vim.keymap.set("n", "<leader>n", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", { desc = "MiniFiles" })
+vim.keymap.set("n", "<F1>", "<cmd>FloatermToggle<cr>", { desc = "Terminal" })
+
 vim.keymap.set("n", "<leader>be", function()
 	require("dapui").eval()
 end, { desc = "Evaluate  Under Cursor" })
@@ -82,16 +89,8 @@ wk.register({
 	["<leader>R"] = { "<cmd>set relativenumber!<cr><cmd>set cursorline!<cr>", "Screen Sharing Mode" },
 	["gf"] = { "<cmd>edit <cfile><cr>", "Edit File Under Cursor" },
 	["<cr>"] = { "ciw", "Change Word Under Cursor" },
-	["<leader>m"] = { "<cmd>MPToggle<cr>", "Open with Glow" },
 	["<leader>q"] = { "<cmd>lua MiniBufremove.delete(0,true)<cr>", "Close Buffer" },
 	["<leader>Q"] = { "<cmd>qa!<cr>", "The Nuclear Option" },
-	["<M-d>"] = { "<cmd>call smooth_scroll#up(10, 5, 2)<cr>", "Smooth Scroll" },
-	["<M-f>"] = { "<cmd>call smooth_scroll#down(10, 5, 2)<cr>", "Smooth Scroll" },
-	["Y"] = { "y$", "Papa Yank" },
-	["<leader>N"] = { '<cmd>lua require("ranger-nvim").open(true)<cr>', "Ranger" },
-	["<leader>n"] = { "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", "MiniFiles" },
-	["ii"] = { "<esc>", "which_key_ignore", mode = "i" },
-	["<F1>"] = { "<cmd>FloatermToggle<cr>", "Terminal" },
 })
 
 wk.register({
