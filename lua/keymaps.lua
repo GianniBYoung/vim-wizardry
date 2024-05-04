@@ -1,4 +1,3 @@
-local wk = require("which-key")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
@@ -24,12 +23,12 @@ vim.keymap.set("n", "<leader>bn", "<cmd>DapStepOver<cr>", { desc = "Step  Over" 
 vim.keymap.set("n", "<leader>bi", "<cmd>DapStepInto<cr>", { desc = "Step  Into" })
 vim.keymap.set("n", "<leader>bo", "<cmd>DapStepOut<cr>", { desc = "Step  Out" })
 vim.keymap.set("n", "<leader>br", "<cmd>DapToggleRepl<cr>", { desc = "Repl" })
-vim.keymap.set("n", "<C-g>", "<cmd>cprev<cr>", { desc = "Prev quick fix" })
-vim.keymap.set("n", "<C-;>", "<cmd>cnext<cr>", { desc = "Next quick fix" })
 
 vim.keymap.set("n", "<leader>be", function()
 	require("dapui").eval()
 end, { desc = "Evaluate  Under Cursor" })
+
+vim.keymap.set("v", "bv", "<cmd>lua require'dapui'.eval()<cr>", { desc = "Evaluate Under Cursor" })
 
 -- vim.keymap.set("n", "<leader>be", "<cmd>lua require'dapui'.eval()<cr>", { desc = "Evaluate  Under Cursor" })
 -- vim.keymap.set("n", "<leader>bt", "<cmd>lua require'dapui'.toggle()<cr>", { desc = "Toggle  DAP-UI" })
@@ -59,6 +58,10 @@ vim.keymap.set("n", "<leader>cd", "<cmd>cd %:h<cr>", { desc = "Cd" })
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save Buffer" })
 vim.keymap.set("n", "<leader>W", "<cmd>wa<cr>", { desc = "Save All Buffers" })
 
+vim.keymap.set("v", "Y", "myY`y", { desc = "Maintain Cursor Position When Yanking" })
+vim.keymap.set("v", "<", "<gv", { desc = "Indent" })
+vim.keymap.set("v", ">", ">gv", { desc = "Dedent" })
+
 -- nav
 vim.keymap.set("n", "<leader>n", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", { desc = "MiniFiles" })
 vim.keymap.set("n", "gf", "<cmd>edit <cfile><cr>", { desc = "Edit File Under Cursor" })
@@ -74,6 +77,8 @@ vim.keymap.set("n", "gk", "<cmd>bn<cr>", { desc = "Next Buffer" })
 vim.keymap.set("n", "pp", "<cmd>Telescope neovim-project discover<cr>", { desc = "Projects" })
 vim.keymap.set("n", "po", "<cmd>Telescope neovim-project history<cr>", { desc = "Open Project History" })
 vim.keymap.set("n", "pl", "<cmd>NeovimProjectLoadRecent<cr>", { desc = "Open Last Project" })
+vim.keymap.set("n", "<C-g>", "<cmd>cprev<cr>", { desc = "Prev quick fix" })
+vim.keymap.set("n", "<C-;>", "<cmd>cnext<cr>", { desc = "Next quick fix" })
 
 -- wiki
 vim.keymap.set("n", "ww", "<cmd>WikiIndex<cr>", { desc = "Wiki Index" })
@@ -87,16 +92,3 @@ vim.keymap.set("n", "<leader>lg", "<cmd>:LazyGitCurrentFile<cr>", { desc = "" })
 -- Plugin Management
 vim.keymap.set("n", "<leader>ll", "<cmd>Lazy<cr>", { desc = "Lazy" })
 vim.keymap.set("n", "<leader>lm", "<cmd>Mason<cr>", { desc = "Mason" })
-
-wk.register({
-	["Y"] = { "myY`y", mode = "v" },
-	["<leader>r"] = { "<cmd>Hypersonic<cr>", mode = "v" },
-	["<"] = { "<gv", "Indent", mode = "v" },
-	[">"] = { ">gv", "Dedent", mode = "v" },
-	["y"] = { "myy`y", mode = "v" },
-	["<leader>b"] = {
-		name = "DAP",
-		mode = "v",
-		v = { "<cmd>lua require'dapui'.eval()<cr>", "Evaluate Under Cursor" },
-	},
-})
