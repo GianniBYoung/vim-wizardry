@@ -33,6 +33,22 @@ vim.keymap.set("n", "<leader>N", '<cmd>lua require("ranger-nvim").open(true)<cr>
 vim.keymap.set("n", "<leader>n", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", { desc = "MiniFiles" })
 vim.keymap.set("n", "<F1>", "<cmd>FloatermToggle<cr>", { desc = "Terminal" })
 
+vim.keymap.set("n", "<leader>cd", "<cmd>cd %:h<cr>", { desc = "Cd" })
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save Buffer" })
+vim.keymap.set("n", "<leader>W", "<cmd>wa<cr>", { desc = "Save All Buffers" })
+vim.keymap.set("n", "<leader>kk", "<cmd>ColorizerToggle<cr>", { desc = "Colorizer" })
+vim.keymap.set("n", "<leader>C", "<cmd>set cuc!<cr>", { desc = "Cursor Column" })
+vim.keymap.set(
+	"n",
+	"<leader>R",
+	"<cmd>set relativenumber!<cr><cmd>set cursorline!<cr>",
+	{ desc = "Screen Sharing Mode For Normies" }
+)
+vim.keymap.set("n", "gf", "<cmd>edit <cfile><cr>", { desc = "Edit File Under Cursor" })
+vim.keymap.set("n", "<cr>", "ciw", { desc = "Change Word Under Cursor" })
+vim.keymap.set("n", "<leader>q", "<cmd>lua MiniBufremove.delete(0,true)<cr>", { desc = "Close Buffer" })
+vim.keymap.set("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "The Nuclear Option" })
+
 vim.keymap.set("n", "<leader>be", function()
 	require("dapui").eval()
 end, { desc = "Evaluate  Under Cursor" })
@@ -81,16 +97,6 @@ wk.register({
 	["<leader>v"] = {
 		r = { "<cmd>luafile %<cr>", "Reload a File" },
 	},
-	["<leader>cd"] = { "<cmd>cd %:h<cr>", "Cd" },
-	["<leader>s"] = { "<cmd>w<cr>", "Save Buffer" },
-	["<leader>S"] = { "<cmd>wa<cr>", "Save All Buffers" },
-	["<leader>kk"] = { "<cmd>ColorizerToggle<cr>", "Colorizer" },
-	["<leader>C"] = { "<cmd>set cuc!<cr>", "Cursor Column" },
-	["<leader>R"] = { "<cmd>set relativenumber!<cr><cmd>set cursorline!<cr>", "Screen Sharing Mode" },
-	["gf"] = { "<cmd>edit <cfile><cr>", "Edit File Under Cursor" },
-	["<cr>"] = { "ciw", "Change Word Under Cursor" },
-	["<leader>q"] = { "<cmd>lua MiniBufremove.delete(0,true)<cr>", "Close Buffer" },
-	["<leader>Q"] = { "<cmd>qa!<cr>", "The Nuclear Option" },
 })
 
 wk.register({
