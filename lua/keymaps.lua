@@ -15,7 +15,6 @@ vim.keymap.set("n", "<leader>sz", "<cmd>Telescope spell_suggest<cr>", { desc = "
 vim.keymap.set("n", "<leader>sb", "<cmd>BookmarksGoto<cr>", { desc = "List Bookmarks" })
 vim.keymap.set("n", "<leader>g", "<cmd>Telescope live_grep prompt_prefix=🔦<cr>", { desc = "grep" })
 vim.keymap.set("n", "<leader>r", "<cmd>Telescope registers prompt_prefix=📠<cr>", { desc = "Paste From Register" })
-vim.keymap.set("n", "ii", "<ESC>", { desc = "quick exit" })
 
 --DAP
 vim.keymap.set("n", "<leader>bc", "<cmd>DapContinue<cr>", { desc = "Continue" })
@@ -56,13 +55,14 @@ vim.keymap.set("n", "<leader>vr", "<cmd>luafile %<cr>", { desc = "Reload a File"
 vim.keymap.set("n", "Y", "y$", { desc = "Papa Yank" })
 vim.keymap.set("n", "<cr>", "ciw", { desc = "Change Word Under Cursor" })
 vim.keymap.set("n", "<leader>cd", "<cmd>cd %:h<cr>", { desc = "Cd" })
-vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save Buffer" })
-vim.keymap.set("n", "<leader>W", "<cmd>wa<cr>", { desc = "Save All Buffers" })
+vim.keymap.set("n", "<leader>s", "<cmd>w<cr>", { desc = "Save Buffer" })
+vim.keymap.set("n", "<leader>S", "<cmd>wa<cr>", { desc = "Save All Buffers" })
 
 vim.keymap.set("v", "Y", "myY`y", { desc = "Maintain Cursor Position When Yanking" })
 vim.keymap.set("v", "<", "<gv", { desc = "Indent" })
 vim.keymap.set("v", ">", ">gv", { desc = "Dedent" })
 
+vim.keymap.set("i", "ii", "<ESC>", { desc = "quick exit" })
 -- nav
 vim.keymap.set("n", "<leader>n", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>", { desc = "MiniFiles" })
 vim.keymap.set("n", "gf", "<cmd>edit <cfile><cr>", { desc = "Edit File Under Cursor" })
