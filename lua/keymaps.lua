@@ -15,6 +15,7 @@ vim.keymap.set("n", "<leader>sz", "<cmd>Telescope spell_suggest<cr>", { desc = "
 vim.keymap.set("n", "<leader>sb", "<cmd>BookmarksGoto<cr>", { desc = "List Bookmarks" })
 vim.keymap.set("n", "<leader>g", "<cmd>Telescope live_grep prompt_prefix=🔦<cr>", { desc = "grep" })
 vim.keymap.set("n", "<leader>r", "<cmd>Telescope registers prompt_prefix=📠<cr>", { desc = "Paste From Register" })
+vim.keymap.set("n", "ii", "<ESC>", { desc = "quick exit" })
 
 --DAP
 vim.keymap.set("n", "<leader>bc", "<cmd>DapContinue<cr>", { desc = "Continue" })
@@ -74,9 +75,9 @@ vim.keymap.set("n", "<C-w>k", "", { desc = "Select 'Upper' Window", noremap = tr
 vim.keymap.set("n", "<C-w>l", "", { desc = "Select 'Right' Window" })
 vim.keymap.set("n", "gj", "<cmd>bp<cr>", { desc = "Previous Buffer" })
 vim.keymap.set("n", "gk", "<cmd>bn<cr>", { desc = "Next Buffer" })
-vim.keymap.set("n", "pp", "<cmd>Telescope neovim-project discover<cr>", { desc = "Projects" })
-vim.keymap.set("n", "po", "<cmd>Telescope neovim-project history<cr>", { desc = "Open Project History" })
-vim.keymap.set("n", "pl", "<cmd>NeovimProjectLoadRecent<cr>", { desc = "Open Last Project" })
+vim.keymap.set("n", "<leader>pp", "<cmd>Telescope neovim-project discover<cr>", { desc = "Projects" })
+vim.keymap.set("n", "<leader>po", "<cmd>Telescope neovim-project history<cr>", { desc = "Open Project History" })
+vim.keymap.set("n", "<leader>pl", "<cmd>NeovimProjectLoadRecent<cr>", { desc = "Open Last Project" })
 vim.keymap.set("n", "<C-g>", "<cmd>cprev<cr>", { desc = "Prev quick fix" })
 vim.keymap.set("n", "<C-;>", "<cmd>cnext<cr>", { desc = "Next quick fix" })
 
