@@ -242,3 +242,5 @@ Sonarqube
 Log4j
 Cloudwatch
 LVM
+netpacket
+Veriadic
