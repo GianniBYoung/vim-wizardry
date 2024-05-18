@@ -41,7 +41,7 @@ return {
 				end,
 			})
 			require("mini.bufremove").setup()
-			require("mini.comment").setup({ ignore_blank_line = true })
+			-- require("mini.comment").setup({ ignore_blank_line = true })
 			require("mini.indentscope").setup({ symbol = "╎" })
 			require("mini.operators").setup({ sort = { prefix = "" }, replace = { prefix = "cr" } })
 			require("mini.pairs").setup()

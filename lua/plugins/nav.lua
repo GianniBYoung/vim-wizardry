@@ -123,7 +123,7 @@ return {
 						desc = "harpoon prev",
 					},
 					{
-						"<C-d>",
+						"<C-D>",
 						function()
 							require("harpoon"):list():next()
 						end,
