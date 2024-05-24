@@ -78,7 +78,7 @@ vim.keymap.set("n", "gk", "<cmd>bn<cr>", { desc = "Next Buffer" })
 vim.keymap.set("n", "<leader>pp", "<cmd>Telescope neovim-project discover<cr>", { desc = "Projects" })
 vim.keymap.set("n", "<leader>po", "<cmd>Telescope neovim-project history<cr>", { desc = "Open Project History" })
 vim.keymap.set("n", "<leader>pl", "<cmd>NeovimProjectLoadRecent<cr>", { desc = "Open Last Project" })
-vim.keymap.set("n", "<C-g>", "<cmd>cprev<cr>", { desc = "Prev quick fix" })
+vim.keymap.set("n", "<C-h>", "<cmd>cprev<cr>", { desc = "Prev quick fix" })
 vim.keymap.set("n", "<C-;>", "<cmd>cnext<cr>", { desc = "Next quick fix" })
 
 -- wiki
