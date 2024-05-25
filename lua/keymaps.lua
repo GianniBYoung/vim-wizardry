@@ -14,7 +14,7 @@ vim.keymap.set("n", "<leader>sf", "<cmd>Telescope fd<cr>", { desc = "Find Files"
 vim.keymap.set("n", "<leader>sz", "<cmd>Telescope spell_suggest<cr>", { desc = "Spelling Corrections" })
 vim.keymap.set("n", "<leader>sb", "<cmd>BookmarksGoto<cr>", { desc = "List Bookmarks" })
 vim.keymap.set("n", "<leader>g", "<cmd>Telescope live_grep prompt_prefix=🔦<cr>", { desc = "grep" })
-vim.keymap.set("n", "<leader>r", "<cmd>Telescope registers prompt_prefix=📠<cr>", { desc = "Paste From Register" })
+vim.keymap.set("n", "<leader>rp", "<cmd>Telescope registers prompt_prefix=📠<cr>", { desc = "Paste From Register" })
 
 --DAP
 vim.keymap.set("n", "<leader>bc", "<cmd>DapContinue<cr>", { desc = "Continue" })
@@ -69,10 +69,10 @@ vim.keymap.set("n", "gf", "<cmd>edit <cfile><cr>", { desc = "Edit File Under Cur
 vim.keymap.set("n", "<leader>N", '<cmd>lua require("ranger-nvim").open(true)<cr>', { desc = "Ranger" })
 vim.keymap.set("n", "<leader>q", "<cmd>lua MiniBufremove.delete(0,true)<cr>", { desc = "Close Buffer" })
 vim.keymap.set("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "The Nuclear Option" })
-vim.keymap.set("n", "<C-w>h", "", { desc = "Select 'Left' Window" })
-vim.keymap.set("n", "<C-w>j", "", { desc = "Select 'Lower' Window" })
-vim.keymap.set("n", "<C-w>k", "", { desc = "Select 'Upper' Window", noremap = true })
-vim.keymap.set("n", "<C-w>l", "", { desc = "Select 'Right' Window" })
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Select 'Left' Window" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Select 'Lower' Window" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Select 'Upper' Window", noremap = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Select 'Right' Window" })
 vim.keymap.set("n", "gj", "<cmd>bp<cr>", { desc = "Previous Buffer" })
 vim.keymap.set("n", "gk", "<cmd>bn<cr>", { desc = "Next Buffer" })
 vim.keymap.set("n", "<leader>pp", "<cmd>Telescope neovim-project discover<cr>", { desc = "Projects" })

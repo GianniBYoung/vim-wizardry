@@ -115,20 +115,20 @@ return {
 						end,
 						desc = "harpoon quick menu",
 					},
-					{
-						"<C-W>",
-						function()
-							require("harpoon"):list():prev()
-						end,
-						desc = "harpoon prev",
-					},
-					{
-						"<C-E>",
-						function()
-							require("harpoon"):list():next()
-						end,
-						desc = "harpoon next",
-					},
+					-- {
+					-- 	"<C-W>",
+					-- 	function()
+					-- 		require("harpoon"):list():prev()
+					-- 	end,
+					-- 	desc = "harpoon prev",
+					-- },
+					-- {
+					-- 	"<C-E>",
+					-- 	function()
+					-- 		require("harpoon"):list():next()
+					-- 	end,
+					-- 	desc = "harpoon next",
+					-- },
 					{
 						",a",
 						function()
